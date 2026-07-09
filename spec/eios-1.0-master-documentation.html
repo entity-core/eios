@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <title>EIOS 1.0, Keel, and Weave — Master Documentation</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #fdfaf4;
+      --paper: #fffdfa;
+      --ink: #07121e;
+      --text: #101c28;
+      --muted: #515f6e;
+      --line: #e3ddd3;
+      --soft: #f4f0e7;
+      --soft-2: #f1eadc;
+      --sand: #f1e3cb;
+      --teal: #339797;
+      --primary: #133555;
+      --code-bg: #f4f0e7;
+      --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { overflow-x: hidden; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 28px 22px;
+      border-right: 1px solid var(--line);
+      background: #faf5eb;
+    }
+
+    nav h2 {
+      margin: 0 0 20px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    nav ol, nav ul { list-style: decimal; padding-left: 20px; margin: 0; }
+    nav ul { list-style: none; padding-left: 0; margin-bottom: 18px; }
+    nav li { margin: 8px 0; font-size: 13.5px; }
+    nav a { color: var(--muted); }
+    nav a:hover { color: var(--ink); text-decoration: none; }
+    nav li::marker { color: var(--line); font-family: var(--font-mono); font-size: 11px; }
+
+    .nav-group {
+      margin: 20px 0 8px;
+      font-family: var(--font-mono);
+      color: var(--teal);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .nav-group:first-child { margin-top: 0; }
+    .nav-group + ol { margin-bottom: 18px; }
+
+    main { min-width: 0; padding: 48px 56px 80px; }
+
+    .document {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    header {
+      padding: 54px 58px 38px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(241, 227, 203, 0.4);
+    }
+
+    header p.kicker {
+      margin: 0 0 14px;
+      font-family: var(--font-mono);
+      color: var(--teal);
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .subtitle { margin: 22px 0 0; max-width: 820px; font-size: 18px; line-height: 1.6; color: var(--muted); }
+
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 12px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      border-radius: 999px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    section { padding: 38px 58px; border-bottom: 1px solid var(--line); }
+    section:last-child { border-bottom: 0; }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    h3 {
+      margin: 28px 0 10px;
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    h4 { margin: 22px 0 8px; font-size: 15px; font-weight: 600; color: var(--ink); }
+
+    p { margin: 0 0 14px; overflow-wrap: break-word; }
+    .lead { font-size: 17px; color: var(--text); }
+
+    .callout {
+      margin: 22px 0;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--teal);
+      border-radius: 6px;
+      background: var(--soft);
+    }
+    .callout strong { color: var(--ink); }
+    .warning { border-left-color: var(--primary); background: var(--soft-2); }
+
+    .grid { display: grid; gap: 14px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card { border: 1px solid var(--line); background: var(--paper); padding: 18px; border-radius: 8px; }
+    .card h3, .card h4 { margin-top: 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 18px 0 26px; font-size: 14px; }
+    th, td { vertical-align: top; text-align: left; padding: 11px 12px; border: 1px solid var(--line); overflow-wrap: break-word; }
+    th {
+      background: var(--soft-2);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    ul, ol { margin: 8px 0 18px 22px; padding: 0; }
+    li { margin: 6px 0; overflow-wrap: break-word; }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: var(--code-bg);
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      overflow-wrap: anywhere;
+    }
+
+    pre {
+      overflow: auto;
+      padding: 16px 18px;
+      background: var(--code-bg);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      line-height: 1.5;
+      font-size: 12.5px;
+      font-family: var(--font-mono);
+    }
+    pre code { padding: 0; background: transparent; }
+
+    .small { color: var(--muted); font-size: 13px; }
+
+    .principle {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 16px;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+    }
+    .principle:first-child { border-top: 0; }
+    .principle b {
+      color: var(--teal);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding-top: 4px;
+    }
+
+    .diagram {
+      white-space: pre;
+      overflow: auto;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+
+    #toc-toggle, #toc-backdrop { display: none; }
+
+    @media (max-width: 960px) {
+      .shell { display: block; }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        height: 100dvh;
+        width: min(320px, 85vw);
+        z-index: 50;
+        background: #faf5eb;
+        border-right: 1px solid var(--line);
+        transform: translateX(-105%);
+        transition: transform 0.25s ease;
+      }
+      body.toc-open nav { transform: none; }
+
+      #toc-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        background: rgba(7, 18, 30, 0.4);
+      }
+      body.toc-open #toc-backdrop { display: block; }
+
+      #toc-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        position: fixed;
+        bottom: 18px;
+        right: 18px;
+        z-index: 60;
+        border: 0;
+        border-radius: 6px;
+        padding: 13px 18px;
+        background: var(--primary);
+        color: #ffffff;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      main { padding: 20px 16px 96px; }
+      header { padding: 34px 20px 28px; }
+      section { padding: 28px 20px; }
+
+      .grid.two, .grid.three { grid-template-columns: 1fr; }
+
+      table { display: block; overflow-x: auto; }
+      .principle { grid-template-columns: 1fr; gap: 4px; }
+    }
+
+    @media print {
+      body { background: white; }
+      .shell { display: block; }
+      nav, #toc-toggle, #toc-backdrop { display: none !important; }
+      main { padding: 0; }
+      .document { border: 0; }
+      section, header { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div id="toc-backdrop"></div>
+  <button id="toc-toggle" type="button" aria-controls="toc" aria-expanded="false">Contents</button>
+
+  <div class="shell">
+    <nav aria-label="Table of contents">
+      <h2>Contents</h2>
+      <div class="nav-group">Overview</div>
+      <ol>
+        <li><a href="#purpose">Purpose</a></li>
+        <li><a href="#origins">Origins and Relationship to PIOS</a></li>
+        <li><a href="#product-model">Product Model</a></li>
+        <li><a href="#principles">Governing Principles</a></li>
+      </ol>
+      <div class="nav-group">Entity Foundation</div>
+      <ol start="5">
+        <li><a href="#definition">Definition of EIOS</a></li>
+        <li><a href="#center-of-gravity">Entity as Center of Gravity</a></li>
+        <li><a href="#viability">Entity Viability</a></li>
+        <li><a href="#entity-dna">Entity DNA</a></li>
+        <li><a href="#served-world">Served World and Market Context</a></li>
+        <li><a href="#stakeholders">Stakeholder Model</a></li>
+        <li><a href="#financials">Financial and Economic Context</a></li>
+        <li><a href="#agreements">Agreements and Obligations</a></li>
+      </ol>
+      <div class="nav-group">Actors and Boundaries</div>
+      <ol start="13">
+        <li><a href="#actors">Entity Actors</a></li>
+        <li><a href="#circles">Entity Circles and Access Layers</a></li>
+        <li><a href="#boundaries">Hard and Soft Boundaries</a></li>
+      </ol>
+      <div class="nav-group">EIOS Framework</div>
+      <ol start="16">
+        <li><a href="#zones">Information Zones</a></li>
+        <li><a href="#inbound">Inbound Flow</a></li>
+        <li><a href="#events">Event Model</a></li>
+        <li><a href="#glossary">Entity Glossary</a></li>
+        <li><a href="#knowledge">Knowledge Model</a></li>
+      </ol>
+      <div class="nav-group">Weave Context Blueprint</div>
+      <ol start="21">
+        <li><a href="#weave">Weave — Entity Context Blueprint</a></li>
+        <li><a href="#entity-views">Recognized Entity Views</a></li>
+      </ol>
+      <div class="nav-group">Governance and Operations</div>
+      <ol start="23">
+        <li><a href="#governance">Governance</a></li>
+        <li><a href="#meetings">Meetings and Communications</a></li>
+        <li><a href="#loops">Self-Improving Entity Loops</a></li>
+        <li><a href="#customer-loop">Customer Signal Loop</a></li>
+        <li><a href="#products">Products, Services, Capabilities</a></li>
+        <li><a href="#ip-assets">Intellectual Property and Assets</a></li>
+        <li><a href="#operating-layer">Operating System Layer</a></li>
+        <li><a href="#lifecycles">Lifecycle Models</a></li>
+        <li><a href="#retrieval">Retrieval and Use</a></li>
+        <li><a href="#sensitivity">Security and Sensitivity</a></li>
+        <li><a href="#cross-entity">Cross-Entity Collaboration</a></li>
+      </ol>
+      <div class="nav-group">Implementation</div>
+      <ol start="34">
+        <li><a href="#implementation">Implementation Considerations</a></li>
+        <li><a href="#portability">Portability and Continuity</a></li>
+        <li><a href="#mve">Minimum Viable EIOS</a></li>
+        <li><a href="#naming-map">Naming and Terminology Mapping</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+        <li><a href="#license">License and Attribution</a></li>
+      </ol>
+    </nav>
+
+    <main>
+      <article class="document">
+        <header>
+          <p class="kicker">Master Documentation</p>
+          <h1>EIOS 1.0, Keel, and Weave</h1>
+          <p class="subtitle">A unified master document for the Entity Information Operating System framework, the Weave Entity Context Blueprint, and the Keel implementation — the durable information foundation for entity continuity, governance, value creation, and self-improving operations.</p>
+          <div class="meta">
+            <span class="pill">Generated: 2026-07-08</span>
+            <span class="pill">Status: v1.0 · derived render</span>
+            <span class="pill">Canonical: github.com/entity-core/eios</span>
+            <span class="pill">Framework: EIOS</span>
+            <span class="pill">Implementation: Keel</span>
+            <span class="pill">Context Blueprint: Weave</span>
+            <span class="pill">License: CC BY 4.0</span>
+          </div>
+        </header>
+
+        <section id="purpose">
+          <h2>1. Purpose</h2>
+          <p class="lead">An Entity Information Operating System is a foundational information architecture for an entity. Its purpose is to preserve, organize, govern, and operationalize the information that allows an entity to exist, act, learn, improve, create value, and remain viable over time.</p>
+          <p>EIOS treats the entity as the primary subject. The entity may be a company, cooperative, association, foundation, public body, ecosystem organization, project organization, business unit, or other structured entity.</p>
+          <p>An entity is different from a human individual. A human does not need to justify the right to exist through value creation. An entity does. An entity continues to exist because stakeholders continue to support it. That support may come through customer revenue, owner funding, member contribution, investment, public mandate, legitimacy, labor, trust, participation, or other resources.</p>
+          <p>Therefore, EIOS must model not only information and knowledge, but also purpose, mission, stakeholder value, customers, markets, financials, agreements, governance, decision rights, capabilities, operating loops, and continuity.</p>
+          <div class="callout">
+            <strong>Foundational statement:</strong> EIOS is the open framework. Keel is the usable implementation. An entity's Keel is its durable operating memory: not a knowledge base, not a CRM, not an intranet, but the place where everything the entity is, knows, owes, decides, and learns can be preserved and made usable by its people and its agents.
+          </div>
+          <p>EIOS is not merely a knowledge base, document repository, CRM, ERP, project management system, intranet, data warehouse, or AI agent platform. It is the entity-level information foundation that connects these systems and preserves the entity's durable operating memory.</p>
+          <p>EIOS supports both human and AI actors as role-bearing participants in the entity. People, teams, departments, AI agents, tools, systems, partners, advisors, customers, and governance bodies can all be represented as actors or related entities with roles, responsibilities, access, authority, and accountability.</p>
+          <p>The long-term purpose of EIOS is <strong>entity continuity</strong>: the ability of the entity to continue operating, improving, and creating value beyond dependence on any single founder, employee, manager, partner, tool, AI agent, meeting, document, or undocumented process.</p>
+          <p>The system intentionally separates three things that many enterprise products collapse together:</p>
+          <ul>
+            <li><strong>What happened:</strong> canonical events and immutable originals.</li>
+            <li><strong>What it means:</strong> knowledge objects, entity context, glossary terms, interpretations, summaries, and patterns.</li>
+            <li><strong>How it is used:</strong> retrieval APIs, agents, applications, dashboards, entity views, and governance surfaces.</li>
+          </ul>
+        </section>
+
+        <section id="origins">
+          <h2>2. Origins and Relationship to PIOS</h2>
+          <p class="lead">EIOS originated as a sibling framework to PIOS, the Personal Information Operating System. As of 2026-07-08, EIOS is an independent framework: it recognizes its roots, inherits freely with attribution, and evolves on its own terms.</p>
+          <h3>2.1 PIOS</h3>
+          <p>PIOS is centered on an individual person. It is concerned with the person's information, context, memory, relationships, goals, projects, communications, life domains, knowledge, agents, and personal continuity. Its central question is: <em>How can an individual preserve, organize, understand, retrieve, govern, and use their information over time?</em></p>
+          <h3>2.2 EIOS</h3>
+          <p>EIOS is centered on an entity. It is concerned with the entity's purpose, mission, stakeholders, customers, market, strategy, governance, financials, agreements, people, agents, products, services, operations, decisions, communications, knowledge, intellectual property, and viability. Its central question is: <em>How can an entity preserve, organize, understand, govern, operationalize, and improve its information over time so it can continue creating value for stakeholders?</em></p>
+          <h3>2.3 Independence and inheritance model</h3>
+          <p>EIOS and PIOS are independent frameworks with a shared origin. The relationship is governed by four rules:</p>
+          <ul>
+            <li><strong>Copy at fork, not shared dependency.</strong> Principles, terms, and patterns inherited from PIOS are copied into EIOS and owned here. Neither framework references the other as a live dependency.</li>
+            <li><strong>Attribution carries lineage.</strong> Recognition of origins is expressed through attribution, not through name matching or structural coupling.</li>
+            <li><strong>No backwards compatibility.</strong> Neither framework constrains the other. Inherited terms may be redefined in EIOS without coordination, and vice versa.</li>
+            <li><strong>Divergence is documented, not accidental.</strong> The <a href="#naming-map">Naming and Terminology Mapping</a> section records which terms were inherited, from where, and how their EIOS meaning differs.</li>
+          </ul>
+          <h3>2.4 Shared architectural ancestry</h3>
+          <p>EIOS inherits the following architectural principles from its PIOS origin:</p>
+          <ul class="cols2">
+            <li>One central information core</li>
+            <li>Capture first, organize later</li>
+            <li>Preserve originals</li>
+            <li>Maintain an event log</li>
+            <li>Create living knowledge objects</li>
+            <li>Treat derived summaries and dashboards as rebuildable views</li>
+            <li>Maintain system definitions, agents, permissions, and governance rules as first-class information</li>
+            <li>Use common language and structured context</li>
+            <li>Allow both human-readable and machine-usable forms</li>
+            <li>Support agents as information users and operators</li>
+            <li>Separate raw events from interpreted meaning and applied use</li>
+          </ul>
+          <p>The main difference is the subject:</p>
+          <table>
+            <tr><th>Dimension</th><th>PIOS</th><th>EIOS</th></tr>
+            <tr><td>Center of gravity</td><td>Individual person</td><td>Entity</td></tr>
+            <tr><td>Primary owner</td><td>Person</td><td>Entity or entity governance</td></tr>
+            <tr><td>Core continuity</td><td>Personal continuity</td><td>Entity continuity</td></tr>
+            <tr><td>Main context</td><td>Person's life and world</td><td>Entity's purpose, stakeholders, market, operations, and governance</td></tr>
+            <tr><td>Main actors</td><td>Person, trusted people, AI agents</td><td>People, teams, departments, AI agents, systems, stakeholders</td></tr>
+            <tr><td>Access model</td><td>Personal circle</td><td>Entity circles and stakeholder layers</td></tr>
+            <tr><td>Governance</td><td>Personal authority and delegated trust</td><td>Role-based authority, decision rights, approvals, policies</td></tr>
+            <tr><td>Value logic</td><td>Personal meaning, goals, wellbeing, work</td><td>Stakeholder value, viability, financial sustainability, mission</td></tr>
+            <tr><td>Market/customer layer</td><td>Optional or entrepreneur-specific</td><td>First-class</td></tr>
+            <tr><td>Financial layer</td><td>Personal finance domain</td><td>Core viability and governance domain</td></tr>
+            <tr><td>Agreements</td><td>Personal legal/admin records</td><td>Binding entity obligations and relationships</td></tr>
+            <tr><td>Meetings</td><td>Personal planning and conversations</td><td>Primary source of decisions, actions, and institutional memory</td></tr>
+            <tr><td>Self-improvement</td><td>Personal learning and agent support</td><td>Entity-level recursive improvement loops</td></tr>
+          </table>
+        </section>
+
+        <section id="product-model">
+          <h2>3. Product Model</h2>
+          <p>The EIOS distribution stack mirrors the shape of an operating system ecosystem: an open specification, a practical implementation, an organizing blueprint, and deployment profiles.</p>
+          <table>
+            <tr><th>Layer</th><th>Name</th><th>Role</th></tr>
+            <tr><td>Open framework</td><td><strong>EIOS</strong></td><td>Entity Information Operating System: the open architecture, concepts, rules, information model, event model, glossary model, circle model, governance model, and portability requirements.</td></tr>
+            <tr><td>Implementation</td><td><strong>Keel</strong></td><td>The packaged implementation and product built according to EIOS. Keel runs the entity information core.</td></tr>
+            <tr><td>Context blueprint</td><td><strong>Weave</strong></td><td>The non-technical organizing canon for how entity information is named, grouped, interpreted, related, titled, summarized, tagged, and made understandable to humans and agents.</td></tr>
+            <tr><td>Entity instance</td><td><strong>Entity Keel</strong></td><td>An entity's own running Keel: its private source of truth, agent context, entity glossary, event log, originals, and knowledge projections.</td></tr>
+            <tr><td>Managed service</td><td><strong>Keel Managed</strong></td><td>Entity information management as a service, where infrastructure, backups, updates, connectors, security, and operations are managed for the entity.</td></tr>
+            <tr><td>Portable distribution</td><td><strong>Keel Self-Hosted</strong></td><td>A VM/server package that can run on any cloud provider, a company server, or on-premise infrastructure.</td></tr>
+          </table>
+          <h3>3.1 Why "Keel"</h3>
+          <p>The name Keel is intentionally structural rather than cognitive or organizational. The keel is the structural spine of a vessel. A vessel outlives its crew, gets refitted, changes flag, replaces its engines and instruments — but the keel is what makes it the same ship. That is entity continuity in one word:</p>
+          <ul>
+            <li><strong>Structural meaning:</strong> the keel is laid first; everything else is built on and around it.</li>
+            <li><strong>Continuity meaning:</strong> crews change, cargo changes, routes change; the keel persists.</li>
+            <li><strong>Stability meaning:</strong> the keel keeps the vessel upright through changing conditions.</li>
+          </ul>
+          <h3>3.2 Why "Weave"</h3>
+          <p>The name Weave describes how an entity's many threads — people, agents, agreements, decisions, customers, finances, obligations — are structured into one coherent fabric. A weave looks like plain material at a distance, but close up it is a deliberate structure of interlocking threads. Entity information behaves the same way: it looks like documents, meetings, contracts, and metrics on the surface, but underneath it is a structured, layered, contextual mesh that gives the entity its strength.</p>
+          <h3>3.3 Framework, implementation, and blueprint</h3>
+          <p>EIOS should not depend on any specific cloud provider, database, or storage technology. EIOS defines what a compliant entity information core should do. Weave defines the conceptual information organization used inside that core. Keel implements both in a concrete, usable stack.</p>
+          <div class="callout">
+            <strong>Core distinction:</strong> EIOS defines the open entity information architecture. Keel implements it. Weave defines the information organization logic inside it: the principles, categories, metadata conventions, terminology, examples, and decision rules agents use when entity information enters the system.
+          </div>
+        </section>
+
+        <section id="principles">
+          <h2>4. Governing Principles</h2>
+          <div class="principle"><b>Principle 1</b><div><strong>The entity is the center of gravity.</strong> All information is organized according to how it relates to the entity's identity, value creation, governance, stakeholders, operations, and continuity.</div></div>
+          <div class="principle"><b>Principle 2</b><div><strong>EIOS and PIOS share an origin but live independently.</strong> PIOS is centered on a person. EIOS is centered on an entity. They share information operating system ancestry but apply it to different centers of gravity, with no compatibility requirement between them.</div></div>
+          <div class="principle"><b>Principle 3</b><div><strong>Entity existence depends on sustained value creation.</strong> An entity must eventually justify continued existence through stakeholder value, stakeholder support, and sustainable operation.</div></div>
+          <div class="principle"><b>Principle 4</b><div><strong>Purpose, mission, and value are first-class information.</strong> Purpose, mission, vision, values, strategy, stakeholders, and value propositions are not decorative. They guide entity reasoning and decision-making.</div></div>
+          <div class="principle"><b>Principle 5</b><div><strong>The served world is first-class.</strong> Customers, users, buyers, beneficiaries, members, communities, and market context are part of the entity's operating memory.</div></div>
+          <div class="principle"><b>Principle 6</b><div><strong>Financials are first-class entity information.</strong> Financials describe how the entity captures value, funds operations, invests in development, manages risk, maintains reserves, and demonstrates accountability.</div></div>
+          <div class="principle"><b>Principle 7</b><div><strong>Agreements are first-class entity information.</strong> Agreements define binding relationships, rights, obligations, risks, permissions, economic terms, and governance constraints.</div></div>
+          <div class="principle"><b>Principle 8</b><div><strong>Originals are preserved.</strong> Source materials remain intact where possible and are policy-immutable: protected through append-only handling, versioning, retention, and corrective events rather than silent mutation.</div></div>
+          <div class="principle"><b>Principle 9</b><div><strong>Events are the canonical timeline.</strong> The event log records what happened and provides the machine-readable spine of the entity's history.</div></div>
+          <div class="principle"><b>Principle 10</b><div><strong>Knowledge is living and source-linked.</strong> Knowledge is maintained as current interpretation, but connected to sources, events, decisions, and evidence.</div></div>
+          <div class="principle"><b>Principle 11</b><div><strong>Derived views are rebuildable.</strong> Summaries, dashboards, reports, indexes, and public views must not become the only source of truth.</div></div>
+          <div class="principle"><b>Principle 12</b><div><strong>Humans and AI agents are role-bearing actors.</strong> People, AI agents, teams, systems, and external parties are modeled as actors with roles, responsibilities, access, and authority.</div></div>
+          <div class="principle"><b>Principle 13</b><div><strong>Governance is information.</strong> Roles, authority, approvals, policies, responsibilities, and decision rights are represented explicitly.</div></div>
+          <div class="principle"><b>Principle 14</b><div><strong>Discussion is not decision.</strong> EIOS must distinguish dialogue, proposal, recommendation, approval, commitment, and action.</div></div>
+          <div class="principle"><b>Principle 15</b><div><strong>Notification is not approval.</strong> Approval must be explicit and traceable.</div></div>
+          <div class="principle"><b>Principle 16</b><div><strong>Holding information does not imply sharing information.</strong> Soft boundaries require need-to-know behavior and contextual abstraction.</div></div>
+          <div class="principle"><b>Principle 17</b><div><strong>Hard boundaries are system-enforced.</strong> Some information and actions require strict technical separation.</div></div>
+          <div class="principle"><b>Principle 18</b><div><strong>Self-improving loops are governed loops.</strong> EIOS connects signals, decisions, actions, outcomes, and updates into recursive improvement loops, but these loops require boundaries, approvals, measurement, and review.</div></div>
+          <div class="principle"><b>Principle 19</b><div><strong>Institutional memory must compound.</strong> Each meeting, decision, customer signal, project, financial update, agreement, and agent output should strengthen the entity's future understanding.</div></div>
+          <div class="principle"><b>Principle 20</b><div><strong>EIOS reduces dependency on single individuals or tools.</strong> Critical knowledge, values, strategy, IPR, processes, and operating logic become embedded in the entity's durable information core.</div></div>
+          <div class="principle"><b>Principle 21</b><div><strong>Capture first, organize later.</strong> Information should enter quickly and safely before perfect classification is attempted. Required metadata stays rare; richer Weave attributes can be added, backfilled, or reprocessed later.</div></div>
+          <div class="principle"><b>Principle 22</b><div><strong>The event log is complete; entity History is curated.</strong> Communications, captures, system activity, processing steps, corrections, and completed work all enter the canonical event log. The readable History surface is derived from selected events, structured updates, summaries, and retained artifacts.</div></div>
+          <div class="principle"><b>Principle 23</b><div><strong>Weave guides meaning before technology chooses format.</strong> Agents should first understand what kind of information an item represents, where it fits in the entity, and which terms should describe it. Only then should they choose storage format, event type, metadata structure, or processing route.</div></div>
+          <div class="principle"><b>Principle 24</b><div><strong>An Entity Keel must be portable.</strong> A complete Entity Keel must be exportable, recoverable, and runnable outside the infrastructure provider currently hosting it. Continuity through provider change, ownership change, and wind-down is a design requirement, not a feature.</div></div>
+        </section>
+
+        <section id="definition">
+          <h2>5. Definition of EIOS</h2>
+          <p class="lead">An Entity Information Operating System is a foundational information layer that allows an entity to manage its information as a durable, governed, agent-usable, and human-understandable operating foundation.</p>
+          <p>EIOS organizes entity information across:</p>
+          <ul class="cols">
+            <li>Identity</li><li>Purpose</li><li>Mission</li><li>Vision</li><li>Values</li><li>Strategy</li>
+            <li>Stakeholders</li><li>Customers</li><li>Users</li><li>Buyers</li><li>Beneficiaries</li><li>Markets</li>
+            <li>Products</li><li>Services</li><li>Capabilities</li><li>Financials</li><li>Agreements</li><li>Intellectual property</li>
+            <li>Assets</li><li>People</li><li>Teams</li><li>AI agents</li><li>Meetings</li><li>Communications</li>
+            <li>Decisions</li><li>Approvals</li><li>Projects</li><li>Processes</li><li>Tools</li><li>Governance</li>
+            <li>Customer signals</li><li>Market signals</li><li>Operating loops</li><li>Performance metrics</li><li>Risks</li><li>Reserves and buffers</li>
+            <li>Operating history</li>
+          </ul>
+          <div class="callout">
+            <strong>EIOS is not one application.</strong> It is an information operating layer that may be implemented through multiple tools, databases, repositories, agents, APIs, dashboards, and workflows. Keel is its reference implementation.
+          </div>
+        </section>
+
+        <section id="center-of-gravity">
+          <h2>6. The Entity as the Center of Gravity</h2>
+          <h3>6.1 Entity-centered information</h3>
+          <p>In EIOS, all information is interpreted according to how it relates to the entity. Information may describe:</p>
+          <ul class="cols">
+            <li>What the entity is</li>
+            <li>Why the entity exists</li>
+            <li>Whom the entity serves</li>
+            <li>What value the entity creates</li>
+            <li>How the entity captures value</li>
+            <li>What the entity owns</li>
+            <li>What the entity knows</li>
+            <li>What the entity has promised</li>
+            <li>What the entity must do</li>
+            <li>Who acts for the entity</li>
+            <li>Who decides for the entity</li>
+            <li>What the entity has learned</li>
+            <li>What the entity is trying to become</li>
+            <li>What threatens the entity</li>
+            <li>What enables the entity to continue</li>
+          </ul>
+          <p>The entity is not merely an account, workspace, tenant, folder, company profile, or database namespace. It is the primary subject of the system.</p>
+          <h3>6.2 Entity as artificial continuity</h3>
+          <p>An entity is an artificial structure that can outlive individual people. It may continue when founders leave, employees change, managers are replaced, ownership changes, tools are replaced, partners change, customers change, markets change, AI agents are upgraded, strategies evolve, products are rebuilt, and operating models are redesigned.</p>
+          <p>For this to happen, critical information must become embedded into the entity itself. This includes:</p>
+          <ul class="cols">
+            <li>Purpose</li><li>Values</li><li>Strategy</li><li>Governance</li>
+            <li>Customer understanding</li><li>Market knowledge</li><li>Financial logic</li><li>Operating practices</li>
+            <li>Intellectual property</li><li>Decision history</li><li>Product knowledge</li><li>Relationship history</li>
+            <li>Agreement obligations</li><li>Cultural norms</li><li>Agent roles</li><li>Institutional memory</li>
+          </ul>
+          <p>EIOS provides the information architecture for this embedding. Keel provides the running system that holds it.</p>
+        </section>
+
+        <section id="viability">
+          <h2>7. Entity Viability</h2>
+          <h3>7.1 The viability principle</h3>
+          <p>A human being does not need to justify existence through value creation. An entity does. An entity continues to exist only if it can create sufficient value for its stakeholders relative to the cost of operating, maintaining, governing, and developing the entity.</p>
+          <div class="callout">
+            <strong>The basic viability relationship:</strong> stakeholder value created and captured must eventually justify the cost of entity existence.
+          </div>
+          <p>This does not mean every entity must be profitable every day. It means the entity must eventually maintain a credible balance between value creation, value capture, operating cost, development cost, stakeholder support, governance cost, risk, reserves, future potential, and continued legitimacy.</p>
+          <h3>7.2 Stakeholder support</h3>
+          <p>Stakeholders may sustain an entity through:</p>
+          <ul class="cols2">
+            <li>Paying for products or services</li>
+            <li>Funding development</li>
+            <li>Investing capital</li>
+            <li>Paying membership fees</li>
+            <li>Contributing work</li>
+            <li>Providing legitimacy</li>
+            <li>Granting mandate</li>
+            <li>Providing resources</li>
+            <li>Participating in governance</li>
+            <li>Sharing infrastructure</li>
+            <li>Providing distribution</li>
+            <li>Providing knowledge</li>
+            <li>Accepting coordination costs</li>
+            <li>Supporting future value creation</li>
+          </ul>
+          <p>In some entity types, the same stakeholder may be both value recipient and value funder. This is common in cooperatives, associations, member-owned entities, public-private initiatives, and ecosystem organizations.</p>
+          <h3>7.3 Cost of entity existence</h3>
+          <p>Entity cost includes more than financial expense. It may include:</p>
+          <ul class="cols">
+            <li>Operating cost</li><li>Development cost</li><li>Management effort</li><li>Governance effort</li>
+            <li>Coordination cost</li><li>Legal responsibility</li><li>Compliance cost</li><li>Reputation risk</li>
+            <li>Infrastructure cost</li><li>Communication overhead</li><li>Decision-making burden</li><li>Cultural maintenance</li>
+            <li>Stakeholder trust expenditure</li><li>Technical maintenance</li><li>Agent supervision and monitoring</li><li>Opportunity cost</li>
+          </ul>
+          <h3>7.4 Reserves and buffers</h3>
+          <p>Entities require buffers to survive transition, uncertainty, delay, and disruption. Buffers may include:</p>
+          <ul class="cols">
+            <li>Financial reserves</li><li>Human capability reserves</li><li>Knowledge redundancy</li><li>Strategic optionality</li>
+            <li>Customer diversity</li><li>Partner diversity</li><li>Technical resilience</li><li>Operational slack</li>
+            <li>Reputation capital</li><li>Trust reserves</li><li>Intellectual property</li><li>Data assets</li>
+            <li>Market insight</li><li>Legal continuity</li><li>Governance clarity</li>
+          </ul>
+          <p>EIOS should support visibility into both current viability and transition capacity.</p>
+          <h3>7.5 Entity viability model</h3>
+          <div class="diagram">Entity Viability
+  Purpose
+  Stakeholder value
+  Value creation
+  Value capture
+  Revenue
+  Funding
+  Operating cost
+  Development cost
+  Governance cost
+  Stakeholder support
+  Reserves and buffers
+  Transition capacity
+  Risks
+  Continued legitimacy</div>
+        </section>
+
+        <section id="entity-dna">
+          <h2>8. Entity DNA: Purpose, Mission, Vision, Values, Strategy</h2>
+          <h3>8.1 Entity DNA</h3>
+          <p>Entity DNA contains the information that defines who the entity is and what should guide its decisions. It includes purpose, mission, vision, values, principles, strategy, strategic objectives, cultural commitments, identity statements, and long-term direction.</p>
+          <div class="callout">
+            <strong>Entity DNA should not be treated as decorative text.</strong> It should be used as a decision lens by both humans and agents.
+          </div>
+          <div class="grid two">
+            <div class="card">
+              <h4>Purpose — why the entity exists</h4>
+              <p class="small">Reason for existence, founder intent, societal purpose, customer problem to solve, cooperative need, public mandate, ecosystem role, community commitment, value creation rationale.</p>
+            </div>
+            <div class="card">
+              <h4>Mission — what value, to whom</h4>
+              <p class="small">Connects served stakeholders, value created, activities performed, outcomes pursued, and boundaries of action.</p>
+            </div>
+            <div class="card">
+              <h4>Vision — the future being created</h4>
+              <p class="small">What should the entity become? What should be true in 5 to 10 years? What larger change does the entity seek? What would success look like from the outside? How should future stakeholders experience the entity?</p>
+            </div>
+            <div class="card">
+              <h4>Values and principles — expected behavior</h4>
+              <p class="small">Should influence hiring, partnerships, customer treatment, product design, pricing, governance, internal behavior, conflict handling, communication, use of AI, risk decisions, and public statements. EIOS preserves both declared values and evidence of values in action.</p>
+            </div>
+          </div>
+          <h3>8.2 Strategy</h3>
+          <p>Strategy answers how the entity creates, delivers, sustains, and captures value. Strategy may include:</p>
+          <ul class="cols">
+            <li>Market position</li><li>Customer focus</li><li>Competitive advantage</li><li>Capabilities</li>
+            <li>Resource allocation</li><li>Partnerships</li><li>Pricing logic</li><li>Product direction</li>
+            <li>Operating model</li><li>Growth logic</li><li>Risk posture</li><li>Differentiation</li>
+            <li>Timing</li><li>Execution priorities</li>
+          </ul>
+        </section>
+
+        <section id="served-world">
+          <h2>9. Served World, Customers, and Market Context</h2>
+          <h3>9.1 Served world</h3>
+          <p>An entity does not merely exist in an external environment. It exists in relation to a <strong>served world</strong>: the people, organizations, markets, communities, or systems for whom the entity creates value.</p>
+          <p>Depending on entity type, the served world may include customers, users, buyers, citizens, members, patients, students, developers, ecosystem participants, beneficiaries, communities, public-sector stakeholders, and industry actors.</p>
+          <h3>9.2 Customers and users</h3>
+          <p>For a commercial entity, customers, users, and buyers are first-class EIOS concepts. They may be different actors:</p>
+          <table>
+            <tr><th>Role</th><th>Meaning</th></tr>
+            <tr><td>User</td><td>Uses the product or service.</td></tr>
+            <tr><td>Buyer</td><td>Makes the purchase decision.</td></tr>
+            <tr><td>Customer</td><td>Pays or contracts.</td></tr>
+            <tr><td>Beneficiary</td><td>Receives value.</td></tr>
+            <tr><td>Recommender</td><td>Influences adoption.</td></tr>
+            <tr><td>Administrator</td><td>Manages use.</td></tr>
+            <tr><td>Champion</td><td>Promotes internally.</td></tr>
+            <tr><td>Blocker</td><td>Prevents adoption.</td></tr>
+          </table>
+          <p>EIOS should preserve these distinctions.</p>
+          <h3>9.3 Jobs to be done</h3>
+          <p>Jobs to be done describe the progress a stakeholder is trying to make in a given context. A job may include situation, trigger, desired progress, functional need, emotional need, social need, current alternative, pain, risk, desired outcome, success criteria, budget logic, and decision context.</p>
+          <pre><code>job_to_be_done:
+  id: jtbd_example
+  stakeholder_segment: founder_led_sme
+  situation: trying_to_apply_ai_to_business_operations
+  desired_progress: move_from_tool_experimentation_to_operational_capability
+  current_alternatives:
+    - ad_hoc_chat_ai_use
+    - isolated_workflow_automation
+  pains:
+    - lack_of_clarity
+    - too_many_tools
+    - unclear_next_steps
+  desired_outcomes:
+    - operational_confidence
+    - practical_use_cases
+    - safe_first_agentic_workflows
+  evidence_refs:
+    - customer_interview_001
+    - workshop_feedback_003</code></pre>
+          <h3>9.4 Value propositions</h3>
+          <p>A value proposition defines why a stakeholder should care about the entity's product, service, initiative, or existence. It may include target stakeholder, problem addressed, desired outcome, offered solution, differentiation, evidence, cost or tradeoff, value capture logic, proof points, and risks and assumptions.</p>
+          <h3>9.5 Market signals</h3>
+          <p>Market signals are observations from the served world that may affect strategy, product, operations, or viability. Sources may include:</p>
+          <ul class="cols">
+            <li>Customer conversations</li><li>Support requests</li><li>Sales calls</li><li>Lost deals</li>
+            <li>Churn analysis</li><li>Competitor activity</li><li>Industry news</li><li>Policy changes</li>
+            <li>Technology shifts</li><li>Partner feedback</li><li>Community discussion</li><li>Usage data</li>
+            <li>Surveys</li><li>Public reports</li><li>Analyst notes</li><li>Social media</li>
+            <li>Field observations</li>
+          </ul>
+          <div class="callout">
+            <strong>Rule:</strong> market signals should be source-linked, time-stamped, and connected to strategy, product, customer segments, and decisions.
+          </div>
+        </section>
+
+        <section id="stakeholders">
+          <h2>10. Stakeholder Model</h2>
+          <h3>10.1 Stakeholders</h3>
+          <p>Stakeholders are actors or groups who affect or are affected by the entity. Typical stakeholders include:</p>
+          <ul class="cols">
+            <li>Customers</li><li>Users</li><li>Buyers</li><li>Beneficiaries</li>
+            <li>Shareholders</li><li>Owners</li><li>Members</li><li>Board of directors</li>
+            <li>Management</li><li>Employees</li><li>Teams</li><li>Partners</li>
+            <li>Advisors</li><li>Investors</li><li>Suppliers</li><li>Regulators</li>
+            <li>Funders</li><li>Communities</li><li>Ecosystem participants</li><li>Public audiences</li>
+          </ul>
+          <h3>10.2 Stakeholder roles</h3>
+          <p>Stakeholders may relate to the entity through different roles:</p>
+          <table>
+            <tr><th>Stakeholder</th><th>Role pattern</th></tr>
+            <tr><td>Customer</td><td>Value recipient and payer</td></tr>
+            <tr><td>User</td><td>Value user</td></tr>
+            <tr><td>Buyer</td><td>Purchase decision-maker</td></tr>
+            <tr><td>Owner</td><td>Value funder and economic beneficiary</td></tr>
+            <tr><td>Shareholder</td><td>Owner of economic interest</td></tr>
+            <tr><td>Board</td><td>Governance authority</td></tr>
+            <tr><td>Management</td><td>Operational authority</td></tr>
+            <tr><td>Employee</td><td>Execution and knowledge actor</td></tr>
+            <tr><td>Partner</td><td>External capability contributor</td></tr>
+            <tr><td>Advisor</td><td>External knowledge contributor</td></tr>
+            <tr><td>Regulator</td><td>Compliance authority</td></tr>
+            <tr><td>Community</td><td>Legitimacy environment</td></tr>
+          </table>
+          <p>A single stakeholder can hold multiple roles. For example: a cooperative member may be owner, customer, user, and governance participant. A founder may be owner, board member, manager, employee, and product visionary. A public body may be funder, regulator, customer, and policy stakeholder. A strategic partner may be supplier, customer, and co-developer.</p>
+        </section>
+
+        <section id="financials">
+          <h2>11. Financial and Economic Context</h2>
+          <h3>11.1 Financials as first-class entity information</h3>
+          <p>Financials are central to entity viability. For a person, financials may be one life domain. For a business entity, financials are part of the entity's survival logic. Financials answer: Can the entity continue existing? Can it create value sustainably? Can it capture enough value? Can it fund operations and development? Can it survive transition? Can stakeholders trust it? Can commitments be met? Can reserves be maintained?</p>
+          <h3>11.2 Financial layers</h3>
+          <p>EIOS represents financials across four layers:</p>
+          <div class="grid two">
+            <div class="card">
+              <h4>Accounting truth</h4>
+              <p class="small">Formal financial records: chart of accounts, general ledger, trial balance, profit and loss, balance sheet, cash flow statement, accounts receivable/payable, invoices, receipts, payroll, tax records, depreciation, accruals, assets, liabilities, equity, debt.</p>
+            </div>
+            <div class="card">
+              <h4>Management finance</h4>
+              <p class="small">Internal decision layer: budget, forecast, actuals versus budget, cash runway, burn rate, gross margin, contribution margin, unit economics, CAC, LTV, MRR/ARR, churn, expansion revenue, cost centers, profit centers, scenario plans.</p>
+            </div>
+            <div class="card">
+              <h4>Value economics</h4>
+              <p class="small">Strategic value layer: who pays, why they pay, what value is created and captured, what delivery/improvement/growth cost, what reserves are needed, what the transition buffer is, and the long-term sustainability logic.</p>
+            </div>
+            <div class="card">
+              <h4>Governance and reporting</h4>
+              <p class="small">Authority and accountability layer: board reports, investor reports, tax reports, audit records, approval thresholds, spending authority, financial policies, funding decisions, dividend or surplus decisions, capital allocation, financial risk register.</p>
+            </div>
+          </div>
+          <h3>11.3 Standards and terminology</h3>
+          <p>Financial information should use common and established terminology wherever possible: IFRS, IAS, local accounting terminology, GAAP concepts where relevant, chart of accounts structures, financial statement categories, management accounting terms, SaaS metrics where applicable, startup finance terms, banking and payment terminology, tax and VAT terminology, and audit and compliance terminology.</p>
+          <div class="callout">
+            <strong>Standards are mappings and references, not rigid masters.</strong> EIOS preserves jurisdiction-specific requirements, entity-specific meanings, and source records.
+          </div>
+          <h3>11.4 Financial objects</h3>
+          <p>Financial objects may include: financial account, transaction, invoice, payment, revenue stream, cost category, cost center, profit center, budget, forecast, actual, cash position, runway, reserve, funding source, investment need, financial risk, financial KPI, financial policy, approval threshold, tax obligation, report, and scenario.</p>
+          <pre><code>financial_metric:
+  id: metric_cash_runway
+  metric_type: cash_runway
+  value: 8.5
+  unit: months
+  calculation_basis:
+    cash_balance: latest_verified_cash_position
+    monthly_net_burn: average_last_3_months
+  source_refs:
+    - bank_balance_2026_06
+    - pnl_actuals_2026_q2
+  confidence: medium
+  reviewed_by: finance_lead
+  last_reviewed_at: 2026-06-30</code></pre>
+          <h3>11.5 Financial version states</h3>
+          <p>Financial information may be: draft, preliminary, estimated, unaudited, management-reviewed, board-approved, filed, audited, superseded, scenario-based, forecast, or actual.</p>
+          <div class="callout warning">
+            <strong>These states must not be collapsed.</strong> A living forecast, a board-approved budget, a filed financial statement, and a scenario plan are different objects with different authority.
+          </div>
+        </section>
+
+        <section id="agreements">
+          <h2>12. Agreements and Obligations</h2>
+          <h3>12.1 Agreements as first-class entity information</h3>
+          <p>Agreements define binding relationships, rights, obligations, risks, permissions, economic terms, and governance constraints. EIOS should understand agreement types and common agreement topics without treating itself as a legal authority.</p>
+          <div class="callout">
+            <strong>The actual signed agreement remains the source of truth.</strong> EIOS helps classify, summarize, extract obligations, track dates, identify risk, and route legal or governance review to authorized roles.
+          </div>
+          <h3>12.2 Common agreement types</h3>
+          <ul class="cols">
+            <li>Customer agreement</li><li>Sales contract</li><li>Terms of service</li><li>Privacy policy</li>
+            <li>Data processing agreement</li><li>Non-disclosure agreement</li><li>Employment agreement</li><li>Contractor agreement</li>
+            <li>Consulting agreement</li><li>Service agreement</li><li>SaaS agreement</li><li>License agreement</li>
+            <li>IP assignment agreement</li><li>Shareholder agreement</li><li>Founders agreement</li><li>Investment agreement</li>
+            <li>Partnership agreement</li><li>Reseller agreement</li><li>Supplier agreement</li><li>Lease agreement</li>
+            <li>Loan agreement</li><li>Grant agreement</li><li>Memorandum of understanding</li><li>Service level agreement</li>
+            <li>Statement of work</li><li>Purchase order</li><li>Framework agreement</li><li>Board or advisory agreement</li>
+          </ul>
+          <h3>12.3 Common agreement topics</h3>
+          <ul class="cols">
+            <li>Parties</li><li>Purpose</li><li>Scope</li><li>Term and renewal</li>
+            <li>Price and payment</li><li>Deliverables</li><li>Responsibilities</li><li>Service levels</li>
+            <li>Confidentiality</li><li>Data protection</li><li>Intellectual property</li><li>Licensing</li>
+            <li>Ownership</li><li>Warranties</li><li>Liability</li><li>Indemnity</li>
+            <li>Termination</li><li>Governing law</li><li>Dispute resolution</li><li>Audit rights</li>
+            <li>Non-compete</li><li>Non-solicit</li><li>Subcontracting</li><li>Assignment</li>
+            <li>Publicity rights</li><li>Reporting obligations</li><li>Security requirements</li><li>Change management</li>
+            <li>Acceptance criteria</li><li>Support obligations</li><li>Survival clauses</li>
+          </ul>
+          <h3>12.4 Agreement model</h3>
+          <p>EIOS models agreements at three levels:</p>
+          <ol>
+            <li><strong>Agreement type reference</strong> — what kind of agreement this is and what topics usually matter.</li>
+            <li><strong>Specific agreement record</strong> — the actual agreement the entity has entered into.</li>
+            <li><strong>Extracted obligation and governance layer</strong> — what the entity must do, may do, must not do, should monitor, or must review.</li>
+          </ol>
+          <pre><code>agreement_record:
+  id: agreement_customer_001
+  agreement_type: customer_service_agreement
+  parties:
+    - own_entity
+    - customer_entity
+  status: active
+  effective_date: 2026-06-01
+  renewal_date: 2027-06-01
+  source_refs:
+    - signed_contract_pdf_001
+  topics_present:
+    - payment_terms
+    - confidentiality
+    - data_protection
+    - service_levels
+    - termination
+    - limitation_of_liability
+  obligations:
+    - provide_monthly_report
+    - maintain_response_time
+    - notify_security_incident
+  sensitivity: guarded
+  review_required_by: legal_or_authorized_role</code></pre>
+          <h3>12.5 Agreement lifecycle</h3>
+          <div class="diagram">template → draft → under_review → negotiation → approved_for_signature → signed → active
+→ renewal_pending → amended → terminated → expired → archived → disputed</div>
+        </section>
+
+        <section id="actors">
+          <h2>13. Entity Actors</h2>
+          <h3>13.1 Actor model</h3>
+          <p>An actor is any human, AI agent, team, group, system, or external party that can observe, decide, communicate, act, or hold responsibility within the entity context. Actors may include:</p>
+          <ul class="cols">
+            <li>Founder</li><li>Owner</li><li>Board member</li><li>Managing director</li>
+            <li>Executive</li><li>Department head</li><li>Employee</li><li>Contractor</li>
+            <li>Advisor</li><li>Partner</li><li>Customer representative</li><li>AI agent</li>
+            <li>Software system</li><li>Team</li><li>Committee</li><li>Working group</li>
+          </ul>
+          <h3>13.2 Humans and AI agents as role-bearing actors</h3>
+          <p>EIOS represents both humans and AI agents as role-bearing actors. This does not mean humans and AI agents are identical legally, morally, or socially. It means the information architecture can represent their roles, responsibilities, permissions, channels, and decision relationships in a shared structure.</p>
+          <pre><code>actor:
+  id: actor_example
+  actor_type: human | ai_agent | team | external_party | system
+  name: Example Actor
+  role: innovation_manager
+  title: Innovation Manager
+  department: strategy
+  responsibilities:
+    - monitor_market_signals
+    - prepare_monthly_update
+  authority:
+    can_recommend:
+      - new_initiatives
+    can_decide:
+      - internal_research_priorities
+    requires_approval:
+      - budget_commitment
+      - external_publication
+  access:
+    hard_boundary_groups:
+      - strategy_workspace
+    soft_boundary_rules:
+      - generalize_customer_names_by_default</code></pre>
+          <h3>13.3 Roles</h3>
+          <p>A role describes a responsibility pattern. Roles may include CEO, managing director, founder, board chair, product manager, sales lead, customer success lead, finance lead, legal advisor, project manager — and agent roles such as governance agent, research agent, customer insight agent, documentation agent, and meeting synthesis agent.</p>
+          <p>Roles should be connected to responsibilities, authority, access, decision rights, communication channels, reporting relationships, approval requirements, and knowledge areas.</p>
+        </section>
+
+        <section id="circles">
+          <h2>14. Entity Circles and Access Layers</h2>
+          <h3>14.1 Entity circle model</h3>
+          <p>EIOS represents actor proximity and access through entity circles:</p>
+          <div class="diagram">Entity Core
+  Internal Circle
+    Extended Circle
+      Served World
+        Outer Circle</div>
+          <p class="small">The circle vocabulary is inherited from the PIOS Circle model (Core Self → Inner → Extended → Outer). EIOS inserts the Served World as its own circle layer, because for an entity the stakeholders it creates value for are a distinct proximity band between close collaborators and the general public.</p>
+          <h3>14.2 Entity Core</h3>
+          <p>The Entity Core is the private source of truth for the entity. It contains originals, the event log, knowledge objects, derived views, governance rules, agent definitions, permissions, and system state.</p>
+          <div class="callout">
+            <strong>Not every internal actor has access to all Entity Core information.</strong> The Entity Core is a trust boundary, not a shared drive.
+          </div>
+          <h3>14.3 Internal Circle</h3>
+          <p>The Internal Circle includes internal people, teams, departments, management, and internal AI agents: founders, employees, management, departments, teams, internal agents, internal systems, and internal committees. The Internal Circle usually requires granularity by role, function, team, and project.</p>
+          <h3>14.4 Extended Circle</h3>
+          <p>The Extended Circle includes close external actors: partners, advisors, contractors, investors, suppliers, professional service providers, strategic collaborators, and external project members. Extended Circle actors may require controlled access to selected projects, documents, decisions, and summaries.</p>
+          <h3>14.5 Served World</h3>
+          <p>The Served World includes the stakeholders for whom the entity creates value: customers, users, buyers, members, citizens, beneficiaries, and communities. The Served World may both receive value and provide feedback, data, revenue, legitimacy, or participation.</p>
+          <h3>14.6 Outer Circle</h3>
+          <p>The Outer Circle includes the broader public environment: public audiences, media, prospects, ecosystem observers, public regulators, the general market, social media, and website visitors. Outer Circle information is typically public, published, generalized, or intentionally exposed.</p>
+        </section>
+
+        <section id="boundaries">
+          <h2>15. Hard Boundaries and Soft Boundaries</h2>
+          <h3>15.1 Hard boundaries</h3>
+          <p>Hard boundaries are system-enforced restrictions. If a hard boundary applies, an actor cannot access the information. Examples:</p>
+          <ul>
+            <li>A contractor cannot access internal financial records.</li>
+            <li>A customer-facing AI agent cannot access private employee records.</li>
+            <li>A product agent cannot access acquisition discussions.</li>
+            <li>A department workspace cannot access board-only documents.</li>
+            <li>A partner view cannot access internal strategy notes.</li>
+          </ul>
+          <p>Hard boundaries may be enforced through identity and access management, role-based access control, attribute-based access control, tenant boundaries, encryption, tool restrictions, query filters, data separation, network boundaries, agent runtime permissions, and API scopes.</p>
+          <h3>15.2 Soft boundaries</h3>
+          <p>Soft boundaries are context-aware sharing rules. An actor may technically have access to information but should only share what is appropriate for the audience, purpose, sensitivity, and need-to-know context. Soft boundaries reflect how responsible human actors behave.</p>
+          <div class="callout">
+            <strong>The key rule:</strong> holding information does not mean distributing information.
+          </div>
+          <h3>15.3 Need-to-know sharing</h3>
+          <p>Need-to-know sharing means an actor shares only what is necessary for the recipient's legitimate purpose. Examples:</p>
+          <ul>
+            <li>Use "a team member" instead of naming an employee when the name is unnecessary.</li>
+            <li>Use "an enterprise customer" instead of naming the customer when identity is not needed.</li>
+            <li>Share the conclusion of a meeting without exposing the full transcript.</li>
+            <li>Share a risk category without exposing private legal detail.</li>
+            <li>Share a roadmap dependency without exposing confidential product plans.</li>
+            <li>Share an approved public statement instead of internal deliberation.</li>
+          </ul>
+          <h3>15.4 Contextual abstraction</h3>
+          <p>Contextual abstraction is the practice of preserving specificity internally while generalizing details for broader sharing when appropriate.</p>
+          <p>Example source detail: <em>"Anna from Customer X said the integration failed after their internal security review."</em></p>
+          <p>Possible abstraction levels:</p>
+          <ol>
+            <li>A customer contact reported an integration issue during a security review.</li>
+            <li>A customer-side security review surfaced an integration concern.</li>
+            <li>A security-review-related integration issue should be investigated.</li>
+          </ol>
+          <p>EIOS supports such abstraction as an explicit information-handling behavior.</p>
+        </section>
+
+        <section id="zones">
+          <h2>16. Information Zones</h2>
+          <h3>16.1 Five information zones</h3>
+          <p>EIOS organizes information into five core zones. These zones are conceptual: they do not need to correspond directly to physical databases, folders, storage buckets, or applications.</p>
+          <table>
+            <tr><th>Zone</th><th>Purpose</th><th>Mutability</th></tr>
+            <tr><td><strong>Originals</strong></td><td>Preserved source materials exactly as received: contracts, emails, chat exports, meeting recordings and transcripts, board decks, strategy documents, financial records, invoices, customer records, product specifications, research reports, design files, policies, legal documents, data exports, agent outputs, screenshots, audio, video.</td><td>Policy-immutable</td></tr>
+            <tr><td><strong>Events</strong></td><td>Append-only canonical entity event log recording what happened: meeting held, email received, contract signed, decision proposed/approved, roadmap updated, customer feedback received, market signal captured, invoice sent, employee onboarded, policy updated, agent recommendation created, access permission changed, public statement approved, product release completed.</td><td>Append-only</td></tr>
+            <tr><td><strong>Knowledge</strong></td><td>The living semantic layer: entity profile, strategy, product profile, customer profile, partner profile, market segment profile, decision record, policy, role description, project page, process description, risk register, glossary term, customer insight, value proposition, capability description, meeting summary, research synthesis.</td><td>Mutable but traceable</td></tr>
+            <tr><td><strong>Derived</strong></td><td>Rebuildable outputs: summaries, dashboards, reports, search indexes, embeddings, graph views, analytics, stakeholder summaries, board updates, product documentation views, market intelligence reports, customer segment summaries, public pages, redacted views, agent briefings.</td><td>Rebuildable</td></tr>
+            <tr><td><strong>System</strong></td><td>Definitions that operate EIOS: agent definitions, actor profiles, permission rules, access policies, soft-boundary rules, hard-boundary configurations, governance rules, approval workflows, connector states, processing manifests, data schemas, glossary rules, classification rules, source mappings, audit settings, retention policies, API permissions.</td><td>Controlled/versioned</td></tr>
+          </table>
+          <p>Originals should be preserved as received where possible. Events form the canonical timeline of the entity. Knowledge can be updated, but updates should remain traceable to sources and events. Derived information should not become the only source of truth. System information should be controlled, versioned, and auditable.</p>
+          <h3>16.2 Information stability layers</h3>
+          <p>Weave separates information by how stable it is, because storage, review cadence, agent confidence, and retrieval behavior differ by stability:</p>
+          <table>
+            <tr><th>Layer</th><th>Description</th><th>Entity examples</th><th>Agent handling</th></tr>
+            <tr><td>Stable</td><td>Information that rarely or never changes.</td><td>Founding facts, legal identity, registration data, purpose, articles of association.</td><td>Store with strong provenance; change only through explicit correction or versioned update.</td></tr>
+            <tr><td>Slowly changing</td><td>Profile-like information that evolves but should not churn daily.</td><td>Strategy, values in action, capability map, org structure, product positioning, key relationships.</td><td>Maintain as living profile notes with last-reviewed dates and source-linked updates.</td></tr>
+            <tr><td>Dynamic</td><td>Operational information that changes frequently.</td><td>Tasks, projects, meetings, customer signals, financial actuals, support tickets, campaign metrics.</td><td>Represent as events, records, logs, status views, and derived summaries.</td></tr>
+          </table>
+        </section>
+
+        <section id="inbound">
+          <h2>17. Inbound Flow</h2>
+          <p class="lead">All information enters through a universal inbox, regardless of source. The source can be a file upload, API call, connected system, recurring stream, meeting recording, email, calendar feed, agent output, or manual note.</p>
+          <h3>17.1 Universal inbox rule</h3>
+          <p>The inbox is the only normal path into an Entity Keel. The agent responsible for the inbox performs triage, preservation, initial event creation, and routing. Information can be processed at different speeds:</p>
+          <ul>
+            <li><strong>Immediate triage:</strong> identify source, type, time, original reference, sensitivity, and basic event.</li>
+            <li><strong>Background enrichment:</strong> extract text, metadata, glossary terms, actors, stakeholders, obligations, topics, and links.</li>
+            <li><strong>Periodic interpretation:</strong> build patterns, aggregates, summaries, recognized entity views, and retrieval indexes.</li>
+          </ul>
+          <h3>17.2 Connected systems</h3>
+          <p>An Entity Keel connects to the systems where entity work already happens: email, calendar, Slack, Microsoft Teams, Google Drive, SharePoint, Notion, Confluence, Jira, Linear, GitHub, CRM, ERP, accounting systems, HR systems, customer support systems, product analytics, data warehouses, meeting transcription tools, and AI agent platforms.</p>
+          <div class="callout">
+            <strong>Connected systems remain operational systems of record for their own current workflows.</strong> A connected system is an input channel, not the long-term owner of the entity's accumulated record. The Entity Keel becomes the aggregated entity information foundation across all of them.
+          </div>
+          <h3>17.3 Source promotion lifecycle</h3>
+          <p>Not everything a connected system emits deserves equal standing. Sources and their items move through promotion states so that low-value, high-volume noise does not corrupt the curated entity knowledge base:</p>
+          <div class="diagram">parked → analyzed → mapped → enriched → history_included</div>
+          <table>
+            <tr><th>State</th><th>Meaning</th></tr>
+            <tr><td>parked</td><td>Received and preserved, but not yet interpreted. Safe default for bulk imports and new connectors.</td></tr>
+            <tr><td>analyzed</td><td>Type, structure, volume, and sensitivity understood; processing policy assigned.</td></tr>
+            <tr><td>mapped</td><td>Connected to entity concepts: stakeholders, projects, agreements, products, actors, glossary terms.</td></tr>
+            <tr><td>enriched</td><td>Summaries, extracted obligations, signals, and knowledge updates produced.</td></tr>
+            <tr><td>history_included</td><td>Curated into the entity's owner-facing History as meaningful updates, decisions, and milestones.</td></tr>
+          </table>
+          <h3>17.4 Transition-time disposition</h3>
+          <p>When an entity adopts EIOS over an existing tool landscape, each source, folder, app, or record needs a recorded disposition toward the Entity Keel:</p>
+          <table>
+            <tr><th>Disposition</th><th>Meaning</th></tr>
+            <tr><td>canonical</td><td>The Entity Keel retains the source or object as part of the entity's durable information foundation.</td></tr>
+            <tr><td>derived_projection</td><td>Useful as a view, summary, dashboard, or index, but regenerable from retained sources and events.</td></tr>
+            <tr><td>external_referenced</td><td>Truth remains in the external system (e.g. the accounting ledger, the code repository). The Keel records a reference, source rule, or event trail without copying the full source.</td></tr>
+            <tr><td>staged</td><td>Temporarily present for intake, screening, transformation, or review; not yet promoted.</td></tr>
+            <tr><td>excluded</td><td>Deliberately not imported, with the exclusion reason recorded so agents do not rediscover the same boundary.</td></tr>
+            <tr><td>guarded_pending</td><td>May belong in the Keel later, but sensitivity, privacy, legal, retention, or approval questions must be resolved first.</td></tr>
+          </table>
+        </section>
+
+        <section id="events">
+          <h2>18. Event Model</h2>
+          <h3>18.1 Event log</h3>
+          <p>The event log is the canonical machine-readable timeline of the entity. It records what happened, when, where it came from, who was involved, which sources support it, and how it relates to entity knowledge.</p>
+          <h3>18.2 Event envelope</h3>
+          <pre><code>event:
+  event_id: event_001
+  event_type: decision_approved
+  event_time: 2026-06-29T14:00:00+03:00
+  recorded_time: 2026-06-29T14:05:00+03:00
+  source:
+    source_type: meeting_transcript
+    source_ref: source_123
+  actors:
+    - actor_id: managing_director
+      role: approver
+    - actor_id: governance_agent
+      role: recorder
+  entity_context:
+    project: project_example
+    department: strategy
+    stakeholder_scope:
+      - internal_circle
+  sensitivity: sensitive
+  approval:
+    approval_required: true
+    approval_status: approved
+  related_objects:
+    - decision_001
+    - roadmap_item_002</code></pre>
+          <p class="small">Time field hierarchy: <code>source_original_time</code> is the immutable timestamp asserted by the originating source; <code>event_time</code> is the best-effort chronological placement of the event (defaults to <code>source_original_time</code>); <code>recorded_time</code> is the system time of Keel ingestion.</p>
+          <h3>18.3 Event types</h3>
+          <ul class="cols">
+            <li>file_uploaded</li><li>source_connected</li><li>meeting_held</li><li>meeting_transcribed</li>
+            <li>meeting_summary_created</li><li>email_received</li><li>message_received</li><li>customer_feedback_received</li>
+            <li>market_signal_captured</li><li>decision_proposed</li><li>decision_discussed</li><li>decision_approved</li>
+            <li>decision_rejected</li><li>approval_requested</li><li>approval_granted</li><li>approval_denied</li>
+            <li>policy_updated</li><li>project_created</li><li>project_status_changed</li><li>task_completed</li>
+            <li>roadmap_updated</li><li>feature_created</li><li>contract_signed</li><li>invoice_sent</li>
+            <li>access_changed</li><li>agent_definition_updated</li><li>public_statement_published</li><li>state_reverted</li>
+          </ul>
+          <h3>18.4 Correction and reversion events</h3>
+          <p>Because the event log is append-only, rollback is expressed as new events rather than destructive edits. If an ingestion, parser, enrichment run, human correction, or agent action is later found to be wrong, the Keel writes a correction or reversion event that references the affected records and tells projections how to treat them.</p>
+          <pre><code>event:
+  event_id: event_state_reverted_001
+  event_type: state_reverted
+  event_time: 2026-06-29T17:10:00+03:00
+  recorded_time: 2026-06-29T17:11:03+03:00
+  actor: organizer_agent
+  target_event_ids:
+    - event_bad_extraction_001
+  target_object_ids:
+    - knowledge:customer_profile_x
+  reason: extraction_error
+  reversion_scope: derived_projection_only
+  replacement_event_id: event_reprocessed_001
+  projection_instructions:
+    - exclude_from_current_state
+    - rebuild_summaries
+    - refresh_indexes</code></pre>
+          <div class="callout">
+            <strong>Reversion events do not erase originals or hide the audit trail.</strong> They tell current-state views, indexes, summaries, and retrieval systems which records are superseded, invalidated, or excluded from active interpretation. The original evidence remains available for audit and repair. For an entity this is also a compliance property: the correction itself becomes part of the governed record.
+          </div>
+          <h3>18.5 History</h3>
+          <p>History is the human-readable projection of selected events. The event log should be more complete than the History view. Not every email, transcript line, system action, or internal trace should appear in human-facing History. History should be curated into meaningful updates, decisions, milestones, and summaries.</p>
+        </section>
+
+        <section id="glossary">
+          <h2>19. Entity Glossary</h2>
+          <p class="lead">The entity glossary provides the shared vocabulary that humans and agents use to interpret the entity's world consistently. It should remain simple at first: stable IDs, definitions, aliases, status, and relationships.</p>
+          <h3>19.1 What belongs in the glossary</h3>
+          <ul>
+            <li>Terms unique to the entity: product names, project codenames, internal shorthand, team names, process names.</li>
+            <li>Customer, partner, and market vocabulary with entity-specific meaning.</li>
+            <li>Role names, department names, decision types, approval categories, and governance vocabulary.</li>
+            <li>Concepts that are broadly known but have a specific meaning inside this entity.</li>
+            <li>Jurisdiction- or industry-specific terms the entity must use precisely.</li>
+          </ul>
+          <h3>19.2 What should not be over-captured</h3>
+          <p>The glossary should not become a general business dictionary. Widely known concepts should only be included when the entity needs a stable local meaning, mapping, or policy for them.</p>
+          <h3>19.3 Term lifecycle</h3>
+          <table>
+            <tr><th>Status</th><th>Use</th></tr>
+            <tr><td>candidate</td><td>Detected by an agent but not yet confirmed by an authorized role.</td></tr>
+            <tr><td>active</td><td>Current accepted term used in metadata, retrieval, and views.</td></tr>
+            <tr><td>merged</td><td>Term has been connected to another preferred term; the preferred term carries the meaning.</td></tr>
+            <tr><td>deprecated</td><td>No longer in active use, retained for interpreting historical records.</td></tr>
+          </table>
+          <h3>19.4 Example glossary term</h3>
+          <pre><code>glossary_term:
+  id: term_northstar_program
+  term: Northstar
+  definition: Internal codename for the 2026 platform consolidation program.
+  aliases:
+    - NS
+    - the consolidation
+  status: active
+  sensitivity: sensitive
+  related_terms:
+    - term_platform_team
+  related_objects:
+    - project_northstar
+  source_refs:
+    - meeting_2026_03_12
+  owner_role: product_lead</code></pre>
+          <div class="callout">
+            <strong>Why the glossary matters more for entities:</strong> people leave, and their vocabulary leaves with them. A maintained entity glossary is one of the highest-leverage continuity assets EIOS produces — it lets a new employee, a new agent, or a future owner correctly interpret ten years of records.
+          </div>
+        </section>
+
+        <section id="knowledge">
+          <h2>20. Knowledge Model</h2>
+          <h3>20.1 Knowledge objects</h3>
+          <p>A knowledge object represents a living entity concept:</p>
+          <ul class="cols">
+            <li>Entity</li><li>Stakeholder</li><li>Customer</li><li>Segment</li>
+            <li>Product</li><li>Service</li><li>Capability</li><li>Process</li>
+            <li>Policy</li><li>Decision</li><li>Project</li><li>Role</li>
+            <li>Actor</li><li>Team</li><li>Market signal</li><li>Value proposition</li>
+            <li>Job to be done</li><li>Partner</li><li>Risk</li><li>Opportunity</li>
+            <li>IP asset</li><li>Financial model</li><li>Meeting summary</li><li>Glossary term</li>
+          </ul>
+          <h3>20.2 Knowledge object structure</h3>
+          <pre><code>knowledge_object:
+  id: object_001
+  object_type: value_proposition
+  title: Value proposition for owner-led SMEs
+  summary: Structured value statement for a target segment.
+  status: active
+  owner_actor: product_strategy_lead
+  related_stakeholders:
+    - founder_led_sme_segment
+  related_events:
+    - customer_interview_001
+    - strategy_meeting_003
+  related_sources:
+    - transcript_001
+    - workshop_feedback_002
+  sensitivity: normal
+  last_reviewed_at: 2026-06-29
+  confidence: medium</code></pre>
+          <h3>20.3 Source-linked knowledge</h3>
+          <p>Knowledge should be connected to its source evidence. A strategy statement, customer insight, product decision, financial assumption, risk, or value proposition should be traceable to a meeting, interview, document, research, market signal, decision record, customer feedback, approval, owner statement, operational data, financial data, agreement, legal source, or agent output.</p>
+          <p>This improves accountability, continuity, and trust — and it is what allows recognized entity views to be regenerated rather than rewritten from memory.</p>
+        </section>
+
+        <section id="weave">
+          <h2>21. Weave — Entity Context Blueprint</h2>
+          <h3>21.1 Purpose</h3>
+          <p class="lead">Weave is the organizing layer that tells humans and agents how entity information should be understood, named, grouped, related, and applied.</p>
+          <p>Weave is not primarily a database schema, folder tree, or application-specific taxonomy. It is a conceptual and operational blueprint that guides classification, retrieval, sharing, governance, and action. It answers questions such as:</p>
+          <ul>
+            <li>What type of information is this?</li>
+            <li>Is it about the entity itself, the served world, the entity's operations, its viability, or its memory?</li>
+            <li>Which stakeholder, project, agreement, product, decision, or time frame does it relate to?</li>
+            <li>Which title, category, tag, summary, metadata, event type, and knowledge projection should an agent use?</li>
+            <li>Which external standard or common vocabulary should be mapped where relevant?</li>
+          </ul>
+          <h3>21.2 Core areas</h3>
+          <table>
+            <tr><th>Area</th><th>Contains</th></tr>
+            <tr><td><strong>The Entity</strong></td><td>Identity, purpose, mission, vision, values, strategy, ownership, governance, people, capabilities, products, services, assets.</td></tr>
+            <tr><td><strong>The Served World</strong></td><td>Customers, users, buyers, beneficiaries, members, markets, partners, competitors, ecosystem, regulators, communities.</td></tr>
+            <tr><td><strong>The Entity Operating System</strong></td><td>Processes, workflows, meetings, tools, agents, permissions, decisions, approvals, reporting, routines, metrics, systems.</td></tr>
+            <tr><td><strong>Entity Viability</strong></td><td>Financials, value creation, value capture, costs, reserves, buffers, risks, stakeholder support.</td></tr>
+            <tr><td><strong>Entity Memory</strong></td><td>Originals, events, knowledge, derived views, system rules.</td></tr>
+          </table>
+          <p>These areas are organizing lenses over one connected Entity Keel, not isolated containers. The same item may involve several areas at once; agents should preserve those relationships instead of copying items into disconnected silos.</p>
+          <h3>21.3 Standards as mappings, not masters</h3>
+          <p>Weave uses established standards, common terms, industry models, accounting language, agreement categories, and domain vocabularies wherever useful: accounting standards, financial statement terminology, legal agreement categories, project and product management terminology, customer experience terminology, CRM and ERP schemas, risk management terminology, industry-specific vocabularies, public standards, common business frameworks, and historical internal schemas.</p>
+          <div class="callout">
+            <strong>External standards are treated as mappings and references, not as masters.</strong> The entity's own language, context, jurisdiction, governance, and operating reality must be preserved.
+          </div>
+          <h3>21.4 Weave classification template</h3>
+          <p>Weave includes concrete templates so agents can apply the principles consistently. A first-pass template for classifying an incoming item:</p>
+          <pre><code>weave_classification:
+  entity_area: entity | served_world | entity_operating_system | entity_viability | entity_memory
+  stability_layer: stable | slowly_changing | dynamic
+  core_disposition: canonical | derived_projection | external_referenced | staged | excluded | guarded_pending
+  related_concepts:
+    stakeholders:
+      - founder_led_sme_segment
+    projects:
+      - project_northstar
+    agreements:
+      - agreement_customer_001
+    products:
+      - product_main
+  source:
+    source_type: manual_upload | connected_system | meeting | agent_output | imported_archive | application_record
+    origin_class: authored | observed | imported | inferred | generated
+    source_ref: original-or-event-reference
+  axes:
+    sensitivity: normal | sensitive | guarded
+    time_relevance: immediate | active | reference | archival
+    technical_form: text | image | audio | video | structured_data | binary | code
+  glossary_terms:
+    - term_id: term_northstar_program
+      relationship: primary_subject
+  standards_mapping:
+    external_vocabularies:
+      - vocabulary: ifrs
+        mapped_term: revenue_recognition
+  recommended_storage:
+    original: preserve_raw
+    event_type: contract_signed
+    knowledge_projection: agreements/agreement_customer_001.md
+  confidence:
+    classification: 0.82
+    needs_review_by: authorized_role</code></pre>
+          <p class="small">Templates are guidance, not rigid schemas. Agents may leave fields empty, mark uncertainty, or propose new taxonomy values, but they should preserve the reason for each classification decision. Required fields stay rare; richer Weave metadata can be added, backfilled, or reprocessed later.</p>
+          <div class="callout">
+            <strong>Agent rule:</strong> when classification is uncertain, preserve the original, attach the best available metadata, explain the uncertainty, and ask whether the missing concept should become a glossary term, taxonomy value, area extension, or implementation detail.
+          </div>
+        </section>
+
+        <section id="entity-views">
+          <h2>22. Recognized Entity Views</h2>
+          <h3>22.1 Views as structured projections</h3>
+          <p>Many common business artifacts should not be treated only as static documents. They should be understood as <strong>recognized entity views</strong> over living entity knowledge:</p>
+          <ul class="cols">
+            <li>Business plan</li><li>SWOT</li><li>Strategy document</li><li>Board report</li>
+            <li>Investor update</li><li>Annual plan</li><li>OKRs</li><li>Risk register</li>
+            <li>Business model canvas</li><li>Value proposition canvas</li><li>Customer segmentation</li><li>JTBD map</li>
+            <li>Customer journey</li><li>Market map</li><li>Competitive analysis</li><li>Go-to-market plan</li>
+            <li>Operating model</li><li>Capability map</li><li>Responsibility matrix</li><li>Approval matrix</li>
+            <li>Product roadmap</li><li>PRD</li><li>Service blueprint</li><li>Architecture overview</li>
+            <li>Financial forecast</li><li>Budget</li><li>Scenario plan</li>
+          </ul>
+          <h3>22.2 Three levels</h3>
+          <ol>
+            <li><strong>Underlying entity knowledge</strong> — customers, mission, strategy, financials, risks, capabilities, market signals, decisions, assumptions.</li>
+            <li><strong>Structured canonical objects</strong> — value proposition, customer segment, strategic objective, risk, capability, product, revenue model, cost structure, assumption, milestone.</li>
+            <li><strong>Recognized organizational views</strong> — business plan, SWOT, board update, strategy document, investor deck, annual plan, roadmap, value proposition canvas.</li>
+          </ol>
+          <h3>22.3 Living, ratified, and candidate versions</h3>
+          <div class="grid three">
+            <div class="card">
+              <h4>Living version</h4>
+              <p class="small">Continuously updated from current knowledge. Example: a Living Business Plan updated from latest strategy, customer evidence, financials, roadmap, and market signals. Not formally approved until reviewed.</p>
+            </div>
+            <div class="card">
+              <h4>Ratified version</h4>
+              <p class="small">Frozen and approved. Example: Business Plan v1.0, approved by the board, used for investor discussions.</p>
+            </div>
+            <div class="card">
+              <h4>Candidate version</h4>
+              <p class="small">Generated from changes and awaiting review. Example: Business Plan v1.1 Candidate, generated because customer segment, revenue model, and roadmap changed. Needs management review.</p>
+            </div>
+          </div>
+          <h3>22.4 Entity view metadata</h3>
+          <pre><code>entity_view:
+  view_type: business_plan
+  source_objects:
+    - mission
+    - customer_segments
+    - value_propositions
+    - financial_model
+    - roadmap
+  generation_mode: manual | assisted | automated
+  version_type: living | snapshot | approved
+  review_cycle: quarterly
+  approval_required: true
+  approving_role: board | ceo | management_team</code></pre>
+          <h3>22.5 Example: SWOT</h3>
+          <p>A SWOT should be a structured view composed from underlying objects:</p>
+          <div class="diagram">SWOT
+  Strengths      → linked to capabilities, assets, intellectual property, customer trust, team skills
+  Weaknesses     → linked to gaps, risks, constraints, missing capabilities
+  Opportunities  → linked to market signals, customer needs, regulatory shifts, technology changes
+  Threats        → linked to competitors, substitutes, market risks, funding risks, regulation</div>
+        </section>
+
+        <section id="governance">
+          <h2>23. Governance</h2>
+          <h3>23.1 Governance as first-class information</h3>
+          <p>Governance is not external administration. It is part of the entity information system. Governance includes authority, responsibility, accountability, decision rights, approval rules, escalation paths, access rights, delegation, revocation, policy, compliance, auditability, verification, and risk handling.</p>
+          <h3>23.2 Governance from entity information</h3>
+          <p>EIOS derives governance from the entity's own information where possible. Governance sources may include legal documents, articles of association, board records, employment contracts, role descriptions, department structures, financial policies, delegation rules, project ownership records, HR systems, CRM ownership, meeting records, approval history, internal norms, and operating manuals.</p>
+          <h3>23.3 Decision rights</h3>
+          <p>Decision rights define who can decide what:</p>
+          <pre><code>decision_right:
+  id: decision_right_budget_approval
+  decision_type: budget_commitment
+  threshold: 5000_eur
+  responsible_role: managing_director
+  consulted_roles:
+    - finance_lead
+  informed_roles:
+    - leadership_team
+  approval_required: true
+  evidence_required:
+    - purpose
+    - budget_context
+    - expected_outcome
+  source_refs:
+    - finance_policy_001</code></pre>
+          <h3>23.4 Approval</h3>
+          <p>Approval must be explicit:</p>
+          <div class="callout warning">
+            <strong>A notification is not approval. A meeting discussion is not approval. A comment is not necessarily approval. A dashboard view is not approval.</strong>
+          </div>
+          <p>Approval should have a requester, approver, scope, decision type, time, source, conditions, limitations, evidence, and status.</p>
+          <pre><code>approval_event:
+  id: approval_001
+  approval_type: external_publication
+  requested_by: content_agent
+  approved_by: managing_director
+  approved_at: 2026-06-29T15:10:00+03:00
+  scope:
+    - publish_customer_case_summary
+  limitations:
+    - no_customer_name
+    - no_financial_figures
+  source_refs:
+    - draft_document_456
+    - approval_thread_123</code></pre>
+          <h3>23.5 Governance agent</h3>
+          <p>A governance agent is an actor that observes, tracks, interprets, and routes governance-relevant information. It may participate in email threads, chat channels, meeting transcripts, board workflows, project spaces, CRM updates, document review, and agent-to-agent workflows.</p>
+          <p>A governance agent may:</p>
+          <ul class="cols2">
+            <li>Detect possible decisions</li>
+            <li>Distinguish discussion from decision</li>
+            <li>Identify required approvals</li>
+            <li>Route approval requests</li>
+            <li>Record decision events</li>
+            <li>Flag missing authority</li>
+            <li>Track commitments</li>
+            <li>Monitor guarded contexts</li>
+            <li>Maintain audit trails</li>
+            <li>Generalize details when sharing</li>
+            <li>Escalate unclear cases</li>
+          </ul>
+          <h3>23.6 Proposals, rules, and earned autonomy</h3>
+          <p>EIOS treats AI autonomy as earned and scoped. An agent may observe, detect, draft, classify, and suggest — but structured suggestions that affect durable knowledge, entity truth, sharing, cost, external commitments, or governance should be recorded as <strong>proposals</strong> before they become canonical changes, unless a <strong>standing rule</strong> already covers the exact class of action.</p>
+          <table>
+            <tr><th>Object</th><th>Purpose</th><th>Governance rule</th></tr>
+            <tr><td>Proposal</td><td>A structured suggestion with rationale, evidence, confidence, expected result, and response state.</td><td>Rejected, edited, expired, and superseded proposals remain signal for future agent behavior.</td></tr>
+            <tr><td>Rule</td><td>A confirmed standing permission for a defined class of future action.</td><td>Created only through confirmation by a role holding the matching decision right.</td></tr>
+            <tr><td>Rule fire log</td><td>An audit record that a rule acted autonomously.</td><td>Every autonomous rule execution should be inspectable, reversible where possible, and linked to its resulting object.</td></tr>
+            <tr><td>Confidence fallback</td><td>Behavior when a rule match is weak or ambiguous.</td><td>Fall back to a proposal and escalate to the responsible role instead of acting.</td></tr>
+          </table>
+          <p class="small">In an entity context, earned autonomy composes with decision rights: a rule can never grant an agent more authority than the role that confirmed the rule holds. Rules inherit thresholds, scopes, and evidence requirements from the decision rights they operationalize.</p>
+        </section>
+
+        <section id="meetings">
+          <h2>24. Meetings and Communications</h2>
+          <h3>24.1 Meetings as primary information sources</h3>
+          <p>In entities, much operational truth emerges through human-to-human and human-to-agent communication: meetings, calls, workshops, board discussions, department meetings, customer meetings, partner meetings, email threads, chat channels, document comments, project management updates, and agent conversations.</p>
+          <p>EIOS treats communication records as primary sources for events, decisions, tasks, knowledge, governance, and history.</p>
+          <h3>24.2 Meeting record structure</h3>
+          <pre><code>meeting:
+  id: meeting_001
+  title: Strategy review
+  time: 2026-06-29T10:00:00+03:00
+  participants:
+    - actor_ceo
+    - actor_product_lead
+    - governance_agent
+  agenda:
+    - review_market_signals
+    - approve_next_roadmap_priority
+  sources:
+    - calendar_event_001
+    - transcript_001
+    - recording_001
+  outputs:
+    decisions:
+      - decision_001
+    action_items:
+      - task_001
+    open_questions:
+      - question_001
+    knowledge_updates:
+      - market_summary_001</code></pre>
+          <h3>24.3 Conversation processing</h3>
+          <p>A conversation may produce event records, decision records, approval requests, action items, knowledge updates, risk flags, customer insights, market signals, project updates, follow-up tasks, and history entries. EIOS preserves the original conversation while producing structured outputs.</p>
+          <h3>24.4 Discussion versus decision</h3>
+          <p>EIOS must distinguish:</p>
+          <div class="diagram">mention → idea → question → concern → proposal → recommendation
+→ agreement → decision → approval → commitment → action → publication</div>
+          <p>This distinction is essential for governance and accountability.</p>
+        </section>
+
+        <section id="loops">
+          <h2>25. Self-Improving Entity Loops</h2>
+          <h3>25.1 Purpose</h3>
+          <p>EIOS supports recursive improvement loops where entity information does not only accumulate but continuously improves the entity's products, services, processes, decisions, documentation, agents, and operating model.</p>
+          <p>A self-improving entity loop captures signals, interprets them in entity context, routes decisions or actions, measures outcomes, and updates the entity's knowledge, workflows, tools, prompts, policies, or product behavior.</p>
+          <h3>25.2 General loop structure</h3>
+          <div class="diagram">Observe → Interpret → Decide → Act → Measure → Improve → Repeat</div>
+          <table>
+            <tr><th>Stage</th><th>Meaning</th></tr>
+            <tr><td>Observe</td><td>Collect signals from customers, users, products, support, sales, operations, financials, agreements, meetings, agents, or markets.</td></tr>
+            <tr><td>Interpret</td><td>Use entity context to understand what the signal means.</td></tr>
+            <tr><td>Decide</td><td>Choose an action, recommendation, experiment, escalation, approval request, or process change.</td></tr>
+            <tr><td>Act</td><td>Execute a bounded action, create a task, update a document, call a tool, draft a response, modify a workflow, or request human approval.</td></tr>
+            <tr><td>Measure</td><td>Record whether the action worked.</td></tr>
+            <tr><td>Improve</td><td>Update knowledge, process, prompt, tool, policy, product behavior, or documentation.</td></tr>
+            <tr><td>Repeat</td><td>Use the improved loop for the next instance.</td></tr>
+          </table>
+          <h3>25.3 Loop object example</h3>
+          <pre><code>entity_improvement_loop:
+  id: loop_support_to_product_improvement
+  loop_area: customer_support
+  purpose: convert recurring support issues into product and documentation improvements
+  observe:
+    sources:
+      - support_tickets
+      - customer_calls
+      - product_usage_events
+  interpret:
+    agents:
+      - customer_insight_agent
+      - product_triage_agent
+    context:
+      - product_knowledge
+      - customer_segments
+      - roadmap
+      - known_issues
+  decide:
+    decision_type:
+      - bug_fix
+      - documentation_update
+      - feature_request
+      - escalation
+    approval_required_for:
+      - roadmap_change
+      - customer_commitment
+  act:
+    allowed_actions:
+      - create_ticket
+      - update_internal_summary
+      - draft_customer_reply
+      - propose_doc_update
+  measure:
+    outcomes:
+      - reduced_ticket_volume
+      - faster_resolution_time
+      - improved_activation
+      - customer_satisfaction
+  improve:
+    update_targets:
+      - product_knowledge
+      - documentation
+      - triage_rules
+      - agent_prompt
+      - roadmap_candidate_items
+  governance:
+    sensitivity: sensitive
+    hard_boundaries:
+      - no_access_to_private_hr_or_finance
+    soft_boundaries:
+      - generalize_customer_names_in_internal_broad_summaries</code></pre>
+          <h3>25.4 Loop governance</h3>
+          <p>Self-improving loops must be governed loops. Each loop should define purpose, allowed sources, allowed actions, actors and agents, human approval requirements, boundary rules, metrics, failure conditions, escalation rules, review cadence, rollback path, and audit trail.</p>
+        </section>
+
+        <section id="customer-loop">
+          <h2>26. Customer Signal to Value Improvement Loop</h2>
+          <h3>26.1 Purpose</h3>
+          <p>Customer and stakeholder interactions should be treated as first-class operating signals. The purpose of the customer signal loop is to turn real customer needs into owned actions and verified improvements.</p>
+          <h3>26.2 Listening by helping</h3>
+          <p>A strong customer signal model does not depend only on surveys or periodic research. Customers reveal high-quality information when they ask for help, seek clarification, try to use a product, report an issue, compare alternatives, request a feature, or express confusion. This creates a "listening by helping" pattern:</p>
+          <div class="diagram">Customer asks for help
+  → need is revealed
+  → signal is captured
+  → response helps the customer
+  → entity learns from the interaction</div>
+          <h3>26.3 Signal-to-action lifecycle</h3>
+          <div class="diagram">Signal captured → Session formed → Theme detected → Action proposed → Owner assigned
+→ Dependencies mapped → Decision needed if required → Work executed → Outcome recorded
+→ Recurrence monitored → Knowledge updated → Loop improved</div>
+          <h3>26.4 Multidisciplinary routing</h3>
+          <p>Customer experience issues rarely belong to only one team. A single signal may require product change, documentation change, support process change, pricing clarification, sales enablement, operational improvement, management decision, policy change, technical fix, or customer communication.</p>
+          <p>EIOS supports one signal creating multiple actions, cross-team ownership, dependency mapping, sequencing, escalation, management decision points, evidence attached to actions, and duplicate prevention by attaching new evidence to existing work.</p>
+          <h3>26.5 Closing the loop</h3>
+          <div class="callout">
+            <strong>Completion is not the same as resolution.</strong> A task is completed when work is marked done. A problem is resolved when the originating signal, need, risk, or friction declines or disappears.
+          </div>
+          <p>EIOS supports recurrence monitoring. Examples:</p>
+          <ul>
+            <li>A support issue is resolved only if repeated support contacts decline.</li>
+            <li>Documentation is improved only if repeated questions decline.</li>
+            <li>Product onboarding is improved only if activation improves.</li>
+            <li>An operational process is improved only if error rate declines.</li>
+            <li>A financial control is improved only if variance or leakage declines.</li>
+            <li>An agreement obligation is handled only if recurring risk is reduced.</li>
+          </ul>
+          <h3>26.6 Insight-heavy and action-light</h3>
+          <p>Organizations often collect feedback but fail to convert insight into owned work and verified outcomes. EIOS prevents the entity from becoming insight-heavy and action-light by connecting signals to ownership, prioritization, decisions, dependencies, execution, outcome validation, and knowledge updates.</p>
+        </section>
+
+        <section id="products">
+          <h2>27. Product, Service, and Capability Information</h2>
+          <h3>27.1 Product and service knowledge</h3>
+          <p>Products and services are ways the entity creates value for stakeholders. EIOS represents product and service information as structured knowledge, not only as documents. Product and service knowledge may include:</p>
+          <ul class="cols">
+            <li>Purpose</li><li>Target stakeholders</li><li>Value proposition</li><li>User personas</li>
+            <li>Jobs to be done</li><li>Features</li><li>Requirements</li><li>Roadmap</li>
+            <li>Pricing</li><li>Positioning</li><li>Customer evidence</li><li>Usage data</li>
+            <li>Support feedback</li><li>Technical architecture</li><li>Related decisions</li><li>Risks</li>
+            <li>Dependencies</li><li>Intellectual property</li><li>Release history</li>
+          </ul>
+          <h3>27.2 Capabilities</h3>
+          <p>A capability is something the entity can reliably do: product development, customer acquisition, service delivery, research, manufacturing, data processing, AI agent operation, regulatory compliance, partner coordination, market intelligence, support, training, sales, governance, financial control.</p>
+          <p>EIOS connects capabilities to people, agents, processes, tools, knowledge, costs, and value creation.</p>
+        </section>
+
+        <section id="ip-assets">
+          <h2>28. Intellectual Property and Assets</h2>
+          <h3>28.1 Intellectual property</h3>
+          <p>Intellectual property may include:</p>
+          <ul class="cols">
+            <li>Code</li><li>Designs</li><li>Trademarks</li><li>Patents</li>
+            <li>Copyrighted material</li><li>Trade secrets</li><li>Product concepts</li><li>Data assets</li>
+            <li>Documentation</li><li>Methods</li><li>Processes</li><li>Models</li>
+            <li>Training materials</li><li>Brand assets</li><li>Research outputs</li><li>Proprietary datasets</li>
+            <li>Agent configurations</li>
+          </ul>
+          <p>EIOS preserves IPR context, ownership, provenance, restrictions, and usage rights.</p>
+          <h3>28.2 Assets</h3>
+          <p>Assets may include financial assets, physical assets, digital assets, data assets, customer relationships, contracts, licenses, domains, accounts, tools, repositories, infrastructure, brand assets, knowledge assets, and agent definitions.</p>
+          <p>Assets should be connected to responsibility, access, lifecycle, risk, and continuity.</p>
+        </section>
+
+        <section id="operating-layer">
+          <h2>29. Operating System Layer</h2>
+          <h3>29.1 Entity operating system</h3>
+          <p>The entity operating system layer contains the information that describes how the entity operates: processes, workflows, meetings, routines, reporting cycles, governance cycles, decision flows, approval paths, project management, agent workflows, tool usage, communication patterns, dashboards, metrics, reviews, planning rhythms, and execution rhythms.</p>
+          <h3>29.2 Entity operating rhythm</h3>
+          <p>An entity has operating rhythms across time:</p>
+          <ul class="cols">
+            <li>Daily operations</li><li>Weekly team meetings</li><li>Monthly reporting</li><li>Quarterly planning</li>
+            <li>Annual strategy</li><li>Board meetings</li><li>Product release cycles</li><li>Customer feedback cycles</li>
+            <li>Financial review cycles</li><li>Governance review cycles</li><li>Agent monitoring cycles</li>
+          </ul>
+          <p>EIOS connects work, decisions, meetings, strategy, and value signals across these rhythms.</p>
+        </section>
+
+        <section id="lifecycles">
+          <h2>30. Lifecycle Models</h2>
+          <p>EIOS models information and operational objects through lifecycle states. A lifecycle helps distinguish current, proposed, approved, deprecated, completed, and archived information.</p>
+          <table>
+            <tr><th>Object</th><th>Lifecycle</th></tr>
+            <tr><td>Decision</td><td>proposed → discussed → drafted → reviewed → approved / rejected / deferred → implemented → revisited → superseded → archived</td></tr>
+            <tr><td>Project</td><td>idea → proposed → approved → active → blocked → completed / cancelled → archived</td></tr>
+            <tr><td>Policy</td><td>draft → reviewed → approved → active → deprecated → replaced → archived</td></tr>
+            <tr><td>Product</td><td>idea → discovery → validation → development → launch → growth → maintenance → retirement → archived</td></tr>
+            <tr><td>Customer</td><td>lead → prospect → opportunity → customer → expansion → support → renewal → dormant → former customer</td></tr>
+            <tr><td>Agent</td><td>proposed → configured → tested → active → restricted → suspended → retired → archived</td></tr>
+            <tr><td>Agreement</td><td>template → draft → under review → negotiation → approved for signature → signed → active → renewal pending → amended → terminated / expired → archived / disputed</td></tr>
+            <tr><td>Entity view</td><td>living → snapshot created → human review requested → approved → published → superseded → retired → archived</td></tr>
+            <tr><td>Glossary term</td><td>candidate → active → merged → deprecated</td></tr>
+          </table>
+        </section>
+
+        <section id="retrieval">
+          <h2>31. Retrieval and Use</h2>
+          <h3>31.1 Retrieval</h3>
+          <p>EIOS supports retrieval across originals, events, knowledge, derived views, and system rules. Retrieval may use:</p>
+          <ul class="cols">
+            <li>Keyword search</li><li>Metadata filtering</li><li>Structured queries</li><li>Semantic retrieval</li>
+            <li>Graph traversal</li><li>Time-based retrieval</li><li>Actor-based retrieval</li><li>Source-based retrieval</li>
+            <li>Project-based retrieval</li><li>Stakeholder-based retrieval</li><li>Approval-status retrieval</li><li>Sensitivity-aware retrieval</li>
+          </ul>
+          <div class="callout">
+            <strong>Retrieve summary-first.</strong> Good retrieval does not start by reading everything. Agents should choose the right navigation layer first — index, summary, History period, entity view, stakeholder page, project page, agreement register, event record, or original source — depending on the question. Vector and graph indexes are projections, not truth.
+          </div>
+          <h3>31.2 Agent use</h3>
+          <ul class="cols2">
+            <li>Retrieve context</li>
+            <li>Summarize meetings</li>
+            <li>Draft documents</li>
+            <li>Prepare decisions</li>
+            <li>Track approvals</li>
+            <li>Monitor market signals</li>
+            <li>Update knowledge objects</li>
+            <li>Propose next actions</li>
+            <li>Detect contradictions</li>
+            <li>Create stakeholder summaries</li>
+            <li>Generalize sensitive details</li>
+            <li>Route governance requests</li>
+            <li>Maintain glossaries</li>
+            <li>Compare work to strategy</li>
+            <li>Support continuity</li>
+            <li>Improve loops</li>
+          </ul>
+          <h3>31.3 Human use</h3>
+          <ul class="cols2">
+            <li>Understand what happened</li>
+            <li>Find current truth</li>
+            <li>Review decisions</li>
+            <li>Prepare meetings</li>
+            <li>Onboard into roles</li>
+            <li>Understand customers</li>
+            <li>Track strategy</li>
+            <li>Review project history</li>
+            <li>Audit approvals</li>
+            <li>Learn from past work</li>
+            <li>Coordinate with agents</li>
+            <li>Preserve institutional memory</li>
+          </ul>
+        </section>
+
+        <section id="sensitivity">
+          <h2>32. Security, Sensitivity, and Guarded Handling</h2>
+          <h3>32.1 Sensitivity levels</h3>
+          <table>
+            <tr><th>Level</th><th>Meaning</th><th>Examples</th></tr>
+            <tr><td><strong>Normal</strong></td><td>Processed according to ordinary access and sharing rules.</td><td>Public product descriptions, internal process notes, non-sensitive project updates, approved public summaries.</td></tr>
+            <tr><td><strong>Sensitive</strong></td><td>Requires careful handling.</td><td>Customer-specific context, commercial negotiations, employee matters, financial information, legal context, strategy, partner discussions, internal conflicts, non-public roadmap details.</td></tr>
+            <tr><td><strong>Guarded</strong></td><td>Requires strong restrictions, approval, redaction, or isolation.</td><td>Credentials, tokens, private keys, M&amp;A discussions, legal disputes, HR-sensitive matters, board-only materials, unpublished financials, high-impact external commitments, destructive actions, public statements requiring approval, contract approvals, financial commitments, untrusted inbound content.</td></tr>
+          </table>
+          <h3>32.2 Guarded action contexts</h3>
+          <p>Guarded handling applies not only to information but also to actions. Actions may be guarded when they:</p>
+          <ul class="cols2">
+            <li>Spend money</li>
+            <li>Publish externally</li>
+            <li>Modify production systems</li>
+            <li>Delete records</li>
+            <li>Commit the entity legally</li>
+            <li>Affect employees</li>
+            <li>Affect customers</li>
+            <li>Reveal sensitive information</li>
+            <li>Change access rights</li>
+            <li>Trigger external communication</li>
+            <li>Create compliance risk</li>
+          </ul>
+        </section>
+
+        <section id="cross-entity">
+          <h2>33. Cross-Entity Collaboration</h2>
+          <h3>33.1 Entity-to-entity relationships</h3>
+          <p>Entities often collaborate with other entities: company and customer, company and supplier, company and partner, company and investor, company and regulator, company and public funder, company and ecosystem initiative, parent and subsidiary, joint venture partners.</p>
+          <h3>33.2 Relationship record</h3>
+          <pre><code>entity_relationship:
+  id: relationship_001
+  subject_entity: own_entity
+  related_entity: partner_entity
+  relationship_type: strategic_partner
+  circle_scope: extended_circle
+  active_projects:
+    - project_001
+  sharing_rules:
+    - share_project_status
+    - do_not_share_customer_names_without_approval
+  decision_rights:
+    - joint_steering_group_required_for_scope_change</code></pre>
+          <h3>33.3 Shared projections</h3>
+          <p>Cross-entity collaboration relies on shared projections rather than uncontrolled merging of source truth. An entity may share approved summaries, project views, shared decisions, meeting minutes, status updates, deliverables, redacted records, partner dashboards, and public reports.</p>
+          <div class="callout">
+            <strong>Each entity preserves its own source truth and governance context.</strong> When both entities in a relationship run their own Entity Keel, collaboration happens through governed projections between Keels, never through merged storage.
+          </div>
+          <p class="small">Where an entity's people also maintain personal information systems (such as PIOS-based ones), the same rule applies: the entity's Keel and a person's own system exchange governed projections. The entity does not absorb personal source truth, and the person does not absorb entity source truth.</p>
+        </section>
+
+        <section id="implementation">
+          <h2>34. Implementation Considerations</h2>
+          <h3>34.1 Conceptual model versus storage</h3>
+          <p>EIOS is a conceptual and operational information architecture. It can be implemented using different technologies: object storage, document storage, relational databases, graph databases, vector indexes, search engines, event logs, message queues, workflow engines, APIs, agent tools, file systems, knowledge repositories, data warehouses, and identity systems.</p>
+          <div class="callout">
+            <strong>The conceptual model should not be reduced to one storage technology.</strong> EIOS defines what a compliant entity information core should do; Keel chooses the stack.
+          </div>
+          <h3>34.2 Keel implementation profiles</h3>
+          <table>
+            <tr><th>Profile</th><th>Description</th><th>Fit</th></tr>
+            <tr><td><strong>Keel Managed</strong></td><td>Hosted entity information core: infrastructure, backups, updates, connectors, security, and operations managed as a service. The entity remains the primary authority and conceptual owner of its information; the service operates as a fiduciary steward with mandatory export, deletion, and takeover rights.</td><td>Entities that want the foundation without operating infrastructure.</td></tr>
+            <tr><td><strong>Keel Self-Hosted</strong></td><td>A portable VM/server distribution runnable on any cloud provider, a company server, or on-premise hardware. Same information model, same agent-facing service contract: switch base URL and credentials, not the architecture.</td><td>Entities with sovereignty, regulatory, or infrastructure requirements.</td></tr>
+          </table>
+          <p>The Keel service interface should be provider-neutral before it is implementation-specific. The agent-facing contract remains the same across profiles where possible.</p>
+          <h3>34.3 Originals and projections</h3>
+          <p>Originals remain preserved. Structured knowledge, summaries, dashboards, indexes, and documentation views are treated as projections where possible.</p>
+          <h3>34.4 Existing systems and legacy schemas</h3>
+          <p>Existing systems may remain operational systems of record for their own current workflows, while the Entity Keel becomes the aggregated entity information foundation. Existing schemas, taxonomies, and data models can be useful as mappings, references, or migration aids — but they should not automatically define the entity's primary organizing logic. EIOS treats external schemas as mappings, not masters.</p>
+          <h3>34.5 Introduce specialized systems only when needed</h3>
+          <p>Databases, queues, graph stores, vector stores, search engines, and orchestration platforms are added only when actual data volume or retrieval needs justify them. A small entity's first Keel can run on object storage, Markdown knowledge objects, JSON event logs, and a handful of agents.</p>
+        </section>
+
+        <section id="portability">
+          <h2>35. Portability and Continuity</h2>
+          <h3>35.1 Portability requirement</h3>
+          <p class="lead">A complete Entity Keel must be exportable, recoverable, and runnable outside the infrastructure provider currently hosting it. The export is not a folder of files — it is a reconstructable entity information core.</p>
+          <p>An Entity Keel export should include:</p>
+          <ul class="cols2">
+            <li>Originals</li>
+            <li>Canonical events</li>
+            <li>Knowledge objects</li>
+            <li>Entity glossary</li>
+            <li>System definitions and governance rules</li>
+            <li>Agent definitions and permissions</li>
+            <li>Connector configuration (excluding secrets where necessary)</li>
+            <li>Derived data where useful</li>
+            <li>Rebuild instructions</li>
+            <li>Deployment configuration</li>
+          </ul>
+          <h3>35.2 Keel Bundle model</h3>
+          <table>
+            <tr><th>Artifact</th><th>Role</th></tr>
+            <tr><td><strong>Keel Template</strong></td><td>The parameterized infrastructure shape of an empty Entity Keel: storage zones, keys, policies, roles, indexes, audit logging, guardrails. Structure is golden and repeatable; entity-specific values stay parameterized.</td></tr>
+            <tr><td><strong>Keel Export Bundle</strong></td><td>The entity's exportable data payload, scoped or full. A full Keel Export Bundle carries everything needed for migration, rebuild, or takeover. Scoped bundles serve sharing, audits, due diligence, or partner projections.</td></tr>
+            <tr><td><strong>Provisioning Manifest</strong></td><td>Binds a specific template version, entity, account, region, security posture, and optional bundle hydration into one rebuildable Keel instance.</td></tr>
+          </table>
+          <h3>35.3 Why portability is an entity survival property</h3>
+          <p>For an entity, portability is not only a data right — it is a continuity mechanism for the events entities actually face:</p>
+          <ul>
+            <li><strong>Ownership change:</strong> in an acquisition or succession, the Keel Export Bundle is the institutional memory being transferred.</li>
+            <li><strong>Provider change:</strong> the entity can move between Keel Managed and Keel Self-Hosted without losing its operating memory.</li>
+            <li><strong>Wind-down:</strong> obligations, records, and IP remain governed and retrievable through and after dissolution.</li>
+            <li><strong>Audit and due diligence:</strong> scoped bundles provide governed, evidence-linked views without exposing the full Entity Core.</li>
+          </ul>
+          <h3>35.4 Backup, versioning, and recovery</h3>
+          <p>Originals and events require versioned, tested backup. Knowledge objects require version history. Derived data may be excluded from backup where rebuild instructions exist. Recovery must be rehearsed: a backup that has never been restored is a hypothesis, not a continuity plan.</p>
+        </section>
+
+        <section id="mve">
+          <h2>36. Minimum Viable EIOS</h2>
+          <p>A minimum viable EIOS for a small organization includes:</p>
+          <div class="grid two">
+            <div class="card">
+              <h4>Entity foundation</h4>
+              <p class="small">Purpose, mission, vision, values, strategy, stakeholder map, customer segments, value propositions, basic governance roles.</p>
+            </div>
+            <div class="card">
+              <h4>Information core</h4>
+              <p class="small">Originals preservation, event log, knowledge objects, derived summaries, system rules.</p>
+            </div>
+            <div class="card">
+              <h4>Communication capture</h4>
+              <p class="small">Meeting summaries, decision records, email or channel ingestion, action item extraction, approval tracking.</p>
+            </div>
+            <div class="card">
+              <h4>Actor model</h4>
+              <p class="small">People, teams, AI agents, roles, responsibilities, decision rights, access rules.</p>
+            </div>
+            <div class="card">
+              <h4>Value and market context</h4>
+              <p class="small">Customers, jobs to be done, market signals, customer feedback, value propositions, product/service knowledge.</p>
+            </div>
+            <div class="card">
+              <h4>Financial context</h4>
+              <p class="small">Basic revenue model, cost structure, budget, forecast, actuals, cash position, runway, reserves, financial risks.</p>
+            </div>
+            <div class="card">
+              <h4>Agreements and obligations</h4>
+              <p class="small">Agreement register, obligation tracking, renewal dates, legal review flags, contract-sensitive handling.</p>
+            </div>
+            <div class="card">
+              <h4>Governance basics</h4>
+              <p class="small">Approval records, sensitive and guarded handling, hard boundaries, soft boundary rules, need-to-know sharing.</p>
+            </div>
+            <div class="card">
+              <h4>Self-improving loops</h4>
+              <p class="small">Customer signal loop, meeting-to-decision loop, support-to-product loop, financial review loop, agent improvement loop.</p>
+            </div>
+            <div class="card">
+              <h4>Continuity views</h4>
+              <p class="small">Entity history, decision log, project status, customer insight view, strategy alignment view, knowledge gaps, risk register, financial viability view.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="naming-map">
+          <h2>37. Naming and Terminology Mapping</h2>
+          <p>EIOS and Weave terms should remain stable across implementations even when underlying tools, services, and storage differ. This section also records terminology inherited from the PIOS origin, so divergence stays documented rather than accidental. Inherited terms carry no compatibility obligation in either direction.</p>
+          <table>
+            <tr><th>EIOS / Weave term</th><th>Meaning in EIOS</th><th>Inherited from (PIOS origin)</th><th>Divergence</th></tr>
+            <tr><td>EIOS</td><td>The open entity information framework.</td><td>PIOS</td><td>Entity-centered rather than person-centered.</td></tr>
+            <tr><td>Keel</td><td>The packaged implementation running the entity information core.</td><td>Core</td><td>Renamed; structural-nautical metaphor for entity continuity.</td></tr>
+            <tr><td>Weave</td><td>The entity context blueprint: organizing canon for meaning, naming, classification.</td><td>Cotton</td><td>Renamed; extends the fiber metaphor — personal fiber woven into entity fabric.</td></tr>
+            <tr><td>Entity Keel</td><td>An entity's own running instance and private source of truth.</td><td>Core Self</td><td>Renamed; owner is the entity/governance, not a person.</td></tr>
+            <tr><td>Keel Managed / Keel Self-Hosted</td><td>Deployment profiles.</td><td>Core Managed / Core Self-Hosted</td><td>Pattern inherited directly.</td></tr>
+            <tr><td>Entity Core</td><td>The innermost circle layer: the entity's private trust boundary.</td><td>Core Self (as circle center)</td><td>In EIOS, "Entity Core" names only the circle layer; the instance is "Entity Keel".</td></tr>
+            <tr><td>Entity circles</td><td>Entity Core → Internal → Extended → Served World → Outer.</td><td>Circle (Core Self → Inner → Extended → Outer)</td><td>Adds Served World as a distinct circle; renames Inner to Internal.</td></tr>
+            <tr><td>Five information zones</td><td>Originals, Events, Knowledge, Derived, System.</td><td>Five Core data zones</td><td>Inherited unchanged.</td></tr>
+            <tr><td>Sensitivity levels</td><td>normal / sensitive / guarded, extended to guarded actions.</td><td>Sensitivity axes</td><td>Inherited; action-guarding emphasized.</td></tr>
+            <tr><td>Source promotion lifecycle</td><td>parked → analyzed → mapped → enriched → history_included.</td><td>Source promotion lifecycle</td><td>Inherited unchanged.</td></tr>
+            <tr><td>core_disposition</td><td>Transition-time disposition of sources toward the Keel.</td><td>core_disposition</td><td>Inherited unchanged.</td></tr>
+            <tr><td>Correction/reversion events</td><td>state_reverted pattern for append-only rollback.</td><td>Correction and Reversion Events</td><td>Inherited; framed additionally as a compliance property.</td></tr>
+            <tr><td>Entity Glossary</td><td>Shared entity vocabulary with term lifecycle.</td><td>Personal Glossary</td><td>Subject shifts from personal nuance to institutional vocabulary and continuity.</td></tr>
+            <tr><td>Proposals, rules, earned autonomy</td><td>Agent autonomy earned through confirmed standing rules, bounded by decision rights.</td><td>Proposals, Rules, and Earned Autonomy</td><td>Composed with entity decision rights: a rule cannot exceed the confirming role's authority.</td></tr>
+            <tr><td>Keel Export Bundle / Keel Template / Provisioning Manifest</td><td>Portability artifacts.</td><td>Core Export Bundle / Core Template / Provisioning Manifest</td><td>Pattern inherited; reframed as entity survival property (M&amp;A, succession, wind-down).</td></tr>
+            <tr><td>Entity History</td><td>Curated human-readable projection of the event log.</td><td>Update-first owner History</td><td>Inherited principle; curation authority follows governance roles.</td></tr>
+            <tr><td>Recognized entity views</td><td>Living / ratified / candidate business artifacts as projections.</td><td>Living views are projections</td><td>EIOS-native extension: formal ratification and approval workflow added.</td></tr>
+            <tr><td>Entity DNA</td><td>Purpose, mission, vision, values, strategy as a decision lens.</td><td>—</td><td>EIOS-native concept.</td></tr>
+            <tr><td>Entity viability</td><td>Value creation, capture, cost, reserves, legitimacy balance.</td><td>—</td><td>EIOS-native concept.</td></tr>
+            <tr><td>Served world</td><td>The stakeholders for whom the entity creates value.</td><td>—</td><td>EIOS-native concept.</td></tr>
+            <tr><td>Governance agent</td><td>Agent that detects decisions, routes approvals, maintains audit trails.</td><td>—</td><td>EIOS-native concept.</td></tr>
+            <tr><td>Self-improving entity loops</td><td>Governed observe→interpret→decide→act→measure→improve cycles.</td><td>—</td><td>EIOS-native concept.</td></tr>
+          </table>
+        </section>
+
+        <section id="conclusion">
+          <h2>38. Conclusion</h2>
+          <p class="lead">EIOS is an Entity Information Operating System: a framework for making an entity's existence, value creation, governance, knowledge, operations, and continuity information-native.</p>
+          <p>An entity is not merely a collection of documents, systems, people, meetings, agreements, and processes. It is a value-generating structure that must continuously justify and sustain its existence through stakeholder value.</p>
+          <p>EIOS gives the entity a durable information core — its Keel — that preserves originals, records events, maintains living knowledge, creates rebuildable views, and governs the system rules that allow humans and AI agents to act responsibly. Weave gives that core its organizing logic: how entity information is named, classified, related, and made understandable.</p>
+          <p>It supports the entity's ability to:</p>
+          <ul class="cols2">
+            <li>Know why it exists</li>
+            <li>Understand whom it serves</li>
+            <li>Create and capture value</li>
+            <li>Govern decisions</li>
+            <li>Preserve institutional memory</li>
+            <li>Coordinate people and agents</li>
+            <li>Handle sensitive information</li>
+            <li>Learn from customers and markets</li>
+            <li>Maintain financial viability</li>
+            <li>Track agreements and obligations</li>
+            <li>Improve through governed loops</li>
+            <li>Maintain continuity through change</li>
+            <li>Operate beyond dependence on any single individual or tool</li>
+            <li>Improve and renew itself over time</li>
+          </ul>
+          <p>The ultimate purpose of EIOS is to help an entity remain intelligible, governable, useful, self-improving, and viable as it operates in a changing environment.</p>
+        </section>
+
+        <section id="license">
+          <h2>39. License and Attribution</h2>
+          <h3>39.1 Attribution</h3>
+          <div class="callout">
+            <p><strong>EIOS originated as a sibling framework to PIOS</strong> (Personal Information Operating System, github.com/peecos), created by Valto Loikkanen. EIOS inherits architectural principles and terminology from PIOS 2.0 with permission and attribution. The frameworks evolve independently; no compatibility between them is implied or maintained.</p>
+          </div>
+          <h3>39.2 License</h3>
+          <p>© 2026 Valto Loikkanen.</p>
+          <ul>
+            <li><strong>Specification and documentation</strong> (this document and the EIOS/Weave framework texts): <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International (CC BY 4.0)</a>. You may share and adapt for any purpose, including commercially, provided you give appropriate credit to Valto Loikkanen / Entity Core.</li>
+            <li><strong>Reference code, schemas, and tooling</strong> (Keel implementations and related software): <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</li>
+          </ul>
+          <h3>39.3 Document status</h3>
+          <p class="small">EIOS 1.0, Keel, and Weave — Master Documentation. Working master v1.0, generated 2026-07-08 from the EIOS Framework working draft, restructured into the master documentation format with inherited sections (inbound flow, correction and reversion events, entity glossary, earned autonomy, portability) incorporated at fork. Names ratified 2026-07-08: EIOS / Keel / Weave / Entity Keel / Keel Managed / Keel Self-Hosted.</p>
+        </section>
+
+      </article>
+    </main>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById("toc-toggle");
+      var backdrop = document.getElementById("toc-backdrop");
+      function setOpen(open) {
+        document.body.classList.toggle("toc-open", open);
+        btn.textContent = open ? "Close" : "Contents";
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+      btn.addEventListener("click", function () {
+        setOpen(!document.body.classList.contains("toc-open"));
+      });
+      backdrop.addEventListener("click", function () { setOpen(false); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") setOpen(false);
+      });
+      document.querySelectorAll("nav a").forEach(function (a) {
+        a.addEventListener("click", function () { setOpen(false); });
+      });
+    })();
+  </script>
+</body>
+</html>
