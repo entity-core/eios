@@ -10,6 +10,8 @@ The complete framework is in one document:
 
 **[EIOS 1.0, Keel, and Weave — Master Documentation](spec/eios-1.0-master-documentation.md)** — 39 sections covering definitions, information zones, the event model, entity circles and access layers, governance, self-improving loops, portability, and the naming/terminology mapping.
 
+This repository is the **canonical source** of the EIOS specification (decided 2026-07-09). All edits happen here; other renders and copies are derived.
+
 ## The stack
 
 | Layer | Name | Role |
