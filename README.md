@@ -12,6 +12,8 @@ The complete framework is in one document:
 
 This repository is the **canonical source** of the EIOS specification (decided 2026-07-09). All edits happen here; other renders and copies are derived.
 
+Everything around the spec — the initiative, origin and PIOS lineage, naming rationale, canonical-source policy, licensing model, project structure, and roadmap — is in **[ABOUT.md](ABOUT.md)**.
+
 ## The stack
 
 | Layer | Name | Role |
