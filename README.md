@@ -45,5 +45,7 @@ EIOS originated as a sibling framework to **PIOS** (Personal Information Operati
 
 ## License
 
-- **Specification and documentation** (this repository): [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) — share and adapt for any purpose, including commercially, with attribution.
+© 2026 Valto Loikkanen. Entity Core, EIOS, Keel, and Weave are created and maintained by Valto Loikkanen.
+
+- **Specification and documentation** (this repository): [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) — share and adapt for any purpose, including commercially, with attribution to Valto Loikkanen / Entity Core.
 - **Reference code, schemas, and tooling** (Keel implementations, published separately): Apache License 2.0.

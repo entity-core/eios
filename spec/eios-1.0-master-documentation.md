@@ -1996,7 +1996,9 @@ The ultimate purpose of EIOS is to help an entity remain intelligible, governabl
 
 ### 39.2 License
 
-- **Specification and documentation** (this document and the EIOS/Weave framework texts): [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). You may share and adapt for any purpose, including commercially, provided you give appropriate credit.
+© 2026 Valto Loikkanen.
+
+- **Specification and documentation** (this document and the EIOS/Weave framework texts): [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). You may share and adapt for any purpose, including commercially, provided you give appropriate credit to Valto Loikkanen / Entity Core.
 - **Reference code, schemas, and tooling** (Keel implementations and related software): [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
 ### 39.3 Document status

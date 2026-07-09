@@ -44,6 +44,8 @@ Names were ratified 2026-07-08: EIOS / Keel / Weave / Entity Keel / Keel Managed
 
 ## Licensing
 
+**© 2026 Valto Loikkanen.** Entity Core, EIOS, Keel, and Weave — the frameworks, specifications, and documentation — are created by Valto Loikkanen and published under open licenses. Attribution under CC BY 4.0 credits Valto Loikkanen / Entity Core.
+
 Two licenses, split by artifact type, chosen to match the recognition-of-source intent:
 
 | Artifact | License |
@@ -65,7 +67,7 @@ CC BY 4.0 allows sharing and adapting for any purpose, including commercially, w
 | [github.com/entity-core/eios](https://github.com/entity-core/eios) | This repository — the canonical EIOS specification |
 | [github.com/entity-core](https://github.com/entity-core) | The GitHub organization: all Entity Core repositories |
 | [github.com/entity-core/brand](https://github.com/entity-core/brand) | Visual design guide: logo, typography, colors, component conventions |
-| hello@entitycore.org | Contact for pilots, contributors, reviewers, and media |
+| valto@valtoai.com | Contact for pilots, contributors, reviewers, and media |
 
 ## Status and roadmap
 
@@ -85,4 +87,4 @@ EIOS is early and developed openly. Current state and planned documentation:
 
 ## Getting involved
 
-The work is open to collaborators interested in entity memory, AI-native organizations, governance, financial context, agreements, customer signal loops, and agent-ready information architecture. Reach out at **hello@entitycore.org**, or open an issue in this repository.
+The work is open to collaborators interested in entity memory, AI-native organizations, governance, financial context, agreements, customer signal loops, and agent-ready information architecture. Reach out at **valto@valtoai.com**, or open an issue in this repository.
