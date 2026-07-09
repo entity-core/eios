@@ -67,6 +67,7 @@ CC BY 4.0 allows sharing and adapting for any purpose, including commercially, w
 | [github.com/entity-core/eios](https://github.com/entity-core/eios) | This repository — the canonical EIOS specification |
 | [github.com/entity-core](https://github.com/entity-core) | The GitHub organization: all Entity Core repositories |
 | [github.com/entity-core/brand](https://github.com/entity-core/brand) | Visual design guide: logo, typography, colors, component conventions |
+| [github.com/entity-core/media](https://github.com/entity-core/media) | Overview media: video, audio, and visual briefs |
 | valto@valtoai.com | Contact for pilots, contributors, reviewers, and media |
 
 ## Status and roadmap
