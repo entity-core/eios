@@ -1,6 +1,6 @@
 # EIOS — Entity Information Operating System
 
-**EIOS** is an open framework for entity-centered information operating systems. It defines how an entity — a company, cooperative, association, foundation, public body, or other structured organization — can capture, preserve, organize, govern, retrieve, and use its information over time, so it can keep creating value for its stakeholders beyond dependence on any single person, tool, or AI platform.
+**EIOS** is an open framework for AI-native entity information. Its primary point: **AI can only work properly with full context** — so an entity that wants agents to carry real operational weight must first give them (and its people) one complete, governed information core. EIOS defines how an entity — a company, cooperative, association, foundation, public body, or other structured organization — builds that core: capturing, preserving, organizing, governing, retrieving, and using its information over time. The same foundation also ends corporate amnesia, key-person dependency, and tool lock-in — benefits that follow from solving context, not the other way around.
 
 EIOS is part of the [Entity Core](https://entitycore.org) open initiative.
 

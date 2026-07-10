@@ -4,7 +4,9 @@ This document covers everything *around* the EIOS specification — the initiati
 
 ## The initiative
 
-**Entity Core** ([entitycore.org](https://entitycore.org)) is an open initiative for entity-centered information operating systems. Its purpose is to define how an organization can preserve, govern, operationalize, and improve its operating memory — knowledge, decisions, agreements, financials, customer signals — in a form usable by both its people and its AI agents.
+**Entity Core** ([entitycore.org](https://entitycore.org)) is an open initiative for AI-native entity information. Its starting point is simple: **AI can only work properly with full context.** Agents that see fragments produce fragments — more AI on scattered information just generates noise faster. Entity Core defines how an organization gives its AI agents and its people one complete, governed information core: knowledge, decisions, agreements, financials, customer signals, and operating memory in a form both can actually work with.
+
+Building that foundation also cures problems that predate AI — corporate amnesia, key-person dependency, tool lock-in, ungoverned decision trails. Those benefits are real, but they follow from the foundation; the AI-native information core is the point.
 
 The initiative maintains one framework and its surrounding assets:
 

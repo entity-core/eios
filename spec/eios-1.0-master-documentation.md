@@ -1,8 +1,8 @@
 # EIOS 1.0, Keel, and Weave
 
-A unified master document for the Entity Information Operating System framework, the Weave Entity Context Blueprint, and the Keel implementation — the durable information foundation for entity continuity, governance, value creation, and self-improving operations.
+A unified master document for the Entity Information Operating System framework, the Weave Entity Context Blueprint, and the Keel implementation — the AI-native information foundation that gives an entity's humans and AI agents full, governed context, and with it continuity, governance, value creation, and self-improving operations.
 
-`Generated: 2026-07-08` `Status: Working master v1.2 (2026-07-10)` `Framework: EIOS` `Implementation: Keel` `Context Blueprint: Weave` `License: CC BY 4.0`
+`Generated: 2026-07-08` `Status: Working master v1.3 (2026-07-10)` `Framework: EIOS` `Implementation: Keel` `Context Blueprint: Weave` `License: CC BY 4.0`
 
 ---
 
@@ -53,6 +53,8 @@ A unified master document for the Entity Information Operating System framework,
 ## 1. Purpose
 
 An Entity Information Operating System is a foundational information architecture for an entity. Its purpose is to preserve, organize, govern, and operationalize the information that allows an entity to exist, act, learn, improve, create value, and remain viable over time.
+
+EIOS is **AI-native by design**, and this is its primary point: AI can only work properly with full context. Agents that see fragments produce fragments — more AI applied to scattered information only generates noise faster. An entity that wants AI to carry real operational weight must first give its agents (and its people) one complete, governed, retrievable information core. EIOS defines that core. Solving context for AI also solves problems that predate AI — institutional amnesia, key-person dependency, tool fragmentation, ungoverned decision trails — and those benefits are real, but they follow from the foundation rather than define it.
 
 The name deliberately commits to **information** as the foundation. Information is what can be preserved, organized, contextualized, governed, and made usable by humans and agents; intelligence is what becomes possible once that foundation exists. The same commitment applies to PIOS on the personal side.
 
@@ -2330,7 +2332,7 @@ EIOS and Weave terms should remain stable across implementations even when under
 
 ## 38. Conclusion
 
-EIOS is an Entity Information Operating System: a framework for making an entity's existence, value creation, governance, knowledge, operations, and continuity information-native.
+EIOS is an Entity Information Operating System: a framework for making an entity's existence, value creation, governance, knowledge, operations, and continuity information-native — and, first of all, for giving the entity's AI agents and people the full, governed context without which neither can do their best work.
 
 An entity is not merely a collection of documents, systems, people, meetings, agreements, and processes. It is a value-generating structure that must continuously justify and sustain its existence through stakeholder value.
 
@@ -2371,6 +2373,8 @@ The ultimate purpose of EIOS is to help an entity remain intelligible, governabl
 ### 39.3 Document status
 
 EIOS 1.0, Keel, and Weave — Master Documentation. Working master v1.0, generated 2026-07-08 from the EIOS Framework working draft, restructured into the master documentation format with inherited sections (inbound flow, correction and reversion events, entity glossary, earned autonomy, portability) incorporated at fork. Names ratified 2026-07-08: EIOS / Keel / Weave / Entity Keel / Keel Managed / Keel Self-Hosted.
+
+Revision v1.3 (2026-07-10): AI-native primacy — the framework's primary point stated as such (AI can only work properly with full context; other benefits follow from the foundation) in the subtitle, §1, and §38.
 
 Revision v1.2 (2026-07-10): agent communication and authority patterns — Principle 27 (agents recommend; authorized humans decide) with the governance-agent "what it is not" statement and delegated `can_decide` note; authority layers and the operational owner (§23.3); agent meeting participation modes, agent communication channels with the human-colleague standard, communication identity with unknown-party posture, and agent-initiated contact (§24.5–24.8); alignment-keeping as an outward agent function (§8.4); passive and ambient capture (§17); stakeholder-facing document assembly (§31.2); secret-free templates (§35.2); staged adoption path (§36).
 
