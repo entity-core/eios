@@ -39,7 +39,7 @@ An EIOS-compliant core preserves originals, records events append-only, maintain
 
 ## Status
 
-Working master v1.0 (2026-07-08). Names ratified: EIOS / Keel / Weave / Entity Keel / Keel Managed / Keel Self-Hosted. The framework is early and being drafted openly — see [entitycore.org](https://entitycore.org) for the initiative.
+Working master v1.1 (2026-07-10; v1.0 generated 2026-07-08). Names ratified: EIOS / Keel / Weave / Entity Keel / Keel Managed / Keel Self-Hosted. The framework is early and being drafted openly — see [entitycore.org](https://entitycore.org) for the initiative.
 
 ## Origin and attribution
 
