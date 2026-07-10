@@ -80,10 +80,10 @@ EIOS is early and developed openly. Current state and planned documentation:
 | EIOS 1.0 master documentation | **Published** (this repository) |
 | Governing principles | Published (in the spec; summarized on the website) |
 | Minimum viable EIOS | **Published** ([docs/minimum-viable-eios.md](docs/minimum-viable-eios.md)) |
-| Weave — standalone context blueprint | Planned (spec §21 is the seed) |
-| Portability and export | Planned (spec §35 is the seed) |
-| Recognized entity views | Planned (spec §22 is the seed) |
-| Entity Glossary | Planned (spec §19 defines the model) |
+| Weave — standalone context blueprint | **Published** ([docs/weave-entity-context-blueprint.md](docs/weave-entity-context-blueprint.md)) |
+| Portability and export | **Published** ([docs/portability-and-export.md](docs/portability-and-export.md)) |
+| Recognized entity views | **Published** ([docs/recognized-entity-views.md](docs/recognized-entity-views.md)) |
+| Entity Glossary | **Published** ([docs/entity-glossary.md](docs/entity-glossary.md)) |
 | Keel reference architecture | **Seed draft published** ([entity-core/keel](https://github.com/entity-core/keel)) |
 | Keel implementations (managed / self-hosted) | Not started — follows the reference architecture |
 

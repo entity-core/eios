@@ -14,7 +14,7 @@ This repository is the **canonical source** of the EIOS specification (decided 2
 
 Everything around the spec — the initiative, origin and PIOS lineage, naming rationale, canonical-source policy, licensing model, project structure, and roadmap — is in **[ABOUT.md](ABOUT.md)**.
 
-Standalone documents expanding the spec live in [`docs/`](docs/): [Minimum Viable EIOS](docs/minimum-viable-eios.md).
+Standalone documents expanding the spec live in [`docs/`](docs/): [Minimum Viable EIOS](docs/minimum-viable-eios.md), [Weave — Entity Context Blueprint](docs/weave-entity-context-blueprint.md), [Recognized Entity Views](docs/recognized-entity-views.md), [Portability and Export](docs/portability-and-export.md), and [The Entity Glossary](docs/entity-glossary.md).
 
 A navigable HTML render of the spec is served at [entitycore.org/eios/master](https://entitycore.org/eios/master) (source: [`spec/eios-1.0-master-documentation.html`](spec/eios-1.0-master-documentation.html) — generated from the markdown by [`tools/render_html.py`](tools/render_html.py); the markdown wins on any divergence).
 
