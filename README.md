@@ -14,7 +14,7 @@ This repository is the **canonical source** of the EIOS specification (decided 2
 
 Everything around the spec — the initiative, origin and PIOS lineage, naming rationale, canonical-source policy, licensing model, project structure, and roadmap — is in **[ABOUT.md](ABOUT.md)**.
 
-A navigable HTML render of the spec is served at [entitycore.org/eios/master](https://entitycore.org/eios/master) (source: [`spec/eios-1.0-master-documentation.html`](spec/eios-1.0-master-documentation.html) — derived from the markdown; the markdown wins on any divergence).
+A navigable HTML render of the spec is served at [entitycore.org/eios/master](https://entitycore.org/eios/master) (source: [`spec/eios-1.0-master-documentation.html`](spec/eios-1.0-master-documentation.html) — generated from the markdown by [`tools/render_html.py`](tools/render_html.py); the markdown wins on any divergence).
 
 ## The stack
 

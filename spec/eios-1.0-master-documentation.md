@@ -2,7 +2,7 @@
 
 A unified master document for the Entity Information Operating System framework, the Weave Entity Context Blueprint, and the Keel implementation — the durable information foundation for entity continuity, governance, value creation, and self-improving operations.
 
-`Generated: 2026-07-08` `Status: Working master v1.0` `Framework: EIOS` `Implementation: Keel` `Context Blueprint: Weave` `License: CC BY 4.0`
+`Generated: 2026-07-08` `Status: Working master v1.1 (2026-07-10)` `Framework: EIOS` `Implementation: Keel` `Context Blueprint: Weave` `License: CC BY 4.0`
 
 ---
 
@@ -53,6 +53,8 @@ A unified master document for the Entity Information Operating System framework,
 ## 1. Purpose
 
 An Entity Information Operating System is a foundational information architecture for an entity. Its purpose is to preserve, organize, govern, and operationalize the information that allows an entity to exist, act, learn, improve, create value, and remain viable over time.
+
+The name deliberately commits to **information** as the foundation. Information is what can be preserved, organized, contextualized, governed, and made usable by humans and agents; intelligence is what becomes possible once that foundation exists. The same commitment applies to PIOS on the personal side.
 
 EIOS treats the entity as the primary subject. The entity may be a company, cooperative, association, foundation, public body, ecosystem organization, project organization, business unit, or other structured entity.
 
@@ -135,6 +137,7 @@ The EIOS distribution stack mirrors the shape of an operating system ecosystem: 
 
 | Layer | Name | Role |
 | --- | --- | --- |
+| Public initiative | **Entity Core** | The open initiative and public home of the work ([entitycore.org](https://entitycore.org), github.com/entity-core). EIOS is Entity Core's first framework; the initiative may carry further frameworks and assets over time. |
 | Open framework | **EIOS** | Entity Information Operating System: the open architecture, concepts, rules, information model, event model, glossary model, circle model, governance model, and portability requirements. |
 | Implementation | **Keel** | The packaged implementation and product built according to EIOS. Keel runs the entity information core. |
 | Context blueprint | **Weave** | The non-technical organizing canon for how entity information is named, grouped, interpreted, related, titled, summarized, tagged, and made understandable to humans and agents. |
@@ -209,6 +212,10 @@ EIOS should not depend on any specific cloud provider, database, or storage tech
 > **Principle 23 — Weave guides meaning before technology chooses format.** Agents should first understand what kind of information an item represents, where it fits in the entity, and which terms should describe it. Only then should they choose storage format, event type, metadata structure, or processing route.
 
 > **Principle 24 — An Entity Keel must be portable.** A complete Entity Keel must be exportable, recoverable, and runnable outside the infrastructure provider currently hosting it. Continuity through provider change, ownership change, and wind-down is a design requirement, not a feature.
+
+> **Principle 25 — Entity work leaves structured traces.** Work should be legible to both humans and AI agents after the fact: calls transcribed and summarized, decisions written down with rationale, support issues connected to product areas, sales conversations connected to objections and buying criteria, experiments recorded with hypotheses and outcomes. What leaves no trace cannot be retrieved, evaluated, or improved from.
+
+> **Principle 26 — Examine legibility before adding coordination capacity.** Before adding coordination structure, meetings, reporting layers, or headcount whose main function is coordination, the entity should examine whether the work can instead be made more observable, structured, automated, agent-assisted, or loop-driven.
 
 ## 5. Definition of EIOS
 
@@ -305,6 +312,8 @@ For this to happen, critical information must become embedded into the entity it
 
 EIOS provides the information architecture for this embedding. Keel provides the running system that holds it.
 
+Entity continuity can be assessed along eight dimensions, each of which the embedded information must serve: **knowledge continuity** (what the entity knows), **governance continuity** (who may decide what), **strategy continuity** (where the entity is going and why), **customer-value continuity** (whom it serves and how), **operational continuity** (how work gets done), **financial sustainability** (whether it can keep operating), **IPR and asset continuity** (what it owns), and **cultural and value continuity** (how it behaves).
+
 ## 7. Entity Viability
 
 ### 7.1 The viability principle
@@ -379,7 +388,27 @@ Entities require buffers to survive transition, uncertainty, delay, and disrupti
 
 EIOS should support visibility into both current viability and transition capacity.
 
-### 7.5 Entity viability model
+### 7.5 Entity transition states
+
+Viability is assessed differently depending on which state the entity is in. An entity is always in one or more transition states, and temporary imbalance is acceptable while the entity searches for its viable balance:
+
+```
+stable → searching → scaling → pivoting → restructuring → declining → renewing
+```
+
+| State | Viability posture |
+| --- | --- |
+| Stable | Value creation and cost are in credible balance; maintain and improve. |
+| Searching | The entity has not yet found its viable balance; imbalance is expected and funded by reserves, patience, or stakeholder support. |
+| Scaling | Growth investment intentionally exceeds current capture; the imbalance is a bet with a review horizon. |
+| Pivoting | The current value logic is being replaced; legacy value creation and new-direction cost coexist. |
+| Restructuring | Cost structure, governance, or ownership is being reshaped to restore balance. |
+| Declining | Value creation or stakeholder support is eroding; reserves and transition capacity determine available options. |
+| Renewing | The entity is deliberately rebuilding purpose, offering, or structure for a next life phase. |
+
+EIOS should record which state(s) the entity considers itself to be in, since agents and views should interpret financials, signals, and risk differently per state.
+
+### 7.6 Entity viability model
 
 ```
 Entity Viability
@@ -423,6 +452,10 @@ What should the entity become? What should be true in 5 to 10 years? What larger
 
 Should influence hiring, partnerships, customer treatment, product design, pricing, governance, internal behavior, conflict handling, communication, use of AI, risk decisions, and public statements. EIOS preserves both declared values and evidence of values in action.
 
+#### Roadmap — the measurable development path
+
+The roadmap translates strategy into time-based or milestone-based development. It is a first-class direction object, not static text. Roadmap content may include strategic targets, product milestones, capability development, market expansion, operational improvements, financial targets, governance milestones, technology transitions, and customer development steps. Roadmap items should connect to purpose, mission, strategy, resources, decisions, and evidence — a roadmap item without those links is a wish, not a plan.
+
 ### 8.2 Strategy
 
 Strategy answers how the entity creates, delivers, sustains, and captures value. Strategy may include:
@@ -441,6 +474,31 @@ Strategy answers how the entity creates, delivers, sustains, and captures value.
 - Differentiation
 - Timing
 - Execution priorities
+
+### 8.3 The purpose-to-execution chain
+
+Entity DNA elements are ordered and connected, not parallel statements. The chain runs:
+
+```
+Why (purpose) → Mission → Served World → Value Proposition → Strategy → Roadmap → Execution
+```
+
+In question form: *Why do we exist? Who do we serve? What value do we provide? How do we create that value? How do we know it matters? What do we do next?* The companion viability chain asks: *Who needs us? Who sustains us? What does it cost? Can we continue? What must change?*
+
+Market and customer logic flows from mission — not the other way around. When the chain is broken (execution that traces to no strategy, strategy that traces to no served-world evidence), that break is itself a signal worth recording.
+
+### 8.4 Entity DNA as an agent decision lens
+
+"Decision lens" has an operational meaning: agents reasoning about entity work should be able to ask alignment questions against DNA and viability, such as:
+
+- Does this work support the mission?
+- Which customer job does this serve?
+- Are we prioritizing internal preference over customer evidence?
+- Are we drifting from the original why?
+- Are declared values being violated by operational choices?
+- Does this strengthen the entity's ability to keep creating value — not just "is this task done"?
+
+Without the served-world and viability layers, agents degrade into inward-facing administrators: efficient at internal work, blind to whether the work matters.
 
 ## 9. Served World, Customers, and Market Context
 
@@ -521,6 +579,37 @@ Market signals are observations from the served world that may affect strategy, 
 
 > **Rule:** market signals should be source-linked, time-stamped, and connected to strategy, product, customer segments, and decisions.
 
+```yaml
+market_signal:
+  id: signal_001
+  customer_segment: founder_led_sme
+  job_to_be_done: jtbd_example
+  pain_point: unclear_path_from_ai_experiments_to_operations
+  current_alternative: ad_hoc_consulting
+  signal_strength: recurring   # single | occasional | recurring | systemic
+  related_product_area: onboarding
+  evidence_refs:
+    - support_ticket_412
+    - sales_call_2026_06_18
+  implications:
+    - onboarding_gap_for_non_technical_founders
+  captured_at: 2026-06-18
+```
+
+### 9.6 Market and value context areas
+
+The served world is survival logic, not a side domain. Beyond the concepts above, EIOS should represent the following as defined areas of entity knowledge:
+
+| Area | Meaning |
+| --- | --- |
+| Segments | Distinct groups within the served world with different jobs, needs, and value logic. |
+| Alternatives and competitors | What the served world uses instead: competitors, substitutes, and current workflows — including "do nothing". |
+| Positioning | How the entity wants to be understood relative to the alternatives. |
+| Channels | How the entity reaches and serves the market: distribution, sales, delivery, and support paths. |
+| Business model | How value creation connects to value capture — who pays, for what, and how that sustains the entity. |
+| Research | Interviews, surveys, reports, and field observations, preserved as evidence with provenance. |
+| Customer evidence | Quotes, usage, feedback, objections, wins, and churn reasons — linked to segments, products, and decisions. |
+
 ## 10. Stakeholder Model
 
 ### 10.1 Stakeholders
@@ -568,6 +657,21 @@ Stakeholders may relate to the entity through different roles:
 | Community | Legitimacy environment |
 
 A single stakeholder can hold multiple roles. For example: a cooperative member may be owner, customer, user, and governance participant. A founder may be owner, board member, manager, employee, and product visionary. A public body may be funder, regulator, customer, and policy stakeholder. A strategic partner may be supplier, customer, and co-developer.
+
+### 10.3 Stakeholder value
+
+EIOS should represent **what each stakeholder group values**, because stakeholder value is the input to the viability balance. Typical value logic per group:
+
+| Group | Typically values |
+| --- | --- |
+| Customers | Outcomes, reliability, price, usability, trust, service, performance, risk reduction, status. |
+| Owners and investors | Return, mission progress, asset growth, resilience, strategic optionality. |
+| Employees | Meaningful work, compensation, culture, stability, autonomy, learning, fairness. |
+| Partners | Mutual value creation, dependable coordination, shared upside, low friction. |
+| Regulators | Compliance, transparency, accountability, timely reporting. |
+| Communities | Legitimacy, contribution, responsible behavior, local value. |
+
+These are defaults to be replaced by evidence: the entity's own record of what its stakeholders actually value, linked to signals and decisions.
 
 ## 11. Financial and Economic Context
 
@@ -628,6 +732,24 @@ Financial information may be: draft, preliminary, estimated, unaudited, manageme
 
 > **These states must not be collapsed.** A living forecast, a board-approved budget, a filed financial statement, and a scenario plan are different objects with different authority.
 
+### 11.6 Financials drive agent caution
+
+Financial context is one of the strongest triggers for guarded handling. Actions that should require explicit approval by an authorized role include:
+
+- Approving payments
+- Changing bank details or payment recipients
+- Committing budget
+- Sending invoices
+- Changing payroll
+- Publishing financial figures
+- Sharing investor information
+- Signing funding agreements
+- Making tax submissions
+- Deleting accounting records
+- Changing revenue recognition assumptions
+
+Several of these are classic fraud vectors (bank-detail changes, payment approvals, payroll changes); agents should treat requests for them as guarded regardless of who appears to ask.
+
 ## 12. Agreements and Obligations
 
 ### 12.1 Agreements as first-class entity information
@@ -635,6 +757,8 @@ Financial information may be: draft, preliminary, estimated, unaudited, manageme
 Agreements define binding relationships, rights, obligations, risks, permissions, economic terms, and governance constraints. EIOS should understand agreement types and common agreement topics without treating itself as a legal authority.
 
 > **The actual signed agreement remains the source of truth.** EIOS helps classify, summarize, extract obligations, track dates, identify risk, and route legal or governance review to authorized roles.
+
+Agents working with agreements must not: decide legal meaning alone, approve contract language, negotiate terms without authority, declare enforceability, or ignore jurisdiction. Agreement type references and topic lists should be treated as jurisdiction-aware and entity-type-aware — the same agreement type carries different requirements in different legal contexts.
 
 ### 12.2 Common agreement types
 
@@ -765,10 +889,15 @@ An actor is any human, AI agent, team, group, system, or external party that can
 - Team
 - Committee
 - Working group
+- Temporary task force
+
+EIOS supports both stable organizational structure (departments, standing teams, governance bodies) and temporary working structures (project groups, task forces, initiative teams) — including entities that are themselves temporary, created for a defined purpose.
 
 ### 13.2 Humans and AI agents as role-bearing actors
 
 EIOS represents both humans and AI agents as role-bearing actors. This does not mean humans and AI agents are identical legally, morally, or socially. It means the information architecture can represent their roles, responsibilities, permissions, channels, and decision relationships in a shared structure.
+
+Humans are also **knowledge-bearing actors**: they carry what happened, why things are as they are, who can decide, which commitments were made, and how much to generalize. EIOS should capture knowledge *from* humans — through meetings, decisions, reviews, and glossary confirmations — without reducing humans to database entries.
 
 ```yaml
 actor:
@@ -802,6 +931,19 @@ A role describes a responsibility pattern. Roles may include CEO, managing direc
 
 Roles should be connected to responsibilities, authority, access, decision rights, communication channels, reporting relationships, approval requirements, and knowledge areas.
 
+### 13.4 Personas are not actors
+
+Four related concepts must not be conflated:
+
+| Concept | Meaning |
+| --- | --- |
+| Actor | An actual human, AI agent, team, system, or external party that can act. |
+| Role | A responsibility pattern an actor holds. |
+| Persona | A modeled archetype of a user or stakeholder — a description, not a party. |
+| Stakeholder group | A real population the entity serves or answers to. |
+
+Personas connect to the actor and stakeholder models as interpretive artifacts, but a persona can never hold access, authority, or accountability.
+
 ## 14. Entity Circles and Access Layers
 
 ### 14.1 Entity circle model
@@ -824,13 +966,19 @@ The Entity Core is the private source of truth for the entity. It contains origi
 
 > **Not every internal actor has access to all Entity Core information.** The Entity Core is a trust boundary, not a shared drive.
 
+Note on the name: "Entity Core" carries two senses. Inside the framework it names this innermost circle layer. Outside the framework, **Entity Core** is also the name of the public initiative that publishes EIOS (entitycore.org). In ambiguous contexts, the initiative sense wins publicly and the circle-layer sense wins inside framework text; see the terminology mapping in [Naming and Terminology Mapping](#37-naming-and-terminology-mapping).
+
 ### 14.3 Internal Circle
 
-The Internal Circle includes internal people, teams, departments, management, and internal AI agents: founders, employees, management, departments, teams, internal agents, internal systems, and internal committees. The Internal Circle usually requires granularity by role, function, team, and project.
+The Internal Circle includes internal people, teams, departments, management, and internal AI agents: founders, employees, management, departments, teams, internal agents, internal systems, and internal committees.
+
+The Internal Circle usually needs sub-layers rather than one flat band: core governance group (board, owners in governance roles), leadership team, departments, teams, project groups, role-based access groups, temporary working groups, and internal agent groups. Governance stakeholders sit by role: a board member belongs to the governance sub-layer of the Internal Circle, while shareholders and investors without operational roles belong to the Extended Circle — proximity follows role, not title, and shareholders are never in the same band as customers.
 
 ### 14.4 Extended Circle
 
 The Extended Circle includes close external actors: partners, advisors, contractors, investors, suppliers, professional service providers, strategic collaborators, and external project members. Extended Circle actors may require controlled access to selected projects, documents, decisions, and summaries.
+
+Typical sharing mechanisms for this circle include shared workspaces, partner-specific views, project-specific access, redacted summaries, **time-limited access**, contract-bound access (rights defined by an agreement), audit-logged access, and need-to-know rules.
 
 ### 14.5 Served World
 
@@ -884,6 +1032,20 @@ Possible abstraction levels:
 3. A security-review-related integration issue should be investigated.
 
 EIOS supports such abstraction as an explicit information-handling behavior.
+
+### 15.5 Independent control axes
+
+Access control involves several distinct axes that must not be collapsed into one field:
+
+- **Access level** — can the actor reach the information at all (hard boundary)?
+- **Sensitivity** — how carefully must it be handled (normal / sensitive / guarded)?
+- **Visibility** — is its existence discoverable even when content is restricted?
+- **Rights** — what may be done with it (read, share, edit, export)?
+- **Approval** — which actions on it require explicit sign-off?
+- **Authority** — who may decide about it?
+- **Sharing context** — for which audience and purpose may it be disclosed?
+
+The axes combine independently: a document may be internally accessible but guarded; a person may see information but not approve action on it; a partner may access a shared view but not the source records behind it. Collapsing the axes produces both over-sharing and over-blocking.
 
 ## 16. Information Zones
 
@@ -1165,6 +1327,49 @@ Knowledge should be connected to its source evidence. A strategy statement, cust
 
 This improves accountability, continuity, and trust — and it is what allows recognized entity views to be regenerated rather than rewritten from memory.
 
+### 20.4 Decision records and assumptions
+
+The decision record is the central carrier of institutional memory. It preserves not only what was decided, but why, by whom, with what information, against which alternatives, and under which assumptions:
+
+```yaml
+decision_record:
+  id: decision_001
+  decision_statement: adopt_keel_managed_for_first_deployment
+  rationale: fastest_path_to_operational_foundation_with_export_rights
+  alternatives_considered:
+    - self_hosted_from_day_one
+    - postpone_until_team_grows
+  decided_by: managing_director
+  approved_by: board
+  decision_date: 2026-06-29
+  information_available:
+    - cost_comparison_003
+    - portability_requirements_review
+  assumptions:
+    - assumption_010
+  source_refs:
+    - meeting_2026_06_29
+  affected_objects:
+    - project_keel_rollout
+  status: approved
+```
+
+```yaml
+assumption:
+  id: assumption_010
+  statement: monthly_ingestion_volume_stays_under_50gb_first_year
+  confidence: medium
+  evidence:
+    - current_tool_export_sizes
+  validation_method: review_actuals_quarterly
+  related_decisions:
+    - decision_001
+  related_risks:
+    - risk_storage_cost_overrun
+```
+
+Assumptions are first-class because decisions age through their assumptions: when an assumption fails, every decision that rests on it becomes reviewable.
+
 ## 21. Weave — Entity Context Blueprint
 
 ### 21.1 Purpose
@@ -1243,39 +1448,38 @@ Templates are guidance, not rigid schemas. Agents may leave fields empty, mark u
 
 > **Agent rule:** when classification is uncertain, preserve the original, attach the best available metadata, explain the uncertainty, and ask whether the missing concept should become a glossary term, taxonomy value, area extension, or implementation detail.
 
+### 21.5 Entity DNA, Performance Context, and System Settings
+
+Weave separates three layers that are often mixed together:
+
+| Layer | Contains | Changes |
+| --- | --- | --- |
+| **Entity DNA** | What guides interpretation and decisions: purpose, mission, vision, values, strategy. | Rarely; through governance. |
+| **Entity Performance Context** | What success currently means: current objectives, OKRs, KPIs, targets, team goals, current performance against them. | Per planning cycle. |
+| **System Settings** | How the system is configured: agents, permissions, connectors, processing rules. | Operationally. |
+
+> **Do not mix identity, goals, and configuration.** An agent interpreting a signal needs all three, but as distinct inputs: DNA says what matters, Performance Context says what is currently being pursued, Settings say what the system may do about it.
+
+### 21.6 Domain blueprints
+
+Weave is extended through **domain blueprints**. A domain blueprint defines the object types, attributes, relationships, lifecycle states, and documentation projections for a specific entity domain — for example a governance blueprint, actor blueprint, meeting blueprint, product blueprint, customer blueprint, market blueprint, or process blueprint.
+
+Domain blueprints keep Weave modular: the core areas stay stable while domains deepen independently. Legacy schemas and external models may inform a domain blueprint as mappings, never as masters. The product and recognized-view models in this document are the first two worked instances of this mechanism; further domain blueprints are published as separate documents.
+
 ## 22. Recognized Entity Views
 
 ### 22.1 Views as structured projections
 
-Many common business artifacts should not be treated only as static documents. They should be understood as **recognized entity views** over living entity knowledge:
+Many common business artifacts should not be treated only as static documents. They should be understood as **recognized entity views** over living entity knowledge, grouped into five families:
 
-- Business plan
-- SWOT
-- Strategy document
-- Board report
-- Investor update
-- Annual plan
-- OKRs
-- Risk register
-- Business model canvas
-- Value proposition canvas
-- Customer segmentation
-- JTBD map
-- Customer journey
-- Market map
-- Competitive analysis
-- Go-to-market plan
-- Operating model
-- Capability map
-- Responsibility matrix
-- Approval matrix
-- Product roadmap
-- PRD
-- Service blueprint
-- Architecture overview
-- Financial forecast
-- Budget
-- Scenario plan
+| Family | Views |
+| --- | --- |
+| **Strategic** | Business plan, strategy document, annual plan, OKRs, roadmap, mission/vision/values statements, SWOT, scenario plan. |
+| **Market and value** | Value proposition canvas, customer segmentation, JTBD map, customer journey, market map, competitive analysis, positioning statement, go-to-market plan, business model canvas. |
+| **Governance and risk** | Board report, investor update, risk register, decision log, compliance register, policy register, approval matrix, stakeholder map. |
+| **Operating** | Operating model, capability map, responsibility matrix, process map, team structure, project portfolio, resource plan, meeting rhythm, agent role map. |
+| **Product and service** | Product strategy, product roadmap, PRD, feature map, release plan, service blueprint, architecture overview. |
+| **Financial** | Financial forecast, budget, actuals vs budget, viability view. |
 
 ### 22.2 Three levels
 
@@ -1422,7 +1626,9 @@ In an entity context, earned autonomy composes with decision rights: a rule can 
 
 In entities, much operational truth emerges through human-to-human and human-to-agent communication: meetings, calls, workshops, board discussions, department meetings, customer meetings, partner meetings, email threads, chat channels, document comments, project management updates, and agent conversations.
 
-EIOS treats communication records as primary sources for events, decisions, tasks, knowledge, governance, and history.
+EIOS treats communication records as primary sources for events, decisions, tasks, knowledge, governance, and history. Channels include email, calendar, chat platforms (Slack, Microsoft Teams, Google Chat, and WhatsApp or Telegram where used professionally), document comments, project tools, and agent conversations.
+
+> **The channel is the source and interaction mode, not the meaning.** Communication is a cross-cutting axis, not a silo: one email thread may simultaneously concern a customer, a project, an agreement, a decision, and a legal risk. EIOS classifies by what the communication is about, and preserves which channel it arrived through.
 
 ### 24.2 Meeting record structure
 
@@ -1467,6 +1673,21 @@ mention → idea → question → concern → proposal → recommendation
 ```
 
 This distinction is essential for governance and accountability.
+
+Something qualifies as a **decision** only when one or more of the following is present:
+
+- An explicit decision statement
+- An actor authorized for that decision type
+- A confirmed conclusion (not an open discussion)
+- An approval event
+- Meeting minutes recording the decision
+- A decision record
+- Policy-based validation
+- Lack of objection, where that is the entity's accepted governance form
+- Follow-up confirmation
+- Formal sign-off
+
+> **EIOS must prevent the accidental promotion of casual discussion into binding decision.** When a governance agent detects a possible decision that meets none of the criteria, the correct output is a proposal or a confirmation request — never a decision event.
 
 ## 25. Self-Improving Entity Loops
 
@@ -1549,7 +1770,24 @@ entity_improvement_loop:
       - generalize_customer_names_in_internal_broad_summaries
 ```
 
-### 25.4 Loop governance
+### 25.4 Typical loop families
+
+Most entity loops fall into eight recurring families:
+
+| Loop family | Signals from | Improves |
+| --- | --- | --- |
+| Support → product | Support tickets, help requests, confusion patterns | Product, documentation, onboarding |
+| Sales → value proposition | Objections, lost deals, buying criteria, win/loss notes | Positioning, pricing, segmentation, sales enablement |
+| Usage → development | Product usage events, activation, drop-off, feature adoption | Product priorities, UX, roadmap candidates |
+| Market signals → strategy | Competitor moves, policy changes, technology shifts, analyst notes | Strategy, positioning, risk posture |
+| Meetings → operating memory | Decisions, action items, open questions, commitments | Decision records, knowledge objects, History |
+| Financials → viability | Actuals, variance, runway, unit economics | Budget, forecast, cost structure, viability view |
+| Agreements → obligations | Renewal dates, obligations, breach risks, disputes | Obligation tracking, risk register, legal review routing |
+| Agent performance → agent improvement | Human corrections, failed actions, approval outcomes, rejected proposals | Prompts, tools, access scopes, boundaries, standing rules |
+
+The families share the same governed loop structure; they differ in signal sources, interpretation context, and update targets.
+
+### 25.5 Loop governance
 
 Self-improving loops must be governed loops. Each loop should define purpose, allowed sources, allowed actions, actors and agents, human approval requirements, boundary rules, metrics, failure conditions, escalation rules, review cadence, rollback path, and audit trail.
 
@@ -1602,6 +1840,25 @@ EIOS supports recurrence monitoring. Examples:
 
 Organizations often collect feedback but fail to convert insight into owned work and verified outcomes. EIOS prevents the entity from becoming insight-heavy and action-light by connecting signals to ownership, prioritization, decisions, dependencies, execution, outcome validation, and knowledge updates.
 
+### 26.7 From signal to growth and viability
+
+The customer signal loop connects to entity viability through growth. **Growth means delivering better or new value to existing customers, or delivering existing value to new customers.** The chain runs:
+
+```
+customer signal → value improvement → retention / expansion / recommendation → growth → entity viability
+```
+
+This is why the loop is not a support function: the signals it processes are the leading indicators of the viability balance in §7.
+
+### 26.8 Operational surfaces
+
+The signal-to-action lifecycle is typically operated through four distinct surfaces, which should not be merged:
+
+1. **Signals** — the raw incoming feed: captured events, sessions, themes.
+2. **Recommendations** — interpreted themes with proposed actions and priorities, awaiting ownership or decision.
+3. **Execution** — owned work in progress, with dependencies and status.
+4. **Governance and conclusions** — decisions, approvals, outcomes, recurrence checks, and items resurfaced because the originating signal did not decline.
+
 ## 27. Product, Service, and Capability Information
 
 ### 27.1 Product and service knowledge
@@ -1627,6 +1884,8 @@ Products and services are ways the entity creates value for stakeholders. EIOS r
 - Dependencies
 - Intellectual property
 - Release history
+
+Product knowledge decomposes into linked structured objects — products, features, requirements, user stories, components — each with its own lifecycle state, rather than one monolithic "product profile". The attribute-level model for these objects belongs to a product domain blueprint (see [Weave domain blueprints](#21-weave--entity-context-blueprint)) published separately from this master document.
 
 ### 27.2 Capabilities
 
@@ -1786,6 +2045,10 @@ Guarded handling applies not only to information but also to actions. Actions ma
 - Change access rights
 - Trigger external communication
 - Create compliance risk
+- Change bank details, payment recipients, or payroll
+- Alter revenue recognition assumptions or file tax submissions
+
+Financial context carries its own guarded-action enumeration in [Financial and Economic Context](#11-financial-and-economic-context).
 
 ## 33. Cross-Entity Collaboration
 
@@ -1943,7 +2206,7 @@ EIOS and Weave terms should remain stable across implementations even when under
 | Weave | The entity context blueprint: organizing canon for meaning, naming, classification. | Cotton | Renamed; extends the fiber metaphor — personal fiber woven into entity fabric. |
 | Entity Keel | An entity's own running instance and private source of truth. | Core Self | Renamed; owner is the entity/governance, not a person. |
 | Keel Managed / Keel Self-Hosted | Deployment profiles. | Core Managed / Core Self-Hosted | Pattern inherited directly. |
-| Entity Core | The innermost circle layer: the entity's private trust boundary. | Core Self (as circle center) | In EIOS, "Entity Core" names only the circle layer; the instance is "Entity Keel". |
+| Entity Core | Two senses: (1) the innermost circle layer — the entity's private trust boundary; (2) the public initiative that publishes EIOS (entitycore.org). | Core Self (as circle center) | Dual use is deliberate and documented: the circle-layer sense applies inside framework text; the initiative sense applies publicly. The instance is always "Entity Keel". |
 | Entity circles | Entity Core → Internal → Extended → Served World → Outer. | Circle (Core Self → Inner → Extended → Outer) | Adds Served World as a distinct circle; renames Inner to Internal. |
 | Five information zones | Originals, Events, Knowledge, Derived, System. | Five Core data zones | Inherited unchanged. |
 | Sensitivity levels | normal / sensitive / guarded, extended to guarded actions. | Sensitivity axes | Inherited; action-guarding emphasized. |
@@ -1959,7 +2222,14 @@ EIOS and Weave terms should remain stable across implementations even when under
 | Entity viability | Value creation, capture, cost, reserves, legitimacy balance. | — | EIOS-native concept. |
 | Served world | The stakeholders for whom the entity creates value. | — | EIOS-native concept. |
 | Governance agent | Agent that detects decisions, routes approvals, maintains audit trails. | — | EIOS-native concept. |
-| Self-improving entity loops | Governed observe→interpret→decide→act→measure→improve cycles. | — | EIOS-native concept. |
+| Self-improving entity loops | Governed observe→interpret→decide→act→measure→improve cycles. | — | EIOS-native; the signal-to-action lifecycle, multidisciplinary routing, and operational surfaces generalize the Pulse CXM signal-to-action model. |
+| Entity operating rhythm | How goals, projects, meetings, decisions, reviews, and agent work move through time. | Dynamic Scheduling Model | Inherited pattern, generalized from personal scheduling to entity cadences. |
+
+### 37.1 Notes on naming decisions
+
+- **Why "Information", not "Intelligence" or "Organizing":** the shared core phrase for both frameworks is *Information Operating System*. Information is the foundation; intelligence is an emergent outcome of information that is preserved, organized, contextualized, governed, and made usable. "Organizing" was rejected as too narrow.
+- **Why the public brand is Entity Core, not EIOS:** the acronym EIOS collides with existing public usage (notably WHO's "Epidemic Intelligence from Open Sources", eios.org), and "EntityOS" is an existing product brand. EIOS therefore remains the framework's internal name, carried publicly by the Entity Core initiative.
+- **Charretto disposition:** the Charretto documentation package examined during EIOS's formation is a legacy relational-documentation reference input — comparable to external schemas, CRM models, or DDD vocabularies. Its tables and attributes may be mined as candidate patterns for domain blueprints, but it is not a conceptual foundation of EIOS ("mappings, not masters").
 
 ## 38. Conclusion
 
@@ -2004,3 +2274,5 @@ The ultimate purpose of EIOS is to help an entity remain intelligible, governabl
 ### 39.3 Document status
 
 EIOS 1.0, Keel, and Weave — Master Documentation. Working master v1.0, generated 2026-07-08 from the EIOS Framework working draft, restructured into the master documentation format with inherited sections (inbound flow, correction and reversion events, entity glossary, earned autonomy, portability) incorporated at fork. Names ratified 2026-07-08: EIOS / Keel / Weave / Entity Keel / Keel Managed / Keel Self-Hosted.
+
+Revision v1.1 (2026-07-10): incorporated the origin-discussion gap assessment — Entity Core initiative layer and dual-sense terminology resolution; decision record and assumption schemas; decision-qualification criteria; structured-traces and coordination-capacity principles; entity transition states; roadmap, purpose-to-execution chain, and agent decision-lens material in Entity DNA; expanded served-world area model and market signal schema; stakeholder value model; financial guarded actions; agreement agent prohibitions; persona/actor distinction; circle sub-layers and governance stakeholder placement; independent control axes; Entity Performance Context and domain blueprints in Weave; recognized-view families; communication-channel axis rule; loop families; growth and operational surfaces in the customer signal loop; continuity dimensions; and naming-decision notes.
