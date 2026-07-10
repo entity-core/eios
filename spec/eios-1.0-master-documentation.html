@@ -215,7 +215,7 @@
           <p class="subtitle">A unified master document for the Entity Information Operating System framework, the Weave Entity Context Blueprint, and the Keel implementation — the durable information foundation for entity continuity, governance, value creation, and self-improving operations.</p>
           <div class="meta">
 <span class="pill">Generated: 2026-07-08</span>
-<span class="pill">Status: Working master v1.1 (2026-07-10)</span>
+<span class="pill">Status: Working master v1.2 (2026-07-10)</span>
 <span class="pill">Framework: EIOS</span>
 <span class="pill">Implementation: Keel</span>
 <span class="pill">Context Blueprint: Weave</span>
@@ -351,6 +351,7 @@
 <div class="callout"><strong>Principle 24 — An Entity Keel must be portable.</strong> A complete Entity Keel must be exportable, recoverable, and runnable outside the infrastructure provider currently hosting it. Continuity through provider change, ownership change, and wind-down is a design requirement, not a feature.</div>
 <div class="callout"><strong>Principle 25 — Entity work leaves structured traces.</strong> Work should be legible to both humans and AI agents after the fact: calls transcribed and summarized, decisions written down with rationale, support issues connected to product areas, sales conversations connected to objections and buying criteria, experiments recorded with hypotheses and outcomes. What leaves no trace cannot be retrieved, evaluated, or improved from.</div>
 <div class="callout"><strong>Principle 26 — Examine legibility before adding coordination capacity.</strong> Before adding coordination structure, meetings, reporting layers, or headcount whose main function is coordination, the entity should examine whether the work can instead be made more observable, structured, automated, agent-assisted, or loop-driven.</div>
+<div class="callout"><strong>Principle 27 — Agents recommend; authorized humans decide.</strong> EIOS agents observe, interpret, prioritize, draft, and recommend. Decisions belong to the humans and bodies holding the matching decision right. When stakeholder positions conflict, an agent surfaces how each position lands against strategy, evidence, and priority — it does not arbitrate.</div>
 </section>
 <section id="5-definition-of-eios">
 <h2>5. Definition of EIOS</h2>
@@ -591,6 +592,7 @@ Continued legitimacy</div>
 <li>Does this strengthen the entity's ability to keep creating value — not just "is this task done"?</li>
 </ul>
 <p>Without the served-world and viability layers, agents degrade into inward-facing administrators: efficient at internal work, blind to whether the work matters.</p>
+<p>The lens also works outward. Beyond reasoning against DNA internally, agents act as <strong>keepers of alignment</strong> toward humans: restating current objectives when work drifts, reminding participants of what was declared important, flagging work that is not in line with strategy, and suggesting how it could be brought into line. In meetings and ongoing work this is the agent-side counterpart of what a good strategy or innovation lead does — keeping the big picture present without holding the decision.</p>
 </section>
 <section id="9-served-world-customers-and-market-context">
 <h2>9. Served World, Customers, and Market Context</h2>
@@ -961,6 +963,7 @@ Continued legitimacy</div>
       - strategy_workspace
     soft_boundary_rules:
       - generalize_customer_names_by_default</code></pre>
+<p>For AI agents, <code>can_decide</code> scopes are always <strong>delegated</strong> authority: they exist only where a role holding the matching decision right has granted them, they inherit that role's thresholds and evidence requirements, and they never extend to entity decisions themselves (see <a href="#23-governance">Governance</a> and Principle 27).</p>
 <h3 id="133-roles">13.3 Roles</h3>
 <p>A role describes a responsibility pattern. Roles may include CEO, managing director, founder, board chair, product manager, sales lead, customer success lead, finance lead, legal advisor, project manager — and agent roles such as governance agent, research agent, customer insight agent, documentation agent, and meeting synthesis agent.</p>
 <p>Roles should be connected to responsibilities, authority, access, decision rights, communication channels, reporting relationships, approval requirements, and knowledge areas.</p>
@@ -1092,6 +1095,7 @@ Outer Circle</div>
 <li><strong>Background enrichment:</strong> extract text, metadata, glossary terms, actors, stakeholders, obligations, topics, and links.</li>
 <li><strong>Periodic interpretation:</strong> build patterns, aggregates, summaries, recognized entity views, and retrieval indexes.</li>
 </ul>
+<p>A distinct inbound class is <strong>passive and ambient capture</strong>: continuous or opportunistic background recording — a running meeting recorder, a field capture device, an always-on note channel — where material is fed in without a per-item decision, and may even be queried while capture is still ongoing (for example, asking mid-meeting what has been discussed so far). Passive capture inherits sensitivity review by default: who was recorded, with what awareness, and under which retention rules must be resolved before the material is promoted beyond <code>parked</code>.</p>
 <h3 id="172-connected-systems">17.2 Connected systems</h3>
 <p>An Entity Keel connects to the systems where entity work already happens: email, calendar, Slack, Microsoft Teams, Google Drive, SharePoint, Notion, Confluence, Jira, Linear, GitHub, CRM, ERP, accounting systems, HR systems, customer support systems, product analytics, data warehouses, meeting transcription tools, and AI agent platforms.</p>
 <div class="callout"><strong>Connected systems remain operational systems of record for their own current workflows.</strong> A connected system is an input channel, not the long-term owner of the entity's accumulated record. The Entity Keel becomes the aggregated entity information foundation across all of them.</div>
@@ -1480,7 +1484,20 @@ Threats → linked to competitors, substitutes, market risks, funding risks, reg
 <p>Governance is not external administration. It is part of the entity information system. Governance includes authority, responsibility, accountability, decision rights, approval rules, escalation paths, access rights, delegation, revocation, policy, compliance, auditability, verification, and risk handling.</p>
 <h3 id="232-governance-from-entity-information">23.2 Governance from entity information</h3>
 <p>EIOS derives governance from the entity's own information where possible. Governance sources may include legal documents, articles of association, board records, employment contracts, role descriptions, department structures, financial policies, delegation rules, project ownership records, HR systems, CRM ownership, meeting records, approval history, internal norms, and operating manuals.</p>
-<h3 id="233-decision-rights">23.3 Decision rights</h3>
+<h3 id="233-authority-layers-and-the-operational-owner">23.3 Authority layers and the operational owner</h3>
+<p>Where PIOS has one owner, an entity distributes authority — but not evenly. Most real organizations resolve to three layers:</p>
+<table>
+<thead><tr>
+<th>Layer</th>
+<th>Holds</th>
+<th>Typical form</th>
+</tr></thead><tbody>
+<tr><td><strong>Governance layer</strong></td><td>Policy, constraints, approval thresholds, appointment and removal of the operational owner.</td><td>Board of directors, owners' meeting, council, general assembly.</td></tr>
+<tr><td><strong>Operational owner</strong></td><td>Day-to-day decision authority within governance constraints; the apex of the operational escalation and conflict-resolution chain.</td><td>CEO, managing director, executive director.</td></tr>
+<tr><td><strong>Working layer</strong></td><td>Execution within delegated authority.</td><td>Teams, employees, AI agents, working groups.</td></tr>
+</tbody></table>
+<p>The operational owner is EIOS's structural analogue of the PIOS owner: the single role where operational escalation terminates and unresolved conflicts land. The governance layer does not run the entity day to day; it bounds and reviews the operational owner. Looser entity forms — ecosystems, communities, some cooperatives — may distribute the operational-owner function, but EIOS assumes some identified operational authority exists, because agents need to know where escalation ends.</p>
+<h3 id="234-decision-rights">23.4 Decision rights</h3>
 <p>Decision rights define who can decide what:</p>
 <pre><code>decision_right:
   id: decision_right_budget_approval
@@ -1498,7 +1515,7 @@ Threats → linked to competitors, substitutes, market risks, funding risks, reg
     - expected_outcome
   source_refs:
     - finance_policy_001</code></pre>
-<h3 id="234-approval">23.4 Approval</h3>
+<h3 id="235-approval">23.5 Approval</h3>
 <p>Approval must be explicit:</p>
 <div class="callout"><strong>A notification is not approval. A meeting discussion is not approval. A comment is not necessarily approval. A dashboard view is not approval.</strong></div>
 <p>Approval should have a requester, approver, scope, decision type, time, source, conditions, limitations, evidence, and status.</p>
@@ -1516,7 +1533,7 @@ Threats → linked to competitors, substitutes, market risks, funding risks, reg
   source_refs:
     - draft_document_456
     - approval_thread_123</code></pre>
-<h3 id="235-governance-agent">23.5 Governance agent</h3>
+<h3 id="236-governance-agent">23.6 Governance agent</h3>
 <p>A governance agent is an actor that observes, tracks, interprets, and routes governance-relevant information. It may participate in email threads, chat channels, meeting transcripts, board workflows, project spaces, CRM updates, document review, and agent-to-agent workflows.</p>
 <p>A governance agent may:</p>
 <ul>
@@ -1532,7 +1549,8 @@ Threats → linked to competitors, substitutes, market risks, funding risks, reg
 <li>Generalize details when sharing</li>
 <li>Escalate unclear cases</li>
 </ul>
-<h3 id="236-proposals-rules-and-earned-autonomy">23.6 Proposals, rules, and earned autonomy</h3>
+<div class="callout"><strong>What a governance agent is not:</strong> it is not a decision maker. It tracks, routes, records, and recommends — at most it is highly efficient prioritization support. When stakeholders disagree, it shows how each position lands against strategy, evidence, and declared priorities, and hands the decision to the role that holds it. This applies to all EIOS agents, not only the governance agent (Principle 27).</div>
+<h3 id="237-proposals-rules-and-earned-autonomy">23.7 Proposals, rules, and earned autonomy</h3>
 <p>EIOS treats AI autonomy as earned and scoped. An agent may observe, detect, draft, classify, and suggest — but structured suggestions that affect durable knowledge, entity truth, sharing, cost, external commitments, or governance should be recorded as <strong>proposals</strong> before they become canonical changes, unless a <strong>standing rule</strong> already covers the exact class of action.</p>
 <table>
 <thead><tr>
@@ -1599,6 +1617,53 @@ Threats → linked to competitors, substitutes, market risks, funding risks, reg
 <li>Formal sign-off</li>
 </ul>
 <div class="callout"><strong>EIOS must prevent the accidental promotion of casual discussion into binding decision.</strong> When a governance agent detects a possible decision that meets none of the criteria, the correct output is a proposal or a confirmation request — never a decision event.</div>
+<h3 id="245-agent-participation-modes-in-meetings">24.5 Agent participation modes in meetings</h3>
+<p>An agent can be present in a meeting in three modes, chosen by one criterion — whether real-time contribution from the agent is required:</p>
+<table>
+<thead><tr>
+<th>Mode</th>
+<th>Meaning</th>
+<th>When</th>
+</tr></thead><tbody>
+<tr><td><strong>Asynchronous</strong></td><td>The recording or transcript is processed after the meeting.</td><td>Default; cheapest; contribution not needed live.</td></tr>
+<tr><td><strong>Live listener</strong></td><td>The agent attends in real time (for example via a dial-in) without speaking; participants can query it mid-meeting about what has been covered.</td><td>Live grounding or mid-meeting recall is useful.</td></tr>
+<tr><td><strong>Interactive participant</strong></td><td>The agent can speak: answer, clarify, remind of objectives, surface relevant records.</td><td>Real-time agent contribution is part of the meeting's design.</td></tr>
+</tbody></table>
+<p>In every mode the agent processes the meeting <strong>in entity context</strong> — grounded in strategy, objectives, stakeholders, and prior decisions — never as an isolated transcript.</p>
+<h3 id="246-agent-communication-channels">24.6 Agent communication channels</h3>
+<p>Agents are not only processors of captured communication; they are <strong>reachable actors</strong> that expose channels outward. Channels differ in reach, friction, cost, and control, and should be chosen deliberately:</p>
+<table>
+<thead><tr>
+<th>Channel class</th>
+<th>Properties</th>
+<th>Examples</th>
+</tr></thead><tbody>
+<tr><td><strong>Universal</strong></td><td>Work for anyone, anywhere, with no installation or account on a specific platform; the zero-friction baseline for the served world.</td><td>Email, phone voice, SMS.</td></tr>
+<tr><td><strong>Platform</strong></td><td>Convenient but controlled by a platform operator; availability, capabilities, and policies can change outside the entity's control.</td><td>Team chat tools, consumer messengers.</td></tr>
+<tr><td><strong>Private</strong></td><td>A designated authenticated line between the agent and a specific role — typically the operational owner.</td><td>A dedicated messaging channel or private line.</td></tr>
+</tbody></table>
+<p>Each channel an agent exposes carries a <strong>circle scope</strong> (which circles may reach the agent through it) and an <strong>identity-assurance expectation</strong> (how confidently the counterpart can be recognized on it). Behavior, sensitivity handling, and guarded-action eligibility on a channel follow from the recognized counterpart, not from the channel alone.</p>
+<div class="callout"><strong>The human-colleague standard:</strong> interacting with an agent through the entity's channels should feel like working with a competent human colleague — responsive, contextual, and accountable. An independent consultant serves clients entirely through phone, email, and messages; an entity agent should meet the same bar. Whether and when the entity discloses that a counterpart is an agent is a governance decision the entity must make explicitly.</div>
+<h3 id="247-communication-identity">24.7 Communication identity</h3>
+<p>Every inbound communication should be <strong>identity-resolved before boundary rules are applied</strong>. Actor records therefore carry channel identities:</p>
+<pre><code>actor_channel_identities:
+  actor_id: stakeholder_042
+  role: steering_group_member
+  identities:
+    - channel: email
+      address: person@example.org
+      assurance: verified
+    - channel: phone
+      number: &quot;+358401234567&quot;
+      assurance: recognized
+  interest_areas:
+    - strategy_track
+  circle: extended_circle</code></pre>
+<p>Recognition determines posture: a verified owner identity unlocks owner-level interaction; a recognized stakeholder gets their role- and circle-appropriate behavior; an <strong>unknown counterpart gets a defined guarded default</strong> — polite, generic, no sensitive context, no guarded actions, and an identity-resolution or escalation step before anything more. Identity assurance is itself one of the independent control axes (<a href="#15-hard-boundaries-and-soft-boundaries">Hard Boundaries and Soft Boundaries</a>).</p>
+<h3 id="248-agent-initiated-contact">24.8 Agent-initiated contact</h3>
+<p>When an agent needs a human, it escalates through channels by intrusiveness, not availability:</p>
+<div class="diagram">structured record → asynchronous message → synchronous contact (human-initiated) → synchronous contact (agent-initiated, if authorized)</div>
+<p>The default pattern: the agent sends a low-intrusion message stating the reason ("I need your input on X — call or reply when convenient") and lets the human choose when and how to go synchronous. Direct agent-initiated calls are reserved for cases the entity has explicitly authorized (urgency classes, standing rules). Channel selection is also cost-aware: continuous synchronous contact has real costs — attention above all — and an agent that interrupts like a bad colleague fails the human-colleague standard.</p>
 </section>
 <section id="25-self-improving-entity-loops">
 <h2>25. Self-Improving Entity Loops</h2>
@@ -1871,6 +1936,7 @@ Threats → linked to competitors, substitutes, market risks, funding risks, reg
 <li>Route governance requests</li>
 <li>Maintain glossaries</li>
 <li>Compare work to strategy</li>
+<li>Assemble stakeholder-facing documents (funding applications, board packs, partner briefs) from entity context</li>
 <li>Support continuity</li>
 <li>Improve loops</li>
 </ul>
@@ -1995,6 +2061,7 @@ Threats → linked to competitors, substitutes, market risks, funding risks, reg
 <tr><td><strong>Keel Export Bundle</strong></td><td>The entity's exportable data payload, scoped or full. A full Keel Export Bundle carries everything needed for migration, rebuild, or takeover. Scoped bundles serve sharing, audits, due diligence, or partner projections.</td></tr>
 <tr><td><strong>Provisioning Manifest</strong></td><td>Binds a specific template version, entity, account, region, security posture, and optional bundle hydration into one rebuildable Keel instance.</td></tr>
 </tbody></table>
+<div class="callout"><strong>Templates and bundles are secret-free by design.</strong> Credentials, API keys, and tokens are never baked into a Keel Template or carried in an Export Bundle; the entity supplies them at provisioning time. The template's configuration reference should distinguish required from optional configuration, state where each credential is obtained, and be legible to both humans and agents — the same document that onboards a person should be executable guidance for a provisioning agent.</div>
 <h3 id="353-why-portability-is-an-entity-survival-property">35.3 Why portability is an entity survival property</h3>
 <p>For an entity, portability is not only a data right — it is a continuity mechanism for the events entities actually face:</p>
 <ul>
@@ -2029,6 +2096,16 @@ Threats → linked to competitors, substitutes, market risks, funding risks, reg
 <p>Customer signal loop, meeting-to-decision loop, support-to-product loop, financial review loop, agent improvement loop.</p>
 <h4>Continuity views</h4>
 <p>Entity history, decision log, project status, customer insight view, strategy alignment view, knowledge gaps, risk register, financial viability view.</p>
+<h4>Adoption path</h4>
+<p>A minimum viable EIOS is adopted in stages, not switched on:</p>
+<div class="diagram">pre-load context → informed first engagement → scope ratified with stakeholders → minimal viable instance → expand by loop</div>
+<ol>
+<li>1. <strong>Pre-load context.</strong> Existing materials — strategy documents, stakeholder lists, statistics, requirements, notes — enter the inbox first, so the system is informed before anyone meets it.</li>
+<li>2. <strong>Informed first engagement.</strong> The first stakeholder-facing session (for example a scoping workshop) happens with the pre-loaded system already able to recognize key stakeholders and speak to the entity's actual context.</li>
+<li>3. <strong>Scope ratified with stakeholders.</strong> What the system will and will not do first is decided with the stakeholders present, and recorded as decisions.</li>
+<li>4. <strong>Minimal viable instance.</strong> The components above, scoped to the ratified ambition.</li>
+<li>5. <strong>Expand by loop.</strong> Growth follows the self-improving loops: each cycle adds sources, views, or autonomy only where the previous cycle earned it.</li>
+</ol>
 </section>
 <section id="37-naming-and-terminology-mapping">
 <h2>37. Naming and Terminology Mapping</h2>
@@ -2107,6 +2184,7 @@ Threats → linked to competitors, substitutes, market risks, funding risks, reg
 </ul>
 <h3 id="393-document-status">39.3 Document status</h3>
 <p>EIOS 1.0, Keel, and Weave — Master Documentation. Working master v1.0, generated 2026-07-08 from the EIOS Framework working draft, restructured into the master documentation format with inherited sections (inbound flow, correction and reversion events, entity glossary, earned autonomy, portability) incorporated at fork. Names ratified 2026-07-08: EIOS / Keel / Weave / Entity Keel / Keel Managed / Keel Self-Hosted.</p>
+<p>Revision v1.2 (2026-07-10): agent communication and authority patterns — Principle 27 (agents recommend; authorized humans decide) with the governance-agent "what it is not" statement and delegated <code>can_decide</code> note; authority layers and the operational owner (§23.3); agent meeting participation modes, agent communication channels with the human-colleague standard, communication identity with unknown-party posture, and agent-initiated contact (§24.5–24.8); alignment-keeping as an outward agent function (§8.4); passive and ambient capture (§17); stakeholder-facing document assembly (§31.2); secret-free templates (§35.2); staged adoption path (§36).</p>
 <p>Revision v1.1 (2026-07-10): incorporated the origin-discussion gap assessment — Entity Core initiative layer and dual-sense terminology resolution; decision record and assumption schemas; decision-qualification criteria; structured-traces and coordination-capacity principles; entity transition states; roadmap, purpose-to-execution chain, and agent decision-lens material in Entity DNA; expanded served-world area model and market signal schema; stakeholder value model; financial guarded actions; agreement agent prohibitions; persona/actor distinction; circle sub-layers and governance stakeholder placement; independent control axes; Entity Performance Context and domain blueprints in Weave; recognized-view families; communication-channel axis rule; loop families; growth and operational surfaces in the customer signal loop; continuity dimensions; and naming-decision notes.</p>
 </section>
       </article>

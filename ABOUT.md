@@ -39,7 +39,7 @@ Names were ratified 2026-07-08: EIOS / Keel / Weave / Entity Keel / Keel Managed
 ## Canonical source and document policy
 
 - **This repository is the canonical source of the EIOS specification** (decided 2026-07-09). All edits happen here; every other copy or render is derived.
-- The specification is versioned as a working master. The current version is **v1.1** (2026-07-10, incorporating the origin-discussion gap assessment; v1.0 was generated 2026-07-08 from the EIOS Framework working draft with inherited sections incorporated at fork).
+- The specification is versioned as a working master. The current version is **v1.2** (2026-07-10, adding agent communication and authority patterns after the origin-discussion incorporation of v1.1; v1.0 was generated 2026-07-08 from the EIOS Framework working draft with inherited sections incorporated at fork).
 - Derived renders (HTML, PDF, website summaries) may exist but never diverge intentionally; if they disagree with this repository, this repository wins.
 
 ## Licensing
