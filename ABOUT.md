@@ -68,6 +68,7 @@ CC BY 4.0 allows sharing and adapting for any purpose, including commercially, w
 | [github.com/entity-core](https://github.com/entity-core) | The GitHub organization: all Entity Core repositories |
 | [github.com/entity-core/brand](https://github.com/entity-core/brand) | Visual design guide: logo, typography, colors, component conventions |
 | [github.com/entity-core/media](https://github.com/entity-core/media) | Overview media: video, audio, and visual briefs |
+| [github.com/entity-core/keel](https://github.com/entity-core/keel) | Keel — the reference implementation (currently: reference architecture seed) |
 | valto@valtoai.com | Contact for pilots, contributors, reviewers, and media |
 
 ## Status and roadmap
@@ -78,12 +79,12 @@ EIOS is early and developed openly. Current state and planned documentation:
 | --- | --- |
 | EIOS 1.0 master documentation | **Published** (this repository) |
 | Governing principles | Published (in the spec; summarized on the website) |
-| Minimum viable EIOS | Planned — standalone adoption guide (spec §36 is the seed) |
+| Minimum viable EIOS | **Published** ([docs/minimum-viable-eios.md](docs/minimum-viable-eios.md)) |
 | Weave — standalone context blueprint | Planned (spec §21 is the seed) |
 | Portability and export | Planned (spec §35 is the seed) |
 | Recognized entity views | Planned (spec §22 is the seed) |
 | Entity Glossary | Planned (spec §19 defines the model) |
-| Keel reference architecture | Planned — precedes any implementation work |
+| Keel reference architecture | **Seed draft published** ([entity-core/keel](https://github.com/entity-core/keel)) |
 | Keel implementations (managed / self-hosted) | Not started — follows the reference architecture |
 
 ## Getting involved
