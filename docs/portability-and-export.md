@@ -1,6 +1,6 @@
 # Portability and Export
 
-`Status: v1.0 (2026-07-10)` `Expands: spec §35` `License: CC BY 4.0`
+`Status: v1.1 (2026-11-21)` `Expands: spec §35` `License: CC BY 4.0`
 
 A complete Entity Keel must be exportable, recoverable, and runnable outside whatever infrastructure currently hosts it. This document expands [§35 of the EIOS master documentation](https://github.com/entity-core/eios/blob/main/spec/eios-1.0-master-documentation.md); the specification wins on any divergence.
 
@@ -17,7 +17,7 @@ For an entity, portability is not a data-rights checkbox — it is the continuit
 
 ## 2. What a full export contains
 
-Per spec §35.1: originals, canonical events, knowledge objects, the entity glossary, system definitions and governance rules, agent definitions and permissions, connector configuration (secrets excluded), derived data where useful, rebuild instructions, and deployment configuration.
+Per spec §35.1: originals, canonical events, knowledge objects, the entity glossary, system definitions and governance rules, agent definitions and permissions, connector configuration (secrets excluded), derived data where useful, rebuild instructions, deployment configuration, and the audit stream within its retention.
 
 Two items are commonly forgotten and are non-negotiable:
 
@@ -33,6 +33,8 @@ Two items are commonly forgotten and are non-negotiable:
 | **Provisioning Manifest** | Binds template version, entity, account, region, security posture, and optional bundle hydration into one rebuildable instance. | The manifest alone answers "what exactly is running, and how would we recreate it?" |
 
 Credentials never travel in any of the three; the receiving side supplies them at provisioning (spec §35.2).
+
+Since spec v1.4 there is also an entry-side artifact, the **Keel Intake Package**: material assembled from the entity's existing sources before or during a Keel build, with a manifest, checksums, provenance, an ownership basis for each item, and an import report. It is not an export and not evidence of existing Keel state; only governed import followed by export produces a Keel Export Bundle (spec §35.2).
 
 ## 4. Scoped bundles
 
@@ -50,6 +52,7 @@ A scoped bundle is itself a governed act: producing one is event-logged, its sco
 - Knowledge objects: version history (they change; their trail matters).
 - Derived data: may be excluded wherever rebuild instructions exist.
 - System definitions: versioned like code, because they are.
+- Audit stream: backed up with the events, within its retention (spec §32.3).
 
 > **A backup that has never been restored is a hypothesis, not a continuity plan** (spec §35.4). Rehearse recovery: provision from template, hydrate from bundle, verify the result answers real questions. Do this before the day it matters, on a schedule, and log the rehearsal as an event.
 

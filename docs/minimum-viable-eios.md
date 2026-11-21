@@ -1,6 +1,6 @@
 # Minimum Viable EIOS
 
-`Status: v1.0 (2026-07-10)` `Expands: spec §36` `License: CC BY 4.0`
+`Status: v1.1 (2026-11-21)` `Expands: spec §36` `License: CC BY 4.0`
 
 The smallest useful entity memory an organization can adopt — and how to adopt it. This guide expands [§36 of the EIOS master documentation](https://github.com/entity-core/eios/blob/main/spec/eios-1.0-master-documentation.md); the specification wins on any divergence.
 
@@ -46,7 +46,7 @@ Each component below names its purpose, its minimum form, and what it deliberate
 
 **Purpose:** who acts for the entity — humans and agents alike.
 **Minimum:** a record per actor (person, team, agent) with role, responsibilities, decision rights, and access rules; channel identities (email, phone) for key stakeholders so communication can be identity-resolved; the unknown-party posture defined.
-**Defer:** fine-grained access systems; start with clear rules and few people.
+**Defer:** fine-grained access systems; start with clear rules, few people, and one coarse access grant per agent (spec §15.6, §36).
 
 ### 5. Value and market context
 
@@ -69,7 +69,7 @@ Each component below names its purpose, its minimum form, and what it deliberate
 ### 8. Governance basics
 
 **Purpose:** decisions distinguishable from discussion; sensitive material handled deliberately.
-**Minimum:** decision records with rationale and alternatives; the decision-qualification criteria adopted (what counts as decided); sensitivity levels (normal / sensitive / guarded) applied; need-to-know sharing as the default posture.
+**Minimum:** decision records with rationale and alternatives; the decision-qualification criteria adopted (what counts as decided); sensitivity levels (normal / sensitive / guarded) applied; need-to-know sharing as the default posture; one coarse access grant per agent; write receipts; a grounding check.
 **Defer:** approval workflow tooling; earned-autonomy rules for agents.
 
 ### 9. Self-improving loops
@@ -95,7 +95,7 @@ pre-load context → informed first engagement → scope ratified with stakehold
 1. **Pre-load context.** Before involving stakeholders, gather what already exists — strategy documents, stakeholder lists, financials, agreements, notes — into the inbox and the foundation documents. The system should know the entity before the entity meets the system.
 2. **Informed first engagement.** The first stakeholder-facing session (a scoping workshop is the natural form) happens with the pre-loaded foundation in the room: stakeholders are recognized, current strategy is citable, and gaps become visible live.
 3. **Scope ratified with stakeholders.** Decide together — and record as decisions — what the MVE will and will not do first. This is also the first exercise of the decision-record practice.
-4. **Minimal viable instance.** Stand up the ten components at their minimum forms, scoped to the ratified ambition.
+4. **Minimal viable instance.** Stand up the ten components at their minimum forms, scoped to the ratified ambition. Before any agent or channel answers on the entity's behalf, run the grounding check questions and confirm writes return receipts (spec §31.2, §18.6). The spec's "Minimum forms" table in §36 lists the day-one form of the main v1.4 rules.
 5. **Expand by loop.** Growth follows the self-improving loops: each cycle adds sources, views, structure, or agent autonomy only where the previous cycle earned it. Resist expanding all ten components simultaneously.
 
 ## Common failure modes
@@ -120,6 +120,8 @@ pre-load context → informed first engagement → scope ratified with stakehold
 - [ ] Sensitivity levels and need-to-know sharing applied
 - [ ] Two loops running and closing
 - [ ] History, decision log, and risk register readable by a newcomer
+- [ ] One coarse access grant per agent; the founding decision approved the first grants
+- [ ] Writes return receipts; grounding check questions pass
 - [ ] Everything exportable — a departure of any tool or person loses nothing
 
 ---

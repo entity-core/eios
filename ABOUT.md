@@ -30,6 +30,10 @@ On **2026-07-08**, EIOS was founded as an independent framework. The founding de
 3. **No backwards compatibility.** Neither framework constrains the other. Inherited terms may be redefined in EIOS without coordination, and vice versa.
 4. **Divergence is documented, not accidental.** The specification's [Naming and Terminology Mapping](spec/eios-1.0-master-documentation.md#37-naming-and-terminology-mapping) section records which terms were inherited, from where, and how their EIOS meaning differs.
 
+On **2026-11-21**, a fifth rule was added:
+
+5. **Later learnings are adopted, not tracked.** EIOS may adopt a principle PIOS learns after the fork, as a deliberate, dated, attributed adaptation recorded in the specification (owner direction, 2026-11-21). Adoption creates no shared text, no tracking obligation, and no dependency.
+
 ## Why the names
 
 - **Keel** is intentionally structural rather than cognitive or organizational. The keel is the structural spine of a vessel: it is laid first, everything else is built on and around it, and while crews, cargo, engines, and flags change, the keel is what makes it the same ship. That is entity continuity in one word.
@@ -41,7 +45,7 @@ Names were ratified 2026-07-08: EIOS / Keel / Weave / Entity Keel / Keel Managed
 ## Canonical source and document policy
 
 - **This repository is the canonical source of the EIOS specification** (decided 2026-07-09). All edits happen here; every other copy or render is derived.
-- The specification is versioned as a working master. The current version is **v1.2** (2026-07-10, adding agent communication and authority patterns after the origin-discussion incorporation of v1.1; v1.0 was generated 2026-07-08 from the EIOS Framework working draft with inherited sections incorporated at fork).
+- The specification is versioned as a working master. The current version is **v1.4** (2026-11-21, adopting post-fork learnings as entity principles: Principles 28–31 and an amended Principle 22, authority transition, access grants and controlled disclosure, receipts, Keel boundaries and component roles, intake packages; v1.3 stated AI-native primacy; v1.2 added agent communication and authority patterns; v1.1 incorporated the origin-discussion gap assessment; v1.0 was generated 2026-07-08 from the EIOS Framework working draft with inherited sections incorporated at fork).
 - Derived renders (HTML, PDF, website summaries) may exist but never diverge intentionally; if they disagree with this repository, this repository wins.
 
 ## Licensing

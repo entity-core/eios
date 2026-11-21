@@ -2,7 +2,7 @@
 
 A unified master document for the Entity Information Operating System framework, the Weave Entity Context Blueprint, and the Keel implementation — the AI-native information foundation that gives an entity's humans and AI agents full, governed context, and with it continuity, governance, value creation, and self-improving operations.
 
-`Generated: 2026-07-08` `Status: Working master v1.3 (2026-07-10)` `Framework: EIOS` `Implementation: Keel` `Context Blueprint: Weave` `License: CC BY 4.0`
+`Generated: 2026-07-08` `Status: Working master v1.4 (2026-11-21)` `Framework: EIOS` `Implementation: Keel` `Context Blueprint: Weave` `License: CC BY 4.0`
 
 ---
 
@@ -92,12 +92,13 @@ EIOS is centered on an entity. It is concerned with the entity's purpose, missio
 
 ### 2.3 Independence and inheritance model
 
-EIOS and PIOS are independent frameworks with a shared origin. The relationship is governed by four rules:
+EIOS and PIOS are independent frameworks with a shared origin. The relationship is governed by four rules drawn from the founding decision (2026-07-08) and one rule added on 2026-11-21:
 
 - **Copy at fork, not shared dependency.** Principles, terms, and patterns inherited from PIOS are copied into EIOS and owned here. Neither framework references the other as a live dependency.
 - **Attribution carries lineage.** Recognition of origins is expressed through attribution, not through name matching or structural coupling.
 - **No backwards compatibility.** Neither framework constrains the other. Inherited terms may be redefined in EIOS without coordination, and vice versa.
 - **Divergence is documented, not accidental.** The [Naming and Terminology Mapping](#37-naming-and-terminology-mapping) section records which terms were inherited, from where, and how their EIOS meaning differs.
+- **Later learnings are adopted, not tracked.** EIOS may adopt a principle PIOS learns after the fork (owner direction, 2026-11-21). Adoption is a deliberate, dated EIOS decision: the principle is copied, adapted to entities, attributed, and recorded in [Naming and Terminology Mapping](#37-naming-and-terminology-mapping) and [Document status](#393-document-status). It creates no shared text, no tracking obligation, and no dependency. EIOS still decides for itself what applies to entities.
 
 ### 2.4 Shared architectural ancestry
 
@@ -209,7 +210,7 @@ EIOS should not depend on any specific cloud provider, database, or storage tech
 
 > **Principle 21 — Capture first, organize later.** Information should enter quickly and safely before perfect classification is attempted. Required metadata stays rare; richer Weave attributes can be added, backfilled, or reprocessed later.
 
-> **Principle 22 — The event log is complete; entity History is curated.** Communications, captures, system activity, processing steps, corrections, and completed work all enter the canonical event log. The readable History surface is derived from selected events, structured updates, summaries, and retained artifacts.
+> **Principle 22 — The event log is complete for entity activity; entity History is curated.** Communications, captures, system activity, processing steps, corrections, and completed work all enter the canonical event log. High-volume access, security, and health records (authentication, routine access checks, context receipts, polls, heartbeats) are kept in a separate audit stream with its own retention ([Audit stream](#323-audit-stream)); security and health incidents are recorded in the event log with a reference to their audit records. The readable History surface is derived from selected events, structured updates, summaries, and retained artifacts.
 
 > **Principle 23 — Weave guides meaning before technology chooses format.** Agents should first understand what kind of information an item represents, where it fits in the entity, and which terms should describe it. Only then should they choose storage format, event type, metadata structure, or processing route.
 
@@ -220,6 +221,14 @@ EIOS should not depend on any specific cloud provider, database, or storage tech
 > **Principle 26 — Examine legibility before adding coordination capacity.** Before adding coordination structure, meetings, reporting layers, or headcount whose main function is coordination, the entity should examine whether the work can instead be made more observable, structured, automated, agent-assisted, or loop-driven.
 
 > **Principle 27 — Agents recommend; authorized humans decide.** EIOS agents observe, interpret, prioritize, draft, and recommend. Decisions belong to the humans and bodies holding the matching decision right. When stakeholder positions conflict, an agent surfaces how each position lands against strategy, evidence, and priority — it does not arbitrate.
+
+> **Principle 28 — Content is data, not instruction.** Nothing retrieved or received — email, documents, transcripts, web pages, partner messages, or model output — can by itself grant, widen, or activate authority, change policy, or add to the tools an agent may use. An approval or instruction arriving through a channel counts only as the act of an actor whose identity is verified under the channel's identity rules ([Communication identity](#247-communication-identity)), never because of what the content claims. Authority is enforced outside model judgement.
+
+> **Principle 29 — Producing is not accepting.** A draft, an agent output, an imported file, or a completion report is preserved and logged when it arrives (Principles 21–22), but it does not become accepted entity knowledge by existing. It becomes accepted knowledge only through an explicit acceptance: by a role holding the matching decision right, or by a standing rule that such a role confirmed ([Proposals, rules, and earned autonomy](#237-proposals-rules-and-earned-autonomy)). A receipt confirms that something was received, not that it was accepted.
+
+> **Principle 30 — Every item has one authoritative source at a time.** Authority attaches to the item and its declared source, not to a folder, machine, tool, or file format. At every moment, including during migration, each item has exactly one canonical side. Copies, caches, synced folders, and agent working copies are labelled as such and never become silent second masters. Authority may be declared once for a whole collection and inherited by its items, with explicit exceptions.
+
+> **Principle 31 — Revocation ends access, not the record.** Removing a person, agent, partner, or integration ends their access immediately. It never removes the entity's record of what they contributed. Deletion follows retention policy and is a separate decision.
 
 ## 5. Definition of EIOS
 
@@ -952,6 +961,24 @@ Four related concepts must not be conflated:
 
 Personas connect to the actor and stakeholder models as interpretive artifacts, but a persona can never hold access, authority, or accountability.
 
+### 13.5 Identities are not collapsed
+
+The entity, its people, its agents, its infrastructure, and its service providers have distinct identities that must not be merged into one field:
+
+| Identity | Meaning |
+| --- | --- |
+| Entity identity | The entity whose Entity Keel this is. It survives every change of host, provider, tool, or operator. |
+| Human actor identity | A person acting in a role. |
+| Agent definition | The governed description of an agent: role, scope, instructions, permissions. Held in the System zone. |
+| Agent runtime | A replaceable execution of an agent definition, on any machine or platform. |
+| Hosting or cloud account | The infrastructure account a Keel or agent runs in. It is never the entity's identity. |
+| Operator | A party that operates infrastructure or a Keel Managed service on the entity's behalf. |
+| External processor | A model, transcription engine, or specialist service that executes bounded work. |
+
+Every operation records the identities relevant to its authority. Moving to a new host never replaces the entity's stable identity with a provider account id.
+
+An agent's parts are also distinct. Its **definition** lives in the System zone. Its **runtimes** are replaceable. Its **memory** becomes entity knowledge only through acceptance (Principle 29). Its **activity** is recorded as events. Runtime-local prompts, caches, and conversation memory are not entity knowledge.
+
 ## 14. Entity Circles and Access Layers
 
 ### 14.1 Entity circle model
@@ -1055,6 +1082,38 @@ Access control involves several distinct axes that must not be collapsed into on
 
 The axes combine independently: a document may be internally accessible but guarded; a person may see information but not approve action on it; a partner may access a shared view but not the source records behind it. Collapsing the axes produces both over-sharing and over-blocking.
 
+### 15.6 Access grants and controlled disclosure
+
+Access is given through explicit **access grants**, not through membership alone. A circle describes proximity and context; it is not blanket authorization.
+
+```yaml
+access_grant:
+  id: grant_001
+  actor: founder_research_agent        # who uses the grant
+  granted_by: operational_owner
+  purpose: prepare_partner_brief
+  data_classes:                          # categories defined in the System zone's classification rules
+    - product_knowledge
+    - approved_customer_cases
+  operations:
+    - read
+  output_recipients:                     # who may receive what the actor produces with it
+    - internal_draft_review
+  retention: delete_after_task           # how long the actor may keep what it received
+  expires_at: 2026-12-31
+```
+
+A **data class** is a declared category of entity information — for example product knowledge, customer records, or financials — defined in the System zone's classification rules. Revocation of a grant is always immediate (Principle 31).
+
+The entity's data-use terms — the conditions under which its information may be accessed, used, derived, disclosed, or retained — are set by the governance layer or the operational owner. A request is allowed only when the terms, the grant, the technical scope, and runtime policy all allow it. **Absence or ambiguity fails closed.**
+
+Disclosure is controlled with four further rules:
+
+- **Metadata can disclose.** Titles, previews, candidate labels, and counts can reveal content, so they follow the rules of the content they describe. Whether an item's bare existence may be shown is decided separately on the visibility axis ([Independent control axes](#155-independent-control-axes)).
+- **The most restrictive source wins.** An output combined from several sources satisfies every contributing restriction. A summary built partly from board-only material is board-only unless an authorized role approves a generalized version.
+- **Authorize before sending.** Disclosure to an external processor is authorized before the content leaves, not checked afterwards. Fallback to another model or provider is allowed only within the processors the integration definition permits, and never widens the scope.
+- **A copy cannot be recalled.** A governed reference can be revoked; a delivered copy cannot. Choose references where the recipient does not need a copy.
+
 ## 16. Information Zones
 
 ### 16.1 Five information zones
@@ -1101,6 +1160,10 @@ An Entity Keel connects to the systems where entity work already happens: email,
 
 > **Connected systems remain operational systems of record for their own current workflows.** A connected system is an input channel, not the long-term owner of the entity's accumulated record. The Entity Keel becomes the aggregated entity information foundation across all of them.
 
+Every connector and every consumer agent — an independent agent that uses the Keel through its interfaces ([Keel boundaries and component roles](#346-keel-boundaries-and-component-roles)) — has a versioned **integration definition** in the System zone: its declared purpose, the data classes it touches, its recipients, its retention, and the external processors (models and services, including fallbacks) it may use. For a small Keel, the integration definition and the agent definition can be one file. A definition supplied by a vendor or tool is a claim, not a grant. A material change — a new data class, recipient, retention period, or a processor not on the permitted list — suspends the affected access until the responsible role approves it again.
+
+Authorization is staged: registering a source does not authorize backfilling its history, and backfill does not authorize ongoing collection.
+
 ### 17.3 Source promotion lifecycle
 
 Not everything a connected system emits deserves equal standing. Sources and their items move through promotion states so that low-value, high-volume noise does not corrupt the curated entity knowledge base:
@@ -1129,6 +1192,26 @@ When an entity adopts EIOS over an existing tool landscape, each source, folder,
 | staged | Temporarily present for intake, screening, transformation, or review; not yet promoted. |
 | excluded | Deliberately not imported, with the exclusion reason recorded so agents do not rediscover the same boundary. |
 | guarded_pending | May belong in the Keel later, but sensitivity, privacy, legal, retention, or approval questions must be resolved first. |
+
+For code repositories and externally governed documents, `external_referenced` means the Entity Keel holds a version-bound reference plus the entity's own adoption record, never a competing editable copy.
+
+### 17.5 Authority transition
+
+Moving an item's authority — from a founder's machine, a shared drive, or a legacy tool into the Entity Keel, or out again — is a governed transition, not a side effect of copying:
+
+1. **Select** the exact items and record their current authoritative source.
+2. **Copy and verify.** Read back the complete content and confirm it is identical, with provenance and checksums.
+3. **Test.** Run a scoped export from the Entity Keel and confirm the items can be reconstructed from it.
+4. **Decide.** The role holding the decision right records the switch of authority as a decision.
+5. **Label the former source** as a snapshot or working copy. Deleting it is a separate decision.
+
+Throughout, each item has exactly one canonical side (Principle 30). A successful trial run is evidence for the switch, not the switch itself. Items already retained are not ingested again as duplicates.
+
+### 17.6 Work-output acceptance
+
+Drafts, design versions, agent outputs, and generated artifacts are preserved as working material when they arrive, but they are not accepted entity knowledge until accepted (Principle 29). Acceptance is an explicit act — by a role with the matching decision right, or by a standing rule that role confirmed — and it ends in a recorded outcome: accepted, rejected, deferred, conflicted, or failed. This is distinct from the source promotion lifecycle in §17.3, which governs how far a source is processed. Until acceptance is verified, the only copy of a work output is protected from cleanup.
+
+An agent's completion report enters as evidence of what the agent says it did. Accepting the report as evidence is not accepting its content.
 
 ## 18. Event Model
 
@@ -1229,6 +1312,12 @@ event:
 
 History is the human-readable projection of selected events. The event log should be more complete than the History view. Not every email, transcript line, system action, or internal trace should appear in human-facing History. History should be curated into meaningful updates, decisions, milestones, and summaries.
 
+### 18.6 Receipts and idempotency
+
+Every write to the Entity Keel returns a **receipt**: the event id and a readback of what was recorded. An agent reports an action as done only when it holds the receipt. A received item is acknowledged as "received and preserved", not as "accepted", until it is accepted (§17.6).
+
+Each incoming item and each write carries a portable **idempotency key** — the source's own id where one exists, otherwise a content hash, and source plus time only where identical content can legitimately arrive more than once — so that re-forwarded email or re-synchronized folders do not create duplicates. A timeout or lost response is not a rejection: the operation is retried under the same key, never resubmitted blindly.
+
 ## 19. Entity Glossary
 
 The entity glossary provides the shared vocabulary that humans and agents use to interpret the entity's world consistently. It should remain simple at first: stable IDs, definitions, aliases, status, and relationships.
@@ -1316,7 +1405,7 @@ knowledge_object:
   object_type: value_proposition
   title: Value proposition for owner-led SMEs
   summary: Structured value statement for a target segment.
-  status: active
+  status: accepted
   owner_actor: product_strategy_lead
   related_stakeholders:
     - founder_led_sme_segment
@@ -1329,7 +1418,16 @@ knowledge_object:
   sensitivity: normal
   last_reviewed_at: 2026-06-29
   confidence: medium
+  authority:
+    authoritative_source: entity_keel
+    accepted_revision: rev_014
+    editing_authority:
+      - product_strategy_lead
+    permitted_copies:
+      - partner_brief_projection
 ```
+
+Knowledge object status distinguishes at least **proposed**, **reviewed**, **accepted**, and **superseded**, and an object may additionally be flagged **stale** or **disputed** (§20.6). Contributions are visible at once but labelled with their status, and retrieval reports the status of what it used. "Accepted" means accepted as current entity knowledge; it is not governance ratification of a recognized view (§22.3). Glossary terms keep their own lifecycle (§19.3).
 
 ### 20.3 Source-linked knowledge
 
@@ -1379,6 +1477,14 @@ assumption:
 ```
 
 Assumptions are first-class because decisions age through their assumptions: when an assumption fails, every decision that rests on it becomes reviewable.
+
+### 20.5 Concurrent editing
+
+Several people and agents edit the same entity documents. Every edit names the revision it starts from. An edit made on an outdated revision becomes a conflict that is resolved explicitly, never a silent overwrite. Version-control history provides ancestry, but permission to write to a repository is not a governance grant: editing authority comes from the item's `authority` block and the actor's grants.
+
+### 20.6 Recorded, ratified, and true
+
+A record that a claim was made is not proof the claim is true. Origin, evidential support, acceptance, temporal validity, and access are separate properties. Governance ratification records a decision; it does not verify a fact. A ratified business plan states what the entity decided to pursue, not what the market is. When a source is revoked or changes, dependent knowledge and views become stale or disputed — not automatically false.
 
 ## 21. Weave — Entity Context Blueprint
 
@@ -1594,6 +1700,8 @@ Approval must be explicit:
 
 Approval should have a requester, approver, scope, decision type, time, source, conditions, limitations, evidence, and status.
 
+> **No actor approves its own authority.** No human or agent approves the activation of authority it would itself receive, unless it holds a separate decision right for exactly that. Permission to edit a document's text is not permission to change the grants it describes. At instantiation, the first roles and grants are approved by the governance layer — for a small entity, its founders together; for a one-person entity, its founder — and recorded as the Keel's founding decision.
+
 ```yaml
 approval_event:
   id: approval_001
@@ -1792,8 +1900,10 @@ Observe → Interpret → Decide → Act → Measure → Improve → Repeat
 | Decide | Choose an action, recommendation, experiment, escalation, approval request, or process change. |
 | Act | Execute a bounded action, create a task, update a document, call a tool, draft a response, modify a workflow, or request human approval. |
 | Measure | Record whether the action worked. |
-| Improve | Update knowledge, process, prompt, tool, policy, product behavior, or documentation. |
+| Improve | Propose updates to knowledge, process, prompt, tool, policy, product behavior, or documentation, and adopt them through the matching decision (see below). |
 | Repeat | Use the improved loop for the next instance. |
+
+Learning and adaptation are separate steps. A confirmed lesson may be used as context, but changing a prompt, rule, tool, or policy is a separate decision that goes through [Proposals, rules, and earned autonomy](#237-proposals-rules-and-earned-autonomy). Frequency is not importance, and recurrence is not preference: a pattern seen many times still needs a decision before it changes behavior.
 
 ### 25.3 Loop object example
 
@@ -2068,6 +2178,8 @@ EIOS supports retrieval across originals, events, knowledge, derived views, and 
 
 > **Retrieve summary-first.** Good retrieval does not start by reading everything. Agents should choose the right navigation layer first — index, summary, History period, entity view, stakeholder page, project page, agreement register, event record, or original source — depending on the question. Vector and graph indexes are projections, not truth.
 
+Retrieval for an agent is bounded by the requesting actor's grants and circle. Routing to a cheaper or faster model never widens the candidate context or the recipients.
+
 ### 31.2 Agent use
 
 - Retrieve context
@@ -2087,6 +2199,10 @@ EIOS supports retrieval across originals, events, knowledge, derived views, and 
 - Assemble stakeholder-facing documents (funding applications, board packs, partner briefs) from entity context
 - Support continuity
 - Improve loops
+
+> **Grounding is verified, not assumed.** An agent may present an answer as based on the entity's information only when that content was actually delivered to it. Implementations keep a maintained set of check questions that only the entity's own content can answer, and run it before first use, after each import, and after each restore. An agent that sounds informed about material it never received is the failure this prevents.
+
+Every disclosure of entity context to a consumer agent, an external model, or another recipient leaves a **context receipt** in the audit stream: who received it, under which grant and purpose, references to what was returned and what was withheld (item ids and hashes, not copies of the content), and how it was transformed. A receipt records the disclosure; it does not prove the recipient complied with the terms. A significant disclosure, such as one to an external party, is also recorded as an event.
 
 ### 31.3 Human use
 
@@ -2132,6 +2248,14 @@ Guarded handling applies not only to information but also to actions. Actions ma
 - Alter revenue recognition assumptions or file tax submissions
 
 Financial context carries its own guarded-action enumeration in [Financial and Economic Context](#11-financial-and-economic-context).
+
+### 32.3 Audit stream
+
+Next to the entity event log, an Entity Keel keeps a separate **audit stream** — in plain terms, the security logbook — for high-volume access, security, and health records: authentication, access checks, context receipts, polls, and heartbeats. It belongs to the System zone, is append-only, is readable only by roles holding an audit right, and is included in full Keel Export Bundles within its retention. The audit stream has its own retention, set under the System zone's retention policies; context receipts and security records are retained at least as long as the events they relate to, because they serve compliance and disputes. An incident — an audit record that affects entity information, access, or availability, such as a grant used after expiry, repeated authentication failure, or an outage of a Keel-native function — is recorded in the event log with a reference to its audit records (Principle 22). The role holding the audit right defines which record types count as incidents, in the System zone's audit settings. Health checks report real state; routine heartbeats never fill the entity's History.
+
+### 32.4 Erasure and retention dispositions
+
+"Deleted" is not one state. Records are dispositioned as **hidden** (kept but excluded from ordinary retrieval), **deleted** (content removed), **expired** (removed at the end of its retention period), **retained** (kept under an obligation or hold), or **cryptographically inaccessible** (the data exists but its key is destroyed), and the disposition is recorded. Because originals are policy-immutable and the event log is append-only, erasure removes or locks content while an event records that the erasure happened. For entities, legal retention obligations and legal holds often forbid deletion; an erasure request is resolved against them, not around them.
 
 ## 33. Cross-Entity Collaboration
 
@@ -2194,6 +2318,27 @@ Existing systems may remain operational systems of record for their own current 
 
 Databases, queues, graph stores, vector stores, search engines, and orchestration platforms are added only when actual data volume or retrieval needs justify them. A small entity's first Keel can run on object storage, Markdown knowledge objects, JSON event logs, and a handful of agents.
 
+### 34.6 Keel boundaries and component roles
+
+Three questions are answered separately for every component of an Entity Keel deployment: does it implement the Keel service contract (the agent-facing interface every Keel profile offers, §34.2) or govern Entity Keel state; is it part of the Keel or an independent consumer; and where does it run. Running on the same machine never makes a component part of the Keel, and running elsewhere never makes a Keel function independent. A declared Keel-native function may run on another machine, including a founder's.
+
+| Role | Belongs to | Examples |
+| --- | --- | --- |
+| Entity Keel state | The Entity Keel | Originals, events, knowledge objects, governance rules, agent definitions, permissions |
+| Keel-native functions | The Entity Keel, even when replaceable or placed elsewhere | Intake and triage, enrichment, indexing, retrieval, the agent that handles external channels, the governance agent |
+| Independent consumers | Their own principal; they use the Keel through its interfaces | A founder's personal agent environment, an employee's assistant, a partner's tool |
+| External execution resources | Neither; replaceable processors | Models, transcription engines, specialist APIs |
+| Operator control plane | The operator's own business | Provisioning, billing, fleet operations and support for a Keel Managed service |
+
+Further rules:
+
+- **Models are replaceable execution.** The Entity Keel governs the entity's intelligence configuration — agent definitions, guidance, retrieval rules, processing provenance. Changing a model provider, through the permitted-processor list (§17.2), changes neither entity knowledge nor authority.
+- **Interfaces are adapters.** REST, MCP, CLI, and SDK surfaces are adapters over one Keel service contract. None is a second source of truth or holds undeclared permanent copies. Any service that acts on behalf of an actor keeps that actor's identity and grant and never uses an entity-wide credential.
+- **Split functions are declared.** A Keel-native function running outside the main deployment is documented with its authority, dependencies, and rebuild path. A personal agent machine is never the hidden home of Keel intake or enrichment.
+- **Moving execution re-grants.** Relocating a Keel-native function or consumer agent requires granting it access again; credentials are never copied along.
+- **Keel Managed binds one entity per processing job.** Shared code and stateless workers are acceptable; shared mutable entity context is not. Every processing job binds exactly one Entity Keel and its governance context. The operator's control-plane records belong to the operator's own Entity Keel, never to a customer's Keel or export. An operator's own reference Keel never doubles as the control plane or as a shared tenant environment.
+- **Status words are precise.** Report each step separately — proposed, implemented locally, tested, deployed, authorized, accepted for use — and report availability as implemented, installed, enabled, authorized, reachable, and healthy, not as one "working".
+
 ## 35. Portability and Continuity
 
 ### 35.1 Portability requirement
@@ -2208,10 +2353,13 @@ An Entity Keel export should include:
 - Entity glossary
 - System definitions and governance rules
 - Agent definitions and permissions
-- Connector configuration (excluding secrets where necessary)
+- Connector configuration (never including secrets)
 - Derived data where useful
 - Rebuild instructions
 - Deployment configuration
+- Audit stream, within its retention
+
+Portability has three dimensions: **state** (the information survives), **operational** (Keel-native search, enrichment, and governance routing behave equivalently after restore), and **ecosystem** (consumers and connectors can reconnect; credentials and trust are re-established, not copied). Restoring bytes without working Keel-native functions is not recovery. The grounding check questions (§31.2) double as the operational-portability test after a restore.
 
 ### 35.2 Keel Bundle model
 
@@ -2220,6 +2368,11 @@ An Entity Keel export should include:
 | **Keel Template** | The parameterized infrastructure shape of an empty Entity Keel: storage zones, keys, policies, roles, indexes, audit logging, guardrails. Structure is golden and repeatable; entity-specific values stay parameterized. |
 | **Keel Export Bundle** | The entity's exportable data payload, scoped or full. A full Keel Export Bundle carries everything needed for migration, rebuild, or takeover. Scoped bundles serve sharing, audits, due diligence, or partner projections. |
 | **Provisioning Manifest** | Binds a specific template version, entity, account, region, security posture, and optional bundle hydration into one rebuildable Keel instance. |
+| **Keel Intake Package** | Material assembled from the entity's existing sources before or during a Keel build. It is an entry path, not evidence of existing Keel state; only governed import followed by export produces a Keel Export Bundle. |
+
+Every intake package — the usual vehicle for the pre-load step of the adoption path (§36) — carries a manifest, checksums, source-by-source provenance, scope, mapping, an uncertainty and loss report, and the **ownership basis** of each item (declared per collection where items share it): whether it belongs to the entity, a founder or employee personally, a contractor, a client, or another party ([Intellectual Property and Assets](#28-intellectual-property-and-assets)). Items with unresolved ownership stay `guarded_pending`. Third-party information is minimized.
+
+Every import, hydration, or intake produces an **import report**, logged as an event: imported, quarantined, rejected, and unresolved items (imported items remain unaccepted until accepted under Principle 29), conflicts, and connectors that need reauthorization. Imported agent definitions, reusable agent instructions, and connector definitions arrive **inactive** until separately authorized. Unknown fields are preserved or the import fails visibly; a merge import never silently overwrites, and conflicts are kept side by side for review.
 
 > **Templates and bundles are secret-free by design.** Credentials, API keys, and tokens are never baked into a Keel Template or carried in an Export Bundle; the entity supplies them at provisioning time. The template's configuration reference should distinguish required from optional configuration, state where each credential is obtained, and be legible to both humans and agents — the same document that onboards a person should be executable guidance for a provisioning agent.
 
@@ -2234,7 +2387,7 @@ For an entity, portability is not only a data right — it is a continuity mecha
 
 ### 35.4 Backup, versioning, and recovery
 
-Originals and events require versioned, tested backup. Knowledge objects require version history. Derived data may be excluded from backup where rebuild instructions exist. Recovery must be rehearsed: a backup that has never been restored is a hypothesis, not a continuity plan.
+Originals and events require versioned, tested backup. The audit stream is backed up with the events, within its retention. Knowledge objects require version history. Derived data may be excluded from backup where rebuild instructions exist. Recovery must be rehearsed: a backup that has never been restored is a hypothesis, not a continuity plan. A restore report distinguishes restored data from working Keel-native functions, and rebuild instructions must be executable by a provisioning agent, not only readable by people.
 
 ## 36. Minimum Viable EIOS
 
@@ -2270,7 +2423,7 @@ Agreement register, obligation tracking, renewal dates, legal review flags, cont
 
 #### Governance basics
 
-Approval records, sensitive and guarded handling, hard boundaries, soft boundary rules, need-to-know sharing.
+Approval records, sensitive and guarded handling, hard boundaries, soft boundary rules, need-to-know sharing, one coarse access grant per agent, write receipts, and a grounding check.
 
 #### Self-improving loops
 
@@ -2291,8 +2444,31 @@ pre-load context → informed first engagement → scope ratified with stakehold
 1. **Pre-load context.** Existing materials — strategy documents, stakeholder lists, statistics, requirements, notes — enter the inbox first, so the system is informed before anyone meets it.
 2. **Informed first engagement.** The first stakeholder-facing session (for example a scoping workshop) happens with the pre-loaded system already able to recognize key stakeholders and speak to the entity's actual context.
 3. **Scope ratified with stakeholders.** What the system will and will not do first is decided with the stakeholders present, and recorded as decisions.
-4. **Minimal viable instance.** The components above, scoped to the ratified ambition.
+4. **Minimal viable instance.** The components above, scoped to the ratified ambition. Verify grounding and write receipts ([Agent use](#312-agent-use), [Receipts and idempotency](#186-receipts-and-idempotency)) before any agent or channel answers on the entity's behalf: an instance that answers confidently without its own content does more harm than one that answers nothing.
 5. **Expand by loop.** Growth follows the self-improving loops: each cycle adds sources, views, or autonomy only where the previous cycle earned it.
+
+#### Minimum forms of the governance and integrity rules
+
+The main rules added in v1.4 have minimum forms. A small entity meets them in the first column and grows into the second when the trigger occurs.
+
+| Rule | Minimum form from day one | When triggered |
+| --- | --- | --- |
+| Content is data (P28) | Agent tools and grants live only in System-zone definitions. | — |
+| Acceptance (P29, §17.6, §20.2) | A `status` field and an acceptance line in the log. | Full outcome vocabulary when agents produce volume. |
+| One authoritative source (P30, §17.5) | One authority declaration per collection; moves done in batches. | Item-level `authority` blocks when items diverge from their collection. |
+| Revocation (P31) | Revoking a token or key ends access. | — |
+| Identities (§13.5) | Entity, actor, agent-definition, and processor ids. | Hosting-account and operator ids with Keel Managed or several hosts. |
+| Grants and terms (§15.6) | One coarse grant per agent and a one-page data-use terms note. | Purpose-bound per-task grants and enforced retention. |
+| Disclosure rules (§15.6) | A list of permitted processors. | Metadata and most-restrictive rules once there are several sensitivity levels or any external consumer. |
+| Integration definitions (§17.2) | One file per agent, merged with its agent definition. | Suspension on material change and staged backfill from the first connector. |
+| Receipts and idempotency (§18.6) | Every API write returns a receipt. | — |
+| Concurrent editing (§20.5) | Version control plus a base revision on API writes. | — |
+| No self-approval (§23.5) | The founding decision approves the first grants. | — |
+| Grounding and context receipts (§31.2) | 10–20 check questions; one log line per response with actor, grant, and item references. | Scheduled checks; withheld lists and transformation records once there are external recipients. |
+| Audit stream (§32.3) | A separate append-only log. | Distinct retention and access rules at the first compliance obligation. |
+| Erasure dispositions (§32.4) | — | At the first personal-data obligation or erasure request. |
+| Keel boundaries (§34.6) | A one-page declaration of which components are Keel-native. | Operator rules only for Keel Managed. |
+| Intake package and import report (§35.2) | Package-level manifest and ownership default when pre-loading. | Item-level ownership and loss reports at multi-source scale. |
 
 ## 37. Naming and Terminology Mapping
 
@@ -2323,6 +2499,26 @@ EIOS and Weave terms should remain stable across implementations even when under
 | Governance agent | Agent that detects decisions, routes approvals, maintains audit trails. | — | EIOS-native concept. |
 | Self-improving entity loops | Governed observe→interpret→decide→act→measure→improve cycles. | — | EIOS-native; the signal-to-action lifecycle, multidisciplinary routing, and operational surfaces generalize the Pulse CXM signal-to-action model. |
 | Entity operating rhythm | How goals, projects, meetings, decisions, reviews, and agent work move through time. | Dynamic Scheduling Model | Inherited pattern, generalized from personal scheduling to entity cadences. |
+| Component roles and Keel boundaries | Keel-native functions vs independent consumers vs external resources vs operator control plane; placement answered separately. | Hosting, Core boundaries, and portability principles (post-fork PIOS working draft, adopted 2026-11-21) | Adapted to entities; adds operator separation for Keel Managed. |
+| Authority transition, one authoritative source (P30) | Governed switch of authority with one canonical side throughout; per-item or per-collection authority. | Operating-document authority and bounded adoption (post-fork PIOS working draft, adopted 2026-11-21) | Switch decided by the role holding the decision right, not the owner alone. |
+| Access grant / data-use terms, revocation (P31) | Explicit grants binding actor, purpose, data class, operation, recipients, retention; terms set by governance. | Integration governance: grants, terms, and revocation (post-fork PIOS working draft, adopted 2026-11-21) | Terms approved by the governance layer or operational owner; revocation keeps contributed records. |
+| Context receipt, audit stream (P22) | Audit record of every disclosure of entity context, in a separate audit stream. | Integration governance: context receipts and audit events (post-fork PIOS working draft) and an organizational deployment outside EIOS (adopted 2026-11-21) | Kept as references, not copies; P22 amended so telemetry lives in the audit stream. |
+| Keel Intake Package | Source-composed entry package with ownership basis and import report. | Portability package (post-fork PIOS working draft, adopted 2026-11-21) | Ownership basis extended to founders, employees, contractors, and clients. |
+| Content is data (P28) | Retrieved content can never by itself grant or widen authority. | Integration governance: retrieved content is data (post-fork PIOS working draft, adopted 2026-11-21) | Made a governing principle; verified channel approvals remain actor acts. |
+| Acceptance of work outputs (P29, §17.6) | Outputs are preserved on arrival but accepted only explicitly or by a standing rule. | Promoting working artifacts to canonical state (post-fork PIOS capability definition, adopted 2026-11-21) | Named "acceptance" to stay distinct from source promotion (§17.3). |
+| Distinct identities and agent parts (§13.5) | Entity, actor, agent definition, runtime, hosting account, operator, processor kept apart. | Integration governance: identity separation; agent definition vs runtime (post-fork PIOS working draft, adopted 2026-11-21) | Entity identity survives host and operator changes. |
+| Controlled disclosure (§15.6) | Metadata, most-restrictive, authorize-before-sending, and copy rules. | Controlled-disclosure profile (unpublished PIOS working draft, adopted 2026-11-21) | Visibility stays a separate axis. |
+| Receipts and idempotency (§18.6) | Write receipts; portable idempotency keys; timeouts are not rejections. | Distribution and compatibility: idempotency keys (post-fork PIOS working draft) and an organizational deployment outside EIOS (adopted 2026-11-21) | — |
+| Concurrent editing, recorded vs true (§20.5–20.6) | Base-revision edits; ratification is not verification. | Operating-document authority; assertion lineage (post-fork PIOS working drafts, the latter unpublished; adopted 2026-11-21) | Ratification framed as an entity governance act. |
+| No self-approval (§23.5) | No actor approves its own authority; founding decision bootstraps grants. | Operating-document authority (post-fork PIOS working draft, adopted 2026-11-21) | Genesis rule added for entities. |
+| Learning vs adaptation (§25.2) | Lessons inform; behavior changes need a decision. | Cognitive memory and learning (post-fork PIOS working draft, adopted 2026-11-21) | Applied to entity loops. |
+| Verified grounding (§31.2) | Agents claim entity-grounded answers only for content actually delivered. | — (lesson from an organizational deployment outside EIOS, adopted 2026-11-21) | EIOS-native rule. |
+| Integration definitions, staged authorization (§17.2) | Versioned definition per connector and consumer agent; vendor declarations are claims; material change suspends access; registration, backfill, and ongoing collection are authorized separately. | Integration governance: integration manifests and definitions; cognitive memory and source discovery: staged authorization (post-fork PIOS working drafts, adopted 2026-11-21) | Permitted-processor list added; may share one file with the agent definition in a small Keel. |
+| External references (§17.4) | Code and externally governed documents held as a version-bound reference plus the entity's adoption record. | Operating-document authority (post-fork PIOS working draft, adopted 2026-11-21) | Refines `external_referenced`. |
+| Grant-bounded retrieval (§31.1) | Retrieval bounded by the actor's grants and circle; model routing never widens context or recipients. | Integration governance: context compilation and model routing (post-fork PIOS working draft, adopted 2026-11-21) | Circle added as a bound. |
+| Portability dimensions, restore report (§35.1, §35.4) | State, operational, and ecosystem portability; restore report separates restored data from working Keel-native functions; rebuild instructions executable. | Hosting, Core boundaries, and portability principles; portability package (post-fork PIOS working drafts, adopted 2026-11-21) | Grounding check questions reused as the operational test. |
+| Status and availability words (§34.6) | Steps and availability reported separately, never as one "working". | Distribution and compatibility: owner-facing availability (unpublished PIOS working draft, adopted 2026-11-21) | Reported to operators and admins. |
+| Erasure dispositions (§32.4) | Five recorded dispositions; legal holds can forbid deletion. | Shared elements: erasure disposition (post-fork PIOS capability library, adopted 2026-11-21) | Entity legal retention emphasized. |
 
 ### 37.1 Notes on naming decisions
 
@@ -2363,6 +2559,8 @@ The ultimate purpose of EIOS is to help an entity remain intelligible, governabl
 
 > **EIOS originated as a sibling framework to PIOS** (Personal Information Operating System, github.com/peecos), created by Valto Loikkanen. EIOS inherits architectural principles and terminology from PIOS 2.0 with permission and attribution. The frameworks evolve independently; no compatibility between them is implied or maintained.
 
+Since v1.4, principles PIOS learned after the fork are adopted only as dated, attributed EIOS decisions (§2.3).
+
 ### 39.2 License
 
 © 2026 Valto Loikkanen.
@@ -2373,6 +2571,8 @@ The ultimate purpose of EIOS is to help an entity remain intelligible, governabl
 ### 39.3 Document status
 
 EIOS 1.0, Keel, and Weave — Master Documentation. Working master v1.0, generated 2026-07-08 from the EIOS Framework working draft, restructured into the master documentation format with inherited sections (inbound flow, correction and reversion events, entity glossary, earned autonomy, portability) incorporated at fork. Names ratified 2026-07-08: EIOS / Keel / Weave / Entity Keel / Keel Managed / Keel Self-Hosted.
+
+Revision v1.4 (2026-11-21): adoption of post-fork learnings, by owner direction of 2026-11-21. Relationship: a fifth rule allowing EIOS to adopt later PIOS learnings as dated, attributed adaptations (§2.3, §39.1). Principles: Principle 22 amended (telemetry in a separate audit stream); new Principles 28–31 (content is data; producing is not accepting; one authoritative source at a time; revocation ends access, not the record). Sections: distinct identities and agent parts (§13.5); access grants, data-use terms, and controlled disclosure (§15.6); integration definitions with permitted processors and staged authorization (§17.2); external references for code and governed documents (§17.4); authority transition and work-output acceptance (§17.5–17.6); receipts and idempotency (§18.6); knowledge authority block and status vocabulary, concurrent editing, recorded vs true (§20.2, §20.5–20.6); no self-approval with a founding-decision bootstrap (§23.5); learning separate from adaptation (§25.2); grant-bounded retrieval, verified grounding, and context receipts (§31); audit stream and erasure dispositions (§32.3–32.4); Keel boundaries and component roles (§34.6); portability dimensions, Keel Intake Package, import and restore reports, and secret-free connector configuration (§35); minimum forms of the new rules and grounding before agents answer (§36); new mapping rows (§37). Sources: PIOS working drafts published after the fork, three PIOS items still unpublished at the time of adoption (controlled disclosure in §15.6, recorded vs true in §20.6, the availability terms in §34.6), and lessons from an organizational assistant deployment outside EIOS (verified grounding in §31.2, write receipts in §18.6, telemetry outside the event log in §32.3). The source items are drafts; adopting them gives them EIOS standing as working-master text only, to be refined by evidence from the first Keel instances. Companion documents updated: Minimum Viable EIOS v1.1, Portability and Export v1.1.
 
 Revision v1.3 (2026-07-10): AI-native primacy — the framework's primary point stated as such (AI can only work properly with full context; other benefits follow from the foundation) in the subtitle, §1, and §38.
 
